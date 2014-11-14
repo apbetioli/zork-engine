@@ -1,14 +1,57 @@
+small mailbox > open
+	> close 
+	leaflet > take 
+		> read 
+		> drop
+	
+room
+	- house
+	- small mailbox	(container)
+		- leaflet (item) : condição: smail mailbox open
+	
+	
+describe room
+	romm description
+	containers
+	visible items
+
+
+Room: um lugar onde o player possa estar. A cada movimento do jogador ele vai para outros rooms.
+Container: Algo que possa conter objetos dentro.
+Item: algo que o player possa pegar e guardar no inventório ou usar.
+Entity: Uma entidade com quem o player pode interagir.
+
+
+
+Ações
+
+Pegar um item: TAKE, GET, PICK UP
+
+
+
+
 {
 	"welcome": "Welcome to ZORK!",
-	"start-room": "West of House",
+	"start": "West of House",
 	"rooms": [
 		{
 			"name": "West of House",
 			"description": "This is an open field west of a white house, with a boarded front door.\nThere is a small mailbox here.\nA rubber mat saying 'Welcome to Zork!' lies by the door.",
 			"objects": [
 				{
+					"name": "door",
+					"actions": [
+						{
+							"name": "open",
+							"print": "The door can't be opened." 
+						}
+					]
+				}
+			],
+			"containers": [
+				{
 					"name": "small mailbox",
-					"state": "closed",
+					"state": "close",
 					"actions": [
 						{
 							"name": "open",
@@ -18,33 +61,15 @@
 						{
 							"name": "close",
 							"pre-state": "open",
-							"post-state": "closed",
 							"print": "Closed." 
 						}
 					]
-				},
-				{
-					"name": "door",
-					"state": "closed",
-					"actions": [
-						{
-							"name": "open",
-							"print": "The door can't be opened." 
-						}
-					]
-				},
+				}
+			],
+			"items": [
 				{
 					"name": "welcome mat",
-					"actions": [
-						{
-							"name": "take",
-							"print": "Taken." 
-						},
-						{
-							"name": "get",
-							"print": "Taken." 
-						}
-					]
+					"print": "Taken."
 				}
 			]
 		}
