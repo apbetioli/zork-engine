@@ -1,11 +1,12 @@
-package zork;
+package zork.objects;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Map {
 
-	private String welcome;
-	private List<Room> rooms;
+	protected String welcome;
+	protected List<Room> rooms = new LinkedList<Room>();
 
 	public String getWelcome() {
 		return welcome;
@@ -23,7 +24,7 @@ public class Map {
 		this.rooms = rooms;
 	}
 
-	public String describe() {
+	public String welcome() {
 		return welcome + "\n";
 	}
 

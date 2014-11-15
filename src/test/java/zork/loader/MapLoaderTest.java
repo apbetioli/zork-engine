@@ -1,4 +1,4 @@
-package zork;
+package zork.loader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,6 +6,10 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import zork.loader.MapLoader;
+import zork.objects.Map;
+import zork.objects.Room;
 
 public class MapLoaderTest {
 	

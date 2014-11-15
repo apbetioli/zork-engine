@@ -1,11 +1,16 @@
-package zork;
+package zork.objects;
 
-public class Container {
+import zork.Verb;
 
-	private String name;
-	private String description;
+public class Item {
 
-	public Container(String name, String description) {
+	protected String name;
+	protected String description;
+	
+	public Item() {
+	}
+
+	public Item(String name, String description) {
 		this.name = name;
 		this.description = description;
 	}
@@ -26,8 +31,16 @@ public class Container {
 		this.description = description;
 	}
 
-	public String describe() {
+	public String look() {
 		return description;
 	}
 
+	public String execute(Verb todo) {
+		return description;
+	}
+
+	@Override
+	public String toString() {
+		return look();
+	}
 }

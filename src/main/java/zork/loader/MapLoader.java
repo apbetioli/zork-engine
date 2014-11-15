@@ -1,7 +1,9 @@
-package zork;
+package zork.loader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import zork.objects.Map;
 
 import com.google.gson.Gson;
 

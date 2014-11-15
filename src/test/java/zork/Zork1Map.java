@@ -1,29 +1,31 @@
 package zork;
 
-import java.util.ArrayList;
-import java.util.List;
+import zork.objects.Action;
+import zork.objects.Container;
+import zork.objects.Item;
+import zork.objects.Map;
+import zork.objects.Room;
 
 public class Zork1Map extends Map {
 
 	public Zork1Map() {
-		
 		setWelcome("Welcome to ZORK!");
-		setRooms(rooms());
-		
+		addRooms();
 	}
 
-	private List<Room> rooms() {
-		List<Room> rooms = new ArrayList<Room>();
-		
+	private void addRooms() {
 		rooms.add(westHouse());
-		
-		return rooms;
 	}
 
 	private Room westHouse() {
 		Room room = new Room("West of House", "This is an open field west of a white house, with a boarded front door.");
 		room.addItem(new Item("welcome mat", "A rubber mat saying 'Welcome to Zork!' lies by the door."));
-		room.addContainer(new Container("smal mailbox", "There is a small mailbox here."));
+		
+		Container smallMailbox = new Container("small mailbox", "There is a small mailbox here.");
+		smallMailbox.addItem(new Item("leaflet", "A leaflet"));
+		smallMailbox.addAction(new Action("open"));
+		
+		room.addItem(smallMailbox);
 		
 		return room;
 	}
