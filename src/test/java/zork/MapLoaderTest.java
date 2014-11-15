@@ -9,23 +9,23 @@ import org.junit.Test;
 
 public class MapLoaderTest {
 	
-	private MapLoader loader;
+	private Map map;
 	
 	@Before
 	public void loadMap() {
-		loader = new MapLoader();
-		loader.load("map.json");
+		MapLoader loader = new MapLoader();
+		map = loader.load("map.json");
 	}
 	
 	@Test
 	public void welcome() {
-		String welcome = loader.welcome();
+		String welcome = map.getWelcome();
 		assertEquals("Welcome to ZORK!", welcome);
 	}
 	
 	@Test
 	public void rooms() {
-		List<Room> rooms = loader.rooms();
+		List<Room> rooms = map.getRooms();
 		assertEquals(1, rooms.size());
 		
 		Room room = rooms.get(0);

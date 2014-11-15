@@ -11,16 +11,7 @@ public class ZorkTest {
 
 	@Before
 	public void init() {
-		zork = new Zork();
-		String start = zork.load("map.json");
-
-		assertEquals(
-				"Welcome to ZORK!\n\n"
-						+ "West of House\n"
-						+ "This is an open field west of a white house, with a boarded front door.\n"
-						+ "There is a small mailbox here.\n"
-						+ "A rubber mat saying 'Welcome to Zork!' lies by the door.",
-				start);
+		zork = new Zork(new Zork1Map());
 	}
 
 	@Test
@@ -30,26 +21,20 @@ public class ZorkTest {
 	}
 
 	@Test
+	public void welcome() {
+		String welcome = zork.interact("welcome");
+		assertEquals("Welcome to ZORK!\n", welcome);
+	}
+
+	@Test
 	public void look() {
 		String result = zork.interact("look");
 		assertEquals(
 				"West of House\n"
 						+ "This is an open field west of a white house, with a boarded front door.\n"
 						+ "There is a small mailbox here.\n"
-						+ "A rubber mat saying 'Welcome to Zork!' lies by the door.",
+						+ "A rubber mat saying 'Welcome to Zork!' lies by the door.\n",
 				result);
-	}
-
-	@Test
-	public void hi() {
-		String result = zork.interact("hi");
-		assertEquals("Nice weather we've been having lately", result);
-	}
-	
-	@Test
-	public void hello() {
-		String result = zork.interact("hello");
-		assertEquals("Nice weather we've been having lately", result);
 	}
 
 }

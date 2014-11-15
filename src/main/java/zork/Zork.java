@@ -1,26 +1,27 @@
 package zork;
 
-
 public class Zork {
 
-	private MapLoader mapLoader;
-	private int roomIndex;
-	private Room room;
+	private Map map;
 
-	public String load(String mapResource) {
-		mapLoader = new MapLoader();
-		mapLoader.load(mapResource);
-		return start();
-	}
+	private Room currentRoom;
 
-	private String start() {
-		roomIndex = 0;
-		room = mapLoader.rooms().get(roomIndex);
-		return mapLoader.welcome() + "\n\n" + room.getName() + "\n"
-				+ room.getDescription();
+	public Zork(Map map) {
+		this.map = map;
+
+		currentRoom = map.getRooms().get(0);
 	}
 
 	public String interact(String input) {
+
+		if (input.equals("welcome")) {
+			return map.describe();
+		}
+
+		if (input.equals("look")) {
+			return currentRoom.describe();
+		}
+
 		return "That is not a verb I recognize.";
 	}
 

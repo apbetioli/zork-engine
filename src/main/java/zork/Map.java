@@ -23,4 +23,8 @@ public class Map {
 		this.rooms = rooms;
 	}
 
+	public String describe() {
+		return welcome + "\n";
+	}
+
 }

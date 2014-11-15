@@ -1,35 +1,3 @@
-small mailbox > open
-	> close 
-	leaflet > take 
-		> read 
-		> drop
-	
-room
-	- house
-	- small mailbox	(container)
-		- leaflet (item) : condição: smail mailbox open
-	
-	
-describe room
-	romm description
-	containers
-	visible items
-
-
-Room: um lugar onde o player possa estar. A cada movimento do jogador ele vai para outros rooms.
-Container: Algo que possa conter objetos dentro.
-Item: algo que o player possa pegar e guardar no inventório ou usar.
-Entity: Uma entidade com quem o player pode interagir.
-
-
-
-Ações
-
-Pegar um item: TAKE, GET, PICK UP
-
-
-
-
 {
 	"welcome": "Welcome to ZORK!",
 	"start": "West of House",
