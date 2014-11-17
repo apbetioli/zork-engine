@@ -7,6 +7,7 @@ public class Map {
 
 	protected String welcome;
 	protected List<Room> rooms = new LinkedList<Room>();
+	protected List<Action> actions = new LinkedList<Action>();
 
 	public String getWelcome() {
 		return welcome;
@@ -28,4 +29,11 @@ public class Map {
 		return welcome + "\n";
 	}
 
+	public void addAction(Action action) {
+		this.actions.add(action);
+	}
+	
+	public List<Action> getActions() {
+		return actions;
+	}
 }

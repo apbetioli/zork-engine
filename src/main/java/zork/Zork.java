@@ -5,6 +5,8 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 
+import zork.interpreter.AnalisadorLexico;
+import zork.interpreter.Interpreter;
 import zork.objects.Item;
 import zork.objects.Map;
 import zork.objects.Room;
@@ -17,9 +19,13 @@ public class Zork implements Game {
 
 	private Verb todo;
 
+	private Interpreter interpreter;
+
 	public Zork(Map map) {
 		this.map = map;
 
+		interpreter = new Interpreter(map);
+		
 		currentRoom = map.getRooms().get(0);
 	}
 
@@ -32,27 +38,33 @@ public class Zork implements Game {
 
 		String output = "That is not a verb I recognize.";
 
-		StringTokenizer tokenizer = new StringTokenizer(input);
-		String token = tokenizer.nextToken();
-
-		if (todo != null) {
-			try {
-				List<Item> items = currentRoom.getItems();
-				for (Item item : items) {
-					if (item.getName().toUpperCase().contains(token))
-						return item.execute(todo);
-				}
-			} finally {}
-		}
-
-		try {
-			Verb verb = Verb.valueOf(token);
-			output = verb.execute(this);
-		} catch (IllegalArgumentException e) {}
+		AnalisadorLexico tokenizer = interpreter.lex(input);
 
 		if (tokenizer.hasMoreTokens()) {
-			String object = StringUtils.substringAfter(input, token);
-			return interact(object);
+
+			String token = tokenizer.nextToken();
+
+			if (todo != null) {
+				try {
+					List<Item> items = currentRoom.getItems();
+					for (Item item : items) {
+						if (item.getName().toUpperCase().contains(token))
+							return item.execute(todo);
+					}
+				} finally {
+				}
+			}
+
+			try {
+				Verb verb = Verb.valueOf(token);
+				output = verb.execute(this);
+			} catch (IllegalArgumentException e) {
+			}
+
+			if (tokenizer.hasMoreTokens()) {
+				String object = StringUtils.substringAfter(input, token);
+				return interact(object);
+			}
 		}
 
 		return output;
@@ -75,7 +87,7 @@ public class Zork implements Game {
 		todo = Verb.OPEN;
 		return "What do you want to open?";
 	}
-	
+
 	public String close() {
 		todo = Verb.CLOSE;
 		return "What do you want to close?";

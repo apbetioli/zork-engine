@@ -1,0 +1,13 @@
+i
+inventory
+look
+look inside <item>
+open <item>
+close <item>
+burn <item> with <item>
+get <item>
+take <item>
+pick up <item>
+drop <item>
+
+<item> ::= "small mailbox" | "door" | "leaflet"

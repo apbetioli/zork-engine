@@ -1,12 +1,16 @@
 package zork.objects;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import zork.Verb;
 
 public class Item {
 
 	protected String name;
 	protected String description;
-	
+	protected List<Action> actions = new LinkedList<Action>();
+
 	public Item() {
 	}
 
@@ -37,6 +41,14 @@ public class Item {
 
 	public String execute(Verb todo) {
 		return description;
+	}
+
+	public void addAction(Action action) {
+		this.actions.add(action);
+	}
+
+	public List<Action> getActions() {
+		return actions;
 	}
 
 	@Override

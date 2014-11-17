@@ -13,8 +13,6 @@ public class Container extends Item {
 
 	private boolean open;
 
-	private List<Action> actions = new LinkedList<Action>();
-
 	public Container() {
 	}
 
@@ -33,7 +31,6 @@ public class Container extends Item {
 		}
 
 		return look;
-
 	}
 
 	public void addItem(Item item) {
@@ -64,10 +61,6 @@ public class Container extends Item {
 		}
 
 		return super.execute(todo);
-	}
-
-	public void addAction(Action action) {
-		this.actions.add(action);
 	}
 
 }

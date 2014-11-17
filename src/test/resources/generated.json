@@ -1,0 +1,34 @@
+{
+  "welcome": "Welcome to ZORK!",
+  "rooms": [
+    {
+      "items": [
+        {
+          "name": "welcome mat",
+          "description": "A rubber mat saying \u0027Welcome to Zork!\u0027 lies by the door."
+        },
+        {
+          "items": [
+            {
+              "name": "leaflet",
+              "description": "A leaflet"
+            }
+          ],
+          "open": false,
+          "actions": [
+            {
+              "name": "open",
+              "output": "Opening the mailbox reveals a leaflet."
+            }
+          ],
+          "name": "small mailbox",
+          "description": "There is a small mailbox here."
+        }
+      ],
+      "open": false,
+      "actions": [],
+      "name": "West of House",
+      "description": "This is an open field west of a white house, with a boarded front door."
+    }
+  ]
+}

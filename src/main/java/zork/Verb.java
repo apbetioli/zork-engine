@@ -26,12 +26,6 @@ public enum Verb implements Executable {
 			return game.open();
 		}
 	},
-	WELCOME {
-		@Override
-		public String execute(Game game) {
-			return game.welcome();
-		}
-	}, 
 	CLOSE {
 		@Override
 		public String execute(Game game) {

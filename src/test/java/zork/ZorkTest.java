@@ -33,14 +33,7 @@ public class ZorkTest {
 	public void welcome() {
 		String welcome = zork.interact("welcome");
 		
-		assertEquals("Welcome to ZORK!\n", welcome);
-	}
-
-	@Test
-	public void upperCase() {
-		String welcome = zork.interact("WELCOME");
-		
-		assertEquals("Welcome to ZORK!\n", welcome);
+		assertEquals("That is not a verb I recognize.", welcome);
 	}
 
 	@Test
