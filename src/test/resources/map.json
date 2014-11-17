@@ -1,43 +1,155 @@
 {
 	"welcome": "Welcome to ZORK!",
-	"start": "West of House",
-	"rooms": [
+	"inventory": 
+	[
+		
+	],
+
+	"actions": 
+	[
+		{
+			"name": "inventory",
+			"synonyms": "i"
+		},
+
+		{
+			"name": "take",
+			"synonyms": "get|pick up"
+		},
+
+		{
+			"name": "open",
+			"condition": "openable"
+		},
+
+		{
+			"name": "read",
+			"synonyms": "skim",
+			"def": "read [object]|read [object] with [indirect-object]|read [object] through [indirect-object]",
+			"condition": 
+			[
+				{
+					"light": "It is imposible to read in the dark."
+				}
+			]
+		}
+	],
+
+	"rooms": 
+	[
 		{
 			"name": "West of House",
 			"description": "This is an open field west of a white house, with a boarded front door.\nThere is a small mailbox here.\nA rubber mat saying 'Welcome to Zork!' lies by the door.",
-			"objects": [
+			"attributes": 
+			{
+				"light": true
+			},
+
+			"objects": 
+			[
 				{
 					"name": "door",
-					"actions": [
+					"attributes": 
+					{
+						"open": false,
+						"openable": false,
+						"closed": true,
+						"closeable": false
+					},
+
+					"actions": 
+					[
 						{
 							"name": "open",
-							"print": "The door can't be opened." 
-						}
-					]
-				}
-			],
-			"containers": [
-				{
-					"name": "small mailbox",
-					"state": "close",
-					"actions": [
-						{
-							"name": "open",
-							"pre-state": "closed",
-							"print": "You open the small mailbox, revealing a small leaflet."
+							"print": "The door can't be opened."
 						},
+
 						{
 							"name": "close",
-							"pre-state": "open",
-							"print": "Closed." 
+							"print": "The door is already closed."
 						}
 					]
-				}
-			],
-			"items": [
+				},
+
 				{
-					"name": "welcome mat",
-					"print": "Taken."
+					"name": "small mailbox",
+					"attributes": 
+					{
+						"open": false,
+						"openable": true,
+						"closed": true,
+						"closeable": true,
+						"items-visible": false
+					},
+
+					"actions": 
+					[
+						{
+							"name": "open",
+							"condition": "closed",
+							"print": "You open the small mailbox.",
+							"set": 
+							{
+								"open": true,
+								"closed": false,
+								"items-visible": true
+							}
+						},
+
+						{
+							"name": "close",
+							"condition": "open",
+							"print": "You close the small mailbox.",
+							"set": 
+							{
+								"open": false,
+								"closed": true,
+								"items-visible": false
+							}
+						}
+					],
+
+					"objects": 
+					[
+						{
+							"name": "leaflet",
+							"attributes": 
+							{
+								"visible": false,
+								"takeable": true,
+								"readable": true
+							},
+
+							"actions": 
+							[
+								{
+									"name": "reveal",
+									"print": "You open the small mailbox, revealing a small leaflet.",
+									"set": 
+									{
+										"visible": true
+									}
+								},
+
+								{
+									"name": "read",
+									"print": "Welcome to ZORK."
+								},
+
+								{
+									"name": "take",
+									"condition": "takeable",
+									"print": "Taken."
+								},
+
+								{
+									"name": "look",
+									"condition": "visible",
+									"print": ""
+								}
+							]
+						}
+					]
 				}
 			]
 		}
