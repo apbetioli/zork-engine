@@ -9,6 +9,8 @@ import java.util.Set;
 import org.junit.Test;
 
 import zork.Zork1Map;
+import zork.interpreter.Interpreter;
+import zork.interpreter.Parser;
 
 public class InterpreterTest {
 
@@ -25,11 +27,11 @@ public class InterpreterTest {
 
 	@Test
 	public void ignoreSomeInput() {
-		String input = "I WANT TO OPEN THE SMALL MAILBOX";
+		String input = "OPEN THE SMALL MAILBOX";
 
 		Interpreter interpreter = new Interpreter(new Zork1Map());
 
-		AnalisadorLexico lex = interpreter.lex(input);
+		Parser lex = interpreter.parse(input);
 
 		assertTrue(lex.hasMoreTokens());
 		assertEquals("OPEN", lex.nextToken());

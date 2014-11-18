@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import zork.objects.Action;
-import zork.objects.Item;
-import zork.objects.Map;
-import zork.objects.Room;
+import zork.dungeon.Action;
+import zork.dungeon.Item;
+import zork.dungeon.Map;
+import zork.dungeon.Room;
 
 public class Interpreter {
 
@@ -41,8 +41,8 @@ public class Interpreter {
 		return dictionary;
 	}
 
-	public AnalisadorLexico lex(String input) {
-		return new AnalisadorLexico(dictionary, input);
+	public Parser parse(String input) {
+		return new Parser(dictionary, input);
 	}
 
 	public Set<String> getDictionary() {

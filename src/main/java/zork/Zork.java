@@ -1,23 +1,19 @@
 package zork;
 
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.apache.commons.lang3.StringUtils;
 
-import zork.interpreter.AnalisadorLexico;
+import zork.dungeon.Item;
+import zork.dungeon.Map;
 import zork.interpreter.Interpreter;
-import zork.objects.Item;
-import zork.objects.Map;
-import zork.objects.Room;
+import zork.interpreter.Parser;
 
-public class Zork implements Game {
+public class Zork {
 
 	private Map map;
 
-	private Room currentRoom;
-
-	private Verb todo;
+	private String todo;
 
 	private Interpreter interpreter;
 
@@ -25,28 +21,30 @@ public class Zork implements Game {
 		this.map = map;
 
 		interpreter = new Interpreter(map);
-		
-		currentRoom = map.getRooms().get(0);
 	}
 
 	public String interact(String input) {
 
 		input = input.trim().toUpperCase();
-
 		if (input.isEmpty())
 			return "I beg your pardon?";
 
+		Parser parser = interpreter.parse(input);
+
+		return interact(parser);
+
+	}
+
+	private String interact(Parser parser) {
 		String output = "That is not a verb I recognize.";
 
-		AnalisadorLexico tokenizer = interpreter.lex(input);
+		if (parser.hasMoreTokens()) {
 
-		if (tokenizer.hasMoreTokens()) {
-
-			String token = tokenizer.nextToken();
+			String token = parser.nextToken();
 
 			if (todo != null) {
 				try {
-					List<Item> items = currentRoom.getItems();
+					List<Item> items = map.getVisibleItems();
 					for (Item item : items) {
 						if (item.getName().toUpperCase().contains(token))
 							return item.execute(todo);
@@ -57,39 +55,17 @@ public class Zork implements Game {
 
 			try {
 				Verb verb = Verb.valueOf(token);
-				output = verb.execute(this);
+				output = verb.execute(map);
 			} catch (IllegalArgumentException e) {
 			}
 
-			if (tokenizer.hasMoreTokens()) {
-				String object = StringUtils.substringAfter(input, token);
-				return interact(object);
-			}
+			todo = token;
+			
+			if (parser.hasMoreTokens())
+				return interact(parser);
 		}
 
 		return output;
-
 	}
 
-	public String welcome() {
-		return map.welcome();
-	}
-
-	public String inventory() {
-		return "You are empty handed.";
-	}
-
-	public String look() {
-		return currentRoom.look();
-	}
-
-	public String open() {
-		todo = Verb.OPEN;
-		return "What do you want to open?";
-	}
-
-	public String close() {
-		todo = Verb.CLOSE;
-		return "What do you want to close?";
-	}
 }

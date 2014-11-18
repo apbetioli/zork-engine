@@ -1,6 +1,6 @@
-package zork.objects;
+package zork.dungeon;
 
-public class Room extends Container {
+public class Room extends Item {
 
 	public Room() {
 	}

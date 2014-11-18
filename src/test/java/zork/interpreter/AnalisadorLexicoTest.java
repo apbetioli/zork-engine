@@ -8,6 +8,8 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
+import zork.interpreter.Parser;
+
 public class AnalisadorLexicoTest {
 
 	private Set<String> dictionary = new HashSet<String>();
@@ -23,7 +25,7 @@ public class AnalisadorLexicoTest {
 	public void containsAll() {
 		String input = "OPEN MAILBOX";
 
-		AnalisadorLexico lex = new AnalisadorLexico(dictionary, input);
+		Parser lex = new Parser(dictionary, input);
 
 		assertTrue(lex.hasMoreTokens());
 		assertEquals("OPEN", lex.nextToken());
@@ -38,7 +40,7 @@ public class AnalisadorLexicoTest {
 	public void ignoreSomeInput() {
 		String input = "I WANT TO OPEN THE SMALL MAILBOX";
 
-		AnalisadorLexico lex = new AnalisadorLexico(dictionary, input);
+		Parser lex = new Parser(dictionary, input);
 
 		assertTrue(lex.hasMoreTokens());
 		assertEquals("OPEN", lex.nextToken());
@@ -56,7 +58,7 @@ public class AnalisadorLexicoTest {
 	public void doesNotContain() {
 		String input = "FLY";
 		
-		AnalisadorLexico lex = new AnalisadorLexico(dictionary, input);
+		Parser lex = new Parser(dictionary, input);
 		
 		assertFalse(lex.hasMoreTokens());
 		assertNull(lex.nextToken());

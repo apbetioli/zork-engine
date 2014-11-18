@@ -1,10 +1,9 @@
 package zork;
 
-import zork.objects.Action;
-import zork.objects.Container;
-import zork.objects.Item;
-import zork.objects.Map;
-import zork.objects.Room;
+import zork.dungeon.Action;
+import zork.dungeon.Item;
+import zork.dungeon.Map;
+import zork.dungeon.Room;
 
 import com.google.gson.GsonBuilder;
 
@@ -36,12 +35,15 @@ public class Zork1Map extends Map {
 		Room room = new Room("West of House", "This is an open field west of a white house, with a boarded front door.");
 		room.addItem(new Item("welcome mat", "A rubber mat saying 'Welcome to Zork!' lies by the door."));
 		
-		Container smallMailbox = new Container("small mailbox", "There is a small mailbox here.");
+		Item smallMailbox = new Item("small mailbox", "There is a small mailbox here.");
 		smallMailbox.addItem(new Item("leaflet", "A leaflet"));
 		smallMailbox.addAction(new Action("open", "Opening the mailbox reveals a leaflet."));
 		smallMailbox.addAction(new Action("close", "Closed."));
+		smallMailbox.getProperties().put(Verb.OPEN.name(), false);
 		
 		room.addItem(smallMailbox);
+		
+		setCurrentRoom(room);
 		
 		return room;
 	}

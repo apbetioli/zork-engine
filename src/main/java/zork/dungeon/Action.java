@@ -1,4 +1,4 @@
-package zork.objects;
+package zork.dungeon;
 
 public class Action {
 
