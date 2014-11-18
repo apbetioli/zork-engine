@@ -2,6 +2,7 @@ i
 inventory
 look
 look inside <item>
+look at <item>
 open <item>
 close <item>
 burn <item> with <item>
@@ -9,5 +10,9 @@ get <item>
 take <item>
 pick up <item>
 drop <item>
+read <item>
+read <item> with <item>
+read <item> through <item>
+examine <item>
 
 <item> ::= "small mailbox" | "door" | "leaflet"
