@@ -1,0 +1,116 @@
+{
+	"welcome": "Welcome to ZORK!",
+	"inventory": [
+		
+	],
+	"actions": [
+		{
+			"name": "inventory",
+			"synonyms": "i"
+		},
+		{
+			"name": "take",
+			"synonyms": [
+				"get",
+				"pick up"
+			],
+			"conditions": [
+				"takeable",
+				"visible"
+			]
+		},
+		{
+			"name": "drop",
+			"synonyms": [
+				"throw",
+				"put on floor"
+			]
+		},
+		{
+			"name": "open",
+			"conditions": [
+				"openable"
+			]
+		},
+		{
+			"name": "read",
+			"synonyms": "skim",
+			"def": "read [object]|read [object] with [indirect-object]|read [object] through [indirect-object]",
+			"conditions": [
+				{
+					"light": "It is imposible to read in the dark.",
+					"": ""
+				}
+			]
+		}
+	],
+	"rooms": [
+		{
+			"name": "West of House",
+			"description": "This is an open field west of a white house, with a boarded front door.\nThere is a small mailbox here.\nA rubber mat saying 'Welcome to Zork!' lies by the door.",
+			"exits": {
+				"s": "South of House"
+			},
+			"items": [
+				{
+					"name": "white house",
+					"print": "The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy."
+				},
+				{
+					"name": "door",
+					"properties": 
+					{
+						"open": false,
+						"closed": true,
+						"openable": false,
+						"closeable": false
+					},
+					"actions": [
+						{
+							"name": "open",
+							"print": "The door can't be opened."
+						},
+						{
+							"name": "close",
+							"print": "The door is already closed."
+						}
+					]
+				},
+				{
+					"name": "small mailbox",
+					"synonyms": ["small", "mailbox", "box", "mail-box"]
+					"properties": 
+					{
+						"open": false,
+						"closed": true,
+						"openable": true,
+						"closeable": true,
+						"takeable": false
+					},
+					"actions": [
+						{
+							"name": "take",
+							"print": "It is securely anchored."
+						}
+					],
+					"items": [
+						{
+							"name": "leaflet",
+							"properties": 
+							{
+								"takeable": true,
+								"readable": true
+							},
+							"actions": [
+								{
+									"name": "read", 
+									"print": "Welcome to ZORK."
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
