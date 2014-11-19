@@ -33,12 +33,21 @@ public class ZorkTest {
 	public void version() {
 		String version = zork.interact("version");
 		
-		assertEquals("Welcome to ZORK!\n\n", version);
+		assertEquals("Welcome to ZORK!\n", version);
 	}
 
 	@Test
 	public void look() {
 		String result = zork.interact("look");
+		assertEquals("West of House\n"
+				+ "This is an open field west of a white house, with a boarded front door.\n"
+				+ "A rubber mat saying 'Welcome to Zork!' lies by the door.\n"
+				+ "There is a small mailbox here.\n", result);
+	}
+	
+	@Test
+	public void l() {
+		String result = zork.interact("l");
 		assertEquals("West of House\n"
 				+ "This is an open field west of a white house, with a boarded front door.\n"
 				+ "A rubber mat saying 'Welcome to Zork!' lies by the door.\n"

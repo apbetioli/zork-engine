@@ -15,7 +15,7 @@ public class Zork1Map extends Map {
 	}
 
 	public Zork1Map() {
-		setVersion("Welcome to ZORK!\n\n");
+		setVersion("Welcome to ZORK!\n");
 		addRooms();
 	}
 

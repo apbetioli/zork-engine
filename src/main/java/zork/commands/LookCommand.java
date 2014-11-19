@@ -18,7 +18,7 @@ public class LookCommand implements Command {
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("LOOK");
+		return asList("LOOK", "L");
 	}
 
 	@Override
