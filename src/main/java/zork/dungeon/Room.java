@@ -1,21 +1,48 @@
 package zork.dungeon;
 
-public class Room extends Item {
+import java.util.LinkedList;
+import java.util.List;
+
+public class Room {
+
+	protected String name;
+	protected String description;
+	protected List<Item> items = new LinkedList<Item>();
 
 	public Room() {
 	}
 
 	public Room(String name, String description) {
-		super(name, description);
+		this.name = name;
+		this.description = description;
 	}
 
-	public String look() {
-		String text = name + "\n" + description;
+	public String getName() {
+		return name;
+	}
 
-		for (Item item : items) 
-			text += "\n" + item.look();
+	public void setName(String name) {
+		this.name = name;
+	}
 
-		return text + "\n";
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public void addItem(Item item) {
+		items.add(item);
 	}
 
 }

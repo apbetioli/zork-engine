@@ -1,52 +1,61 @@
 package zork.interpreter;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import zork.dungeon.Action;
+import zork.commands.Command;
+import zork.commands.CommandFactory;
 import zork.dungeon.Item;
 import zork.dungeon.Map;
 import zork.dungeon.Room;
 
 public class Interpreter {
 
+	private Map map;
+	private CommandFactory commandFactory;
 	private Set<String> dictionary;
 
-	public Interpreter(Map map) {
-		dictionary = buildDictionary(map);
+	public Interpreter(Map map, CommandFactory commandFactory) {
+		this.map = map;
+		this.commandFactory = commandFactory;
+
+		dictionary = buildDictionary();
 	}
 
-	public Set<String> buildDictionary(Map map) {
+	public Command analize(String input) {
+
+		String action = input.trim();
+
+		Parser parser = parse(input);
+
+		if (parser.hasMoreTokens())
+			action = parser.nextToken();
+
+		return commandFactory.get(action);
+	}
+
+	protected Set<String> buildDictionary() {
 		dictionary = new HashSet<String>();
 
-		List<Action> mapActions = map.getActions();
-		for (Action action : mapActions) {
-			dictionary.addAll(Arrays.asList(action.getName().toUpperCase().split(" ")));
-		}
-		
-		List<Room> rooms = map.getRooms();
-		for (Room room : rooms) {
+		for (String command : commandFactory.keySet())
+			dictionary.add(command);
+
+		for (Room room : map.getRooms()) {
 			List<Item> items = room.getItems();
 			for (Item item : items) {
-				dictionary.addAll(Arrays.asList(item.getName().toUpperCase().split(" ")));
-				List<Action> actions = item.getActions();
-				for (Action action : actions) {
-					dictionary.addAll(Arrays.asList(action.getName().toUpperCase().split(" ")));
-				}
+				dictionary.add(item.getName().toUpperCase());
 			}
 		}
 
 		return dictionary;
 	}
 
-	public Parser parse(String input) {
+	protected Parser parse(String input) {
 		return new Parser(dictionary, input);
 	}
 
-	public Set<String> getDictionary() {
+	protected Set<String> getDictionary() {
 		return dictionary;
 	}
-
 }

@@ -35,5 +35,4 @@ public class Parser {
 		nextToken = null;
 		return token;
 	}
-
 }

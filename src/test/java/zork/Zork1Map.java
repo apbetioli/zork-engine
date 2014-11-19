@@ -1,6 +1,5 @@
 package zork;
 
-import zork.dungeon.Action;
 import zork.dungeon.Item;
 import zork.dungeon.Map;
 import zork.dungeon.Room;
@@ -16,15 +15,8 @@ public class Zork1Map extends Map {
 	}
 
 	public Zork1Map() {
-		setWelcome("Welcome to ZORK!");
-		addActions();
+		setVersion("Welcome to ZORK!\n\n");
 		addRooms();
-	}
-
-	private void addActions() {
-		addAction(new Action("i", "i"));
-		addAction(new Action("inventory", "inventory"));
-		addAction(new Action("look", "look"));
 	}
 
 	private void addRooms() {
@@ -37,9 +29,6 @@ public class Zork1Map extends Map {
 		
 		Item smallMailbox = new Item("small mailbox", "There is a small mailbox here.");
 		smallMailbox.addItem(new Item("leaflet", "A leaflet"));
-		smallMailbox.addAction(new Action("open", "Opening the mailbox reveals a leaflet."));
-		smallMailbox.addAction(new Action("close", "Closed."));
-		smallMailbox.getProperties().put(Verb.OPEN.name(), false);
 		
 		room.addItem(smallMailbox);
 		
