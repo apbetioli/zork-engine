@@ -9,6 +9,7 @@ import zork.commands.Look;
 import zork.commands.Open;
 import zork.commands.Version;
 import zork.dungeon.Map;
+import zork.interpreter.Dictionary;
 import zork.interpreter.Interpreter;
 
 public class Game {
@@ -16,6 +17,7 @@ public class Game {
 	private final Map map;
 	private Interpreter interpreter;
 	private CommandFactory commandFactory;
+	private Dictionary dictionary;
 
 	public Game(Map map) {
 		this.map = map;
@@ -35,7 +37,13 @@ public class Game {
 		commandFactory = createCommandFactory();
 		registerCommands();
 
+		dictionary = createDictionary();
+
 		interpreter = createInterpreter();
+	}
+
+	private Dictionary createDictionary() {
+		return new Dictionary(commandFactory, map);
 	}
 
 	protected CommandFactory createCommandFactory() {
@@ -52,7 +60,7 @@ public class Game {
 	}
 
 	protected Interpreter createInterpreter() {
-		return new Interpreter(map, commandFactory);
+		return new Interpreter(commandFactory, dictionary);
 	}
 
 }

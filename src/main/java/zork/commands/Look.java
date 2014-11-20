@@ -24,12 +24,22 @@ public class Look extends Command {
 	@Override
 	public String execute() {
 		Room room = map.getCurrentRoom();
-		
-		String look = room.getName() + "\n" + room.getDescription() + "\n";
 
-		for (Item item : room.getItems())
+		String look = lookRoom(room);
+
+		look += lookItems(room.getItems());
+
+		return look;
+	}
+
+	private String lookRoom(Room room) {
+		return room.getName() + "\n" + room.getDescription() + "\n";
+	}
+
+	private String lookItems(List<Item> items) {
+		String look = "";
+		for (Item item : items)
 			look += item.getDescription() + "\n";
-
 		return look;
 	}
 

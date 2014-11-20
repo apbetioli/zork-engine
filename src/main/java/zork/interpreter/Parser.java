@@ -11,7 +11,7 @@ public class Parser {
 
 	public Parser(Set<String> dictionary, String input) {
 		this.dictionary = dictionary;
-		tokenizer = new StringTokenizer(input.trim().toUpperCase());
+		this.tokenizer = new StringTokenizer(input.trim().toUpperCase());
 	}
 
 	public boolean hasMoreTokens() {
