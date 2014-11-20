@@ -1,11 +1,26 @@
 package zork.commands;
 
+import java.util.Collections;
 import java.util.List;
 
-public interface Command {
+import zork.interpreter.Parser;
 
-	String execute();
+public abstract class Command {
 
-	List<String> getSynonyms();
+	private Parser parser;
+
+	public abstract String execute();
+
+	public List<String> getSynonyms() {
+		return Collections.emptyList();
+	}
+
+	public void setParser(Parser parser) {
+		this.parser = parser;
+	}
+	
+	public Parser getParser() {
+		return parser;
+	}
 
 }

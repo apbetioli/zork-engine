@@ -8,11 +8,11 @@ import zork.dungeon.Item;
 import zork.dungeon.Map;
 import zork.dungeon.Room;
 
-public class LookCommand implements Command {
+public class Look extends Command {
 
 	private Map map;
 
-	public LookCommand(Map map) {
+	public Look(Map map) {
 		this.map = map;
 	}
 

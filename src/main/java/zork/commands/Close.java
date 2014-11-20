@@ -5,16 +5,16 @@ import static java.util.Arrays.asList;
 import java.util.List;
 
 
-public class OpenCommand implements Command {
+public class Close extends Command {
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("OPEN");
+		return asList("CLOSE");
 	}
 	
 	@Override
 	public String execute() {
-		return "What do you want to open?";
+		return "What do you want to close?";
 	}
 
 }

@@ -1,7 +1,6 @@
 package zork.commands;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class CommandFactory extends HashMap<String, Command> {
 
@@ -18,14 +17,12 @@ public class CommandFactory extends HashMap<String, Command> {
 		if (command != null)
 			return command;
 
-		return new UnknownCommand();
+		return new Unknown();
 	}
 
 	public void register(Command command) {
-		List<String> synonyms = command.getSynonyms();
-		for (String synonym : synonyms)
-			put(synonym.toUpperCase(), command);
-
+		for (String synonym : command.getSynonyms())
+			put(synonym.trim().toUpperCase(), command);
 	}
 
 }

@@ -12,10 +12,10 @@ import org.junit.Test;
 import zork.Zork1Map;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
-import zork.commands.EmptyCommand;
-import zork.commands.InventoryCommand;
-import zork.commands.OpenCommand;
-import zork.commands.UnknownCommand;
+import zork.commands.Empty;
+import zork.commands.Inventory;
+import zork.commands.Open;
+import zork.commands.Unknown;
 import zork.dungeon.Map;
 
 public class InterpreterTest {
@@ -25,7 +25,7 @@ public class InterpreterTest {
 	@Before()
 	public void init() {
 		commandFactory = new CommandFactory();
-		commandFactory.register(new OpenCommand());
+		commandFactory.register(new Open(new Map()));
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class InterpreterTest {
 
 		Interpreter interpreter = new Interpreter(new Map(), commandFactory);
 
-		Parser lex = interpreter.parse(input);
+		Parser lex = interpreter.createParser(input);
 
 		assertTrue(lex.hasMoreTokens());
 		assertEquals("OPEN", lex.nextToken());
@@ -69,13 +69,13 @@ public class InterpreterTest {
 	@Test
 	public void analizeEmptyCommand() {
 		
-		commandFactory.register(new EmptyCommand());
+		commandFactory.register(new Empty());
 		
 		Interpreter interpreter = new Interpreter(new Zork1Map(), commandFactory);
 		
 		Command command = interpreter.analize(" ");
 		
-		assertEquals(EmptyCommand.class, command.getClass());
+		assertEquals(Empty.class, command.getClass());
 	}
 
 	@Test
@@ -85,26 +85,26 @@ public class InterpreterTest {
 		
 		Command command = interpreter.analize("ITADAKIMASU");
 		
-		assertEquals(UnknownCommand.class, command.getClass());
+		assertEquals(Unknown.class, command.getClass());
 	}
 	
 	@Test
 	public void analizeSingleCommand() {
-		commandFactory.register(new InventoryCommand());
+		commandFactory.register(new Inventory());
 		
 		Interpreter interpreter = new Interpreter(new Zork1Map(), commandFactory);
 		
 		Command command = interpreter.analize("INVENTORY");
 		
-		assertEquals(InventoryCommand.class, command.getClass());
+		assertEquals(Inventory.class, command.getClass());
 	}
 	
 	@Test
 	public void analizeCompositeCommand() {
 		Interpreter interpreter = new Interpreter(new Zork1Map(), commandFactory);
 		
-		OpenCommand command = (OpenCommand) interpreter.analize("OPEN MAILBOX");
+		Open command = (Open) interpreter.analize("OPEN MAILBOX");
 		
-		assertEquals(OpenCommand.class, command.getClass());
+		assertEquals(Open.class, command.getClass());
 	}
 }

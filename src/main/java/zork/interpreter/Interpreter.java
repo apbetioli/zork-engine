@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.collections.ListUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import zork.commands.Command;
 import zork.commands.CommandFactory;
 import zork.dungeon.Item;
@@ -27,12 +30,15 @@ public class Interpreter {
 
 		String action = input.trim();
 
-		Parser parser = parse(input);
+		Parser parser = createParser(input);
 
 		if (parser.hasMoreTokens())
 			action = parser.nextToken();
 
-		return commandFactory.get(action);
+		Command command = commandFactory.get(action);
+		command.setParser(parser);
+
+		return command;
 	}
 
 	protected Set<String> buildDictionary() {
@@ -41,17 +47,25 @@ public class Interpreter {
 		for (String command : commandFactory.keySet())
 			dictionary.add(command);
 
-		for (Room room : map.getRooms()) {
-			List<Item> items = room.getItems();
-			for (Item item : items) {
-				dictionary.add(item.getName().toUpperCase());
-			}
-		}
+		for (Room room : map.getRooms())
+			addItemsToDictionary(room.getItems());
 
 		return dictionary;
 	}
 
-	protected Parser parse(String input) {
+	private void addItemsToDictionary(List<Item> items) {
+		for (Item item : items) {
+
+			dictionary.add(item.getName().trim().toUpperCase());
+
+			for (String synonym : item.getSynonyms())
+				dictionary.add(synonym.trim().toUpperCase());
+
+			addItemsToDictionary(item.getItems());
+		}
+	}
+
+	protected Parser createParser(String input) {
 		return new Parser(dictionary, input);
 	}
 

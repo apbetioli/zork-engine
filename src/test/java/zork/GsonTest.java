@@ -1,6 +1,6 @@
 package zork;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,5 +38,12 @@ public class GsonTest {
 		T t2 = gson.create().fromJson(json, T.class);
 		assertTrue(t2.getMap().get("visible"));
 
+	}
+	
+	@Test
+	public void zorkMap() {
+		GsonBuilder gsonBuilder= new GsonBuilder();
+		gsonBuilder.setPrettyPrinting();
+		System.out.println(gsonBuilder.create().toJson(new Zork1Map()));
 	}
 }

@@ -4,16 +4,16 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-public class EmptyCommand implements Command {
+public class Inventory extends Command {
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("");
+		return asList("INVENTORY", "I");
 	}
 	
 	@Override
 	public String execute() {
-		return "I beg your pardon?";
+		return "You are empty-handed.";
 	}
 
 }

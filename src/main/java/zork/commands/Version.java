@@ -6,11 +6,11 @@ import java.util.List;
 
 import zork.dungeon.Map;
 
-public class VersionCommand implements Command {
+public class Version extends Command {
 
 	private Map map;
 
-	public VersionCommand(Map map) {
+	public Version(Map map) {
 		this.map = map;
 	}
 

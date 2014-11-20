@@ -33,7 +33,20 @@ public class ZorkTest {
 	public void version() {
 		String version = zork.interact("version");
 		
-		assertEquals("Welcome to ZORK!\n", version);
+		assertEquals("ZORK I: The Great Underground Empire\n"
+				+ "Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n"
+				+ "ZORK is a registered trademark of Infocom, Inc.\n"
+				+ "Revision 88 / Serial number 840726\n", version);
+	}
+	
+	@Test
+	public void uppercase() {
+		String version = zork.interact("VERSION");
+		
+		assertEquals("ZORK I: The Great Underground Empire\n"
+				+ "Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n"
+				+ "ZORK is a registered trademark of Infocom, Inc.\n"
+				+ "Revision 88 / Serial number 840726\n", version);
 	}
 
 	@Test
@@ -41,7 +54,6 @@ public class ZorkTest {
 		String result = zork.interact("look");
 		assertEquals("West of House\n"
 				+ "This is an open field west of a white house, with a boarded front door.\n"
-				+ "A rubber mat saying 'Welcome to Zork!' lies by the door.\n"
 				+ "There is a small mailbox here.\n", result);
 	}
 	
@@ -50,7 +62,6 @@ public class ZorkTest {
 		String result = zork.interact("l");
 		assertEquals("West of House\n"
 				+ "This is an open field west of a white house, with a boarded front door.\n"
-				+ "A rubber mat saying 'Welcome to Zork!' lies by the door.\n"
 				+ "There is a small mailbox here.\n", result);
 	}
 
@@ -58,14 +69,14 @@ public class ZorkTest {
 	public void i() {
 		String result = zork.interact("i");
 
-		assertEquals("You are empty handed.", result);
+		assertEquals("You are empty-handed.", result);
 	}
 
 	@Test
 	public void inventory() {
 		String result = zork.interact("inventory");
 
-		assertEquals("You are empty handed.", result);
+		assertEquals("You are empty-handed.", result);
 	}
 
 	@Test
@@ -75,12 +86,18 @@ public class ZorkTest {
 		assertEquals("What do you want to open?", result);
 	}
 	
-	@Ignore
 	@Test
 	public void openMailbox() {
 		String result = zork.interact("open mailbox");
 
 		assertEquals("Opening the small mailbox reveals a leaflet.", result);
+	}
+	
+	@Test
+	public void openLeaflet() {
+		String result = zork.interact("open leaflet");
+
+		assertEquals("You must tell me how to do that to a leaflet.", result);
 	}
 
 	@Ignore
@@ -93,7 +110,6 @@ public class ZorkTest {
 		assertEquals("Opening the small mailbox reveals a leaflet.", result);
 	}
 	
-	@Ignore
 	@Test
 	public void openSmallMailbox() {
 		String result = zork.interact("open small mailbox");
@@ -101,7 +117,6 @@ public class ZorkTest {
 		assertEquals("Opening the small mailbox reveals a leaflet.", result);
 	}
 	
-	@Ignore
 	@Test
 	public void openSmall() {
 		String result = zork.interact("open small");

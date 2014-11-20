@@ -18,7 +18,7 @@ public class CommandFactoryTest {
 	public void registerCommand() {
 		CommandFactory factory = new CommandFactory();
 
-		factory.register(new InventoryCommand());
+		factory.register(new Inventory());
 
 		assertTrue(factory.containsKey("inventory"));
 		assertTrue(factory.containsKey("INVENTORY"));
@@ -32,9 +32,9 @@ public class CommandFactoryTest {
 
 		CommandFactory factory = new CommandFactory();
 
-		factory.register(new InventoryCommand());
+		factory.register(new Inventory());
 
-		assertTrue(factory.get("look").getClass().equals(UnknownCommand.class));
+		assertTrue(factory.get("look").getClass().equals(Unknown.class));
 	}
 	
 	@Test
@@ -42,10 +42,10 @@ public class CommandFactoryTest {
 
 		CommandFactory factory = new CommandFactory();
 
-		factory.register(new EmptyCommand());
+		factory.register(new Empty());
 
 		assertTrue(factory.containsKey("   "));
-		assertTrue(factory.get("   ").getClass().equals(EmptyCommand.class));
+		assertTrue(factory.get("   ").getClass().equals(Empty.class));
 	}
 
 }
