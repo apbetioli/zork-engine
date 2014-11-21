@@ -2,6 +2,7 @@ package zork.commands;
 
 import static java.util.Arrays.asList;
 import static zork.commands.Property.OPEN;
+import static zork.commands.Property.SCENERY;
 
 import java.util.List;
 
@@ -39,13 +40,22 @@ public class Look extends Command {
 
 	private String lookItems(List<Item> items) {
 		String look = "";
+
 		for (Item item : items) {
+
+			if (item.is(SCENERY))
+				continue;
+
 			look += item.getDescription() + "\n";
+
 			if (item.is(OPEN)) {
 				look += "The " + item.getName() + " contains:\n";
+
 				for (Item sub : item.getItems())
 					look += "  " + sub.getDescription() + "\n";
+
 			}
+
 		}
 		return look;
 	}

@@ -22,6 +22,12 @@ public class Take extends Command {
 	@Override
 	public String execute() {
 
+		if (item.is(Property.FIXED))
+			return "It is securely anchored.";
+
+		if (!item.is(Property.TAKEABLE))
+			return "An interesting idea...";
+
 		map.getInventory().add(item);
 
 		return "Taken.";

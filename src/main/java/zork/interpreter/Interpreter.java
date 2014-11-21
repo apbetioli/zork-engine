@@ -32,24 +32,24 @@ public class Interpreter {
 
 		RunAutomatonMatcher matcher = newMatcher(sentence);
 		List<Object> tokens = findAllTokens(matcher);
-		
+
 		Iterator<Object> iterator = tokens.iterator();
-		
-		if(!iterator.hasNext())
+
+		if (!iterator.hasNext())
 			return new Unknown();
-		
+
 		Object first = iterator.next();
-		
+
 		if (first instanceof Command) {
 			lastCommand = (Command) first;
-			if(iterator.hasNext())
-				lastCommand.setItem((Item)iterator.next());
-			
+			if (iterator.hasNext())
+				lastCommand.setItem((Item) iterator.next());
+
 		} else {
-			
+
 			lastCommand.setItem((Item) first);
 		}
-		
+
 		return lastCommand;
 	}
 
@@ -57,8 +57,11 @@ public class Interpreter {
 		List<Object> tokens = new LinkedList<Object>();
 
 		Object found;
-		while ((found = matcher.find()) != null)
+		while ((found = matcher.find()) != null) {
+			if (matcher.token().trim().isEmpty() || matcher.token().endsWith(" "))
+				System.out.println(matcher.token() + "::" + matcher.group() + "::" + found);
 			tokens.add(found);
+		}
 
 		return tokens;
 	}

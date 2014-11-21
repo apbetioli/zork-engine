@@ -16,6 +16,13 @@ public class ZorkTest {
 	}
 
 	@Test
+	public void zork() {
+		String result = zork.interact("zork");
+
+		assertEquals("At your service!", result);
+	}
+
+	@Test
 	public void pardon() {
 		String result = zork.interact(" ");
 
@@ -244,7 +251,6 @@ public class ZorkTest {
 				+ "  A leaflet\n", result);
 	}
 
-	@Ignore
 	@Test
 	public void takeMailbox() {
 		String result = zork.interact("take mailbox");
@@ -252,12 +258,55 @@ public class ZorkTest {
 		assertEquals("It is securely anchored.", result);
 	}
 
-	@Ignore
 	@Test
 	public void takeDoor() {
 		String result = zork.interact("take door");
 
 		assertEquals("An interesting idea...", result); // RANDOMIZE
+	}
+
+	@Test
+	public void erroComParserLetraPorLetra() {
+		Game zork = new Zork(new Zork1Map());
+		assertEquals("Opening the small mailbox reveals a leaflet.", zork.interact("open box"));
+		assertEquals("That is not a verb I recognize.", zork.interact("giloio"));
+	}
+
+	@Test
+	public void readLeafletInsideMailboxClosed() {
+		String result = zork.interact("read leaflet");
+
+		assertEquals("You can't see any such thing.", result);
+	}
+
+	@Ignore
+	@Test
+	public void readLeafletWithoutTaking() {
+		zork.interact("open small mailbox");
+
+		String result = zork.interact("read leaflet");
+
+		assertEquals(
+				"(Taken)\n"
+						+ "    WELCOME TO ZORK\n\n"
+						+ "    ZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortal man.  Hardened adventurers have run screaming from the terrors contained within!\n\n"
+						+ "    In ZORK the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps!\n\n"
+						+ "    No devices should be without one!\n", result);
+	}
+
+	@Ignore
+	@Test
+	public void readLeaflet() {
+		zork.interact("open small mailbox");
+		zork.interact("take leaflet");
+
+		String result = zork.interact("read leaflet");
+
+		assertEquals(
+				"    WELCOME TO ZORK\n\n"
+						+ "    ZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortal man.  Hardened adventurers have run screaming from the terrors contained within!\n\n"
+						+ "    In ZORK the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps!\n\n"
+						+ "    No devices should be without one!\n", result);
 	}
 
 	@Ignore
@@ -268,55 +317,4 @@ public class ZorkTest {
 		assertEquals("small mailbox: It is securely anchored.", result);
 	}
 
-	@Test
-	public void erroComParserLetraPorLetra() {
-		Game zork = new Zork(new Zork1Map());
-		assertEquals("Opening the small mailbox reveals a leaflet.", zork.interact("open box"));
-		assertEquals("That is not a verb I recognize.", zork.interact("giloio"));
-	}
-	
-	@Ignore
-	@Test
-	public void readLeafletInsideMailboxClosed() {
-		String result = zork.interact("read leaflet");
-		
-		assertEquals("You can't see any such thing.", result);
-	}
-	
-	@Ignore
-	@Test
-	public void readLeafletWithoutTaking() {
-		zork.interact("open small mailbox");
-		
-		String result = zork.interact("read leaflet");
-		
-		assertEquals("(first taking the small leaflet)\n"
-				+ "                          WELCOME TO ZORK\n\n"
-				+ "    ZORK is a game of adventure, danger, and low cunning.  In it you will explore some of the most amazing territory ever seen by mortal man.  Hardened adventurers have run screaming from the terrors contained within!\n\n"
-				+ "    In ZORK the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps!\n\n"
-				+ "    No PDP-10 should be without one!\n\n"
-				+ "                     All rights reserved.\n", result);		
-	}
-	
-	@Ignore
-	@Test
-	public void readLeaflet() {
-		zork.interact("open small mailbox");
-		zork.interact("take leaflet");
-		
-		String result = zork.interact("read leaflet");
-		
-		assertEquals("                          WELCOME TO ZORK\n\n"
-				+ "    ZORK is a game of adventure, danger, and low cunning.  In it you will explore some of the most amazing territory ever seen by mortal man.  Hardened adventurers have run screaming from the terrors contained within!\n\n"
-				+ "    In ZORK the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps!\n\n"
-				+ "    No device should be without one!\n\n"
-				+ "                     All rights reserved.\n", result);		
-	}
-	
-	@Test
-	public void zork() {
-		String result = zork.interact("zork");
-		
-		assertEquals("At your service!", result);
-	}
 }

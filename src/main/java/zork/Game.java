@@ -6,6 +6,7 @@ import zork.commands.CommandFactory;
 import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
+import zork.commands.Read;
 import zork.commands.Take;
 import zork.commands.Version;
 import zork.dungeon.Map;
@@ -57,6 +58,7 @@ public class Game {
 		registerCommand(new Close());
 		registerCommand(new Look(map));
 		registerCommand(new Take(map));
+		registerCommand(new Read());
 	}
 
 	protected void registerCommand(Command command) {
