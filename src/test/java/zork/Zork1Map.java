@@ -30,7 +30,7 @@ public class Zork1Map extends Map {
 
 		room.addItem(mailbox);
 
-		setCurrentRoom(room);
+		setCurrentRoom(room.getName());
 
 		return room;
 	}

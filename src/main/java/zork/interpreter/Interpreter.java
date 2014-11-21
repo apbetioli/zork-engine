@@ -1,5 +1,8 @@
 package zork.interpreter;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import net.pocorall.automaton.DefaultAutomaton;
@@ -28,35 +31,48 @@ public class Interpreter {
 			return new Empty();
 
 		RunAutomatonMatcher matcher = newMatcher(sentence);
-
-		Object token = matcher.find();
-
-		if (!(token instanceof Command)) {
-			if (lastCommand == null)
-				return new Unknown();
-
-			token = lastCommand;
-			matcher = newMatcher(sentence);
+		List<Object> tokens = findAllTokens(matcher);
+		
+		Iterator<Object> iterator = tokens.iterator();
+		
+		if(!iterator.hasNext())
+			return new Unknown();
+		
+		Object first = iterator.next();
+		
+		if (first instanceof Command) {
+			lastCommand = (Command) first;
+			if(iterator.hasNext())
+				lastCommand.setItem((Item)iterator.next());
+			
+		} else {
+			
+			lastCommand.setItem((Item) first);
 		}
+		
+		return lastCommand;
+	}
 
-		Command command = (Command) token;
-		command.setItem((Item) matcher.find());
+	private List<Object> findAllTokens(RunAutomatonMatcher matcher) {
+		List<Object> tokens = new LinkedList<Object>();
 
-		lastCommand = command;
+		Object found;
+		while ((found = matcher.find()) != null)
+			tokens.add(found);
 
-		return command;
+		return tokens;
 	}
 
 	private RunAutomatonMatcher newMatcher(String sentence) {
 		RunAutomaton automaton = buildAutomaton();
-		return automaton.newMatcher(sentence);
+		return automaton.newMatcher(sentence + " ");
 	}
 
 	private RunAutomaton buildAutomaton() {
 		StringUnionOperations builder = new StringUnionOperations();
 
 		for (Entry<String, Object> entry : dictionary.entrySet())
-			builder.add(entry.getValue(), entry.getKey());
+			builder.add(entry.getValue(), entry.getKey() + " ");
 
 		DefaultAutomaton a = new DefaultAutomaton();
 		a.setInitialState(builder.complete());

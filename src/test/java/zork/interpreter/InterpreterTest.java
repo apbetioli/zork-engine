@@ -69,4 +69,5 @@ public class InterpreterTest {
 
 		assertEquals(Open.class, command.getClass());
 	}
+	
 }

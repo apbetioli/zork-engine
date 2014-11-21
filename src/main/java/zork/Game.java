@@ -51,12 +51,16 @@ public class Game {
 	}
 
 	protected void registerCommands() {
-		commandFactory.register(new Inventory(map));
-		commandFactory.register(new Version(map));
-		commandFactory.register(new Open());
-		commandFactory.register(new Close());
-		commandFactory.register(new Look(map));
-		commandFactory.register(new Take(map));
+		registerCommand(new Inventory(map));
+		registerCommand(new Version(map));
+		registerCommand(new Open());
+		registerCommand(new Close());
+		registerCommand(new Look(map));
+		registerCommand(new Take(map));
+	}
+
+	protected void registerCommand(Command command) {
+		commandFactory.register(command);
 	}
 
 	protected Interpreter createInterpreter() {

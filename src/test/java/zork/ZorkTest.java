@@ -268,4 +268,12 @@ public class ZorkTest {
 		assertEquals("small mailbox: It is securely anchored.", result);
 	}
 
+	@Test
+	public void erroComParserLetraPorLetra() {
+		
+		Game zork = new Zork(new Zork1Map());
+		assertEquals("Opening the small mailbox reveals a leaflet.", zork.interact("open box"));
+		assertEquals("That is not a verb I recognize.", zork.interact("giloio"));
+		
+	}
 }

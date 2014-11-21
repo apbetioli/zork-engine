@@ -6,7 +6,7 @@ import java.util.List;
 public class Map {
 
 	private String version;
-	private Room currentRoom;
+	private String currentRoom;
 	private List<Room> rooms;
 	private List<Item> inventory;
 
@@ -19,10 +19,14 @@ public class Map {
 	}
 
 	public Room getCurrentRoom() {
-		return currentRoom;
+		for (Room room : rooms) {
+			if(room.getName().equals(currentRoom))
+				return room;
+		}
+		return null;
 	}
 
-	public void setCurrentRoom(Room currentRoom) {
+	public void setCurrentRoom(String currentRoom) {
 		this.currentRoom = currentRoom;
 	}
 
