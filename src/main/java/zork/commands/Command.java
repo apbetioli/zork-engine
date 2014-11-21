@@ -3,11 +3,11 @@ package zork.commands;
 import java.util.Collections;
 import java.util.List;
 
-import zork.interpreter.Parser;
+import zork.dungeon.Item;
 
 public abstract class Command {
 
-	private Parser parser;
+	protected Item item;
 
 	public abstract String execute();
 
@@ -15,12 +15,8 @@ public abstract class Command {
 		return Collections.emptyList();
 	}
 
-	public void setParser(Parser parser) {
-		this.parser = parser;
-	}
-	
-	public Parser getParser() {
-		return parser;
+	public void setItem(Item item) {
+		this.item = item;
 	}
 
 }

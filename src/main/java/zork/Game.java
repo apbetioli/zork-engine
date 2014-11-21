@@ -3,10 +3,10 @@ package zork;
 import zork.commands.Close;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
-import zork.commands.Empty;
 import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
+import zork.commands.Take;
 import zork.commands.Version;
 import zork.dungeon.Map;
 import zork.interpreter.Dictionary;
@@ -51,16 +51,16 @@ public class Game {
 	}
 
 	protected void registerCommands() {
-		commandFactory.register(new Empty());
-		commandFactory.register(new Inventory());
+		commandFactory.register(new Inventory(map));
 		commandFactory.register(new Version(map));
-		commandFactory.register(new Open(map));
+		commandFactory.register(new Open());
 		commandFactory.register(new Close());
 		commandFactory.register(new Look(map));
+		commandFactory.register(new Take(map));
 	}
 
 	protected Interpreter createInterpreter() {
-		return new Interpreter(commandFactory, dictionary);
+		return new Interpreter(dictionary);
 	}
 
 }

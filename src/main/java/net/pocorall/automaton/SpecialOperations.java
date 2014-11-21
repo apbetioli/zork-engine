@@ -29,9 +29,14 @@
 
 package net.pocorall.automaton;
 
-import java.util.*;
+import static net.pocorall.automaton.BasicOperations.addEpsilons;
 
-import static net.pocorall.automaton.BasicOperations.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Special automata operations.

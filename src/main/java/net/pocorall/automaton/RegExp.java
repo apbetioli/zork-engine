@@ -29,14 +29,14 @@
 
 package net.pocorall.automaton;
 
+import static net.pocorall.automaton.BasicOperations.repeat;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import static net.pocorall.automaton.BasicOperations.*;
 
 /**
  * Regular Expression extension to <code>DefaultAutomaton</code>.

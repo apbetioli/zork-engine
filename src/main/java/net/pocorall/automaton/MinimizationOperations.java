@@ -29,13 +29,13 @@
 
 package net.pocorall.automaton;
 
+import static net.pocorall.automaton.BasicOperations.determinize;
+import static net.pocorall.automaton.SpecialOperations.reverse;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
-
-import static net.pocorall.automaton.BasicOperations.*;
-import static net.pocorall.automaton.SpecialOperations.*;
 
 /**
  * Operations for minimizing automata.

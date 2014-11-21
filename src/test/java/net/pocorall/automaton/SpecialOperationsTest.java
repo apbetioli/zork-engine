@@ -1,10 +1,25 @@
 package net.pocorall.automaton;
 
-import org.junit.Test;
+import static net.pocorall.automaton.BasicAutomataFactory.makeCharRange;
+import static net.pocorall.automaton.BasicAutomataFactory.makeString;
+import static net.pocorall.automaton.BasicAutomataFactory.makeStringUnion;
+import static net.pocorall.automaton.SpecialOperations.compress;
+import static net.pocorall.automaton.SpecialOperations.getCommonPrefix;
+import static net.pocorall.automaton.SpecialOperations.getFiniteStrings;
+import static net.pocorall.automaton.SpecialOperations.getStrings;
+import static net.pocorall.automaton.SpecialOperations.hexCases;
+import static net.pocorall.automaton.SpecialOperations.isFinite;
+import static net.pocorall.automaton.SpecialOperations.prefixClose;
+import static net.pocorall.automaton.SpecialOperations.replaceWhitespace;
+import static net.pocorall.automaton.SpecialOperations.reverse;
+import static net.pocorall.automaton.SpecialOperations.singleChars;
+import static net.pocorall.automaton.SpecialOperations.subst;
+import static net.pocorall.automaton.SpecialOperations.trim;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static net.pocorall.automaton.BasicAutomataFactory.*;
-import static net.pocorall.automaton.SpecialOperations.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class SpecialOperationsTest {
 	@Test

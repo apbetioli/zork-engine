@@ -29,13 +29,14 @@
 
 package net.pocorall.automaton;
 
+import static net.pocorall.automaton.BasicOperations.addEpsilons;
+import static net.pocorall.automaton.BasicOperations.repeat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
-import static net.pocorall.automaton.BasicOperations.*;
 
 
 /**

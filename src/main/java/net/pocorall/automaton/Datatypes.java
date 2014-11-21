@@ -29,13 +29,30 @@
 
 package net.pocorall.automaton;
 
-import java.io.*;
-import java.net.URL;
-import java.util.*;
+import static net.pocorall.automaton.BasicAutomataFactory.makeChar;
+import static net.pocorall.automaton.BasicAutomataFactory.makeCharRange;
+import static net.pocorall.automaton.BasicAutomataFactory.makeCharSet;
+import static net.pocorall.automaton.BasicAutomataFactory.makeMaxInteger;
+import static net.pocorall.automaton.BasicAutomataFactory.makeString;
+import static net.pocorall.automaton.BasicOperations.union;
+import static net.pocorall.automaton.LinkedAutomaton.setAllowMutate;
 
-import static net.pocorall.automaton.DefaultAutomaton.*;
-import static net.pocorall.automaton.BasicOperations.*;
-import static net.pocorall.automaton.BasicAutomataFactory.*;
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamTokenizer;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Basic automata for representing common datatypes

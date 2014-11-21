@@ -4,12 +4,15 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import zork.util.StringUtils;
+
 public class Item {
 
-	protected String name;
-	protected String description;
-	protected List<Item> items = new LinkedList<Item>();
-	protected List<String> synonyms = new LinkedList<String>();
+	private String name;
+	private String description;
+	private List<Item> items;
+	private List<String> synonyms;
+	private List<String> properties;
 
 	public Item(String name, String description) {
 		this.name = name;
@@ -25,23 +28,45 @@ public class Item {
 	}
 
 	public List<Item> getItems() {
+		if (items == null)
+			items = new LinkedList<Item>();
 		return items;
 	}
 
 	public void addItem(Item item) {
-		items.add(item);
+		getItems().add(item);
 	}
 
 	public List<String> getSynonyms() {
+		if (synonyms == null)
+			synonyms = new LinkedList<String>();
 		return synonyms;
 	}
-	
-	public void addSynonyms(String...synonym) {
-		this.synonyms.addAll(Arrays.asList(synonym));
+
+	public void addSynonyms(String... synonym) {
+		getSynonyms().addAll(StringUtils.trimAll(Arrays.asList(synonym)));
 	}
 
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public void addProperties(String... properties) {
+		getProperties().addAll(StringUtils.trimAndUpperCaseAll(Arrays.asList(properties)));
+	}
+
+	public List<String> getProperties() {
+		if (properties == null)
+			properties = new LinkedList<String>();
+		return properties;
+	}
+
+	public boolean is(String property) {
+		return getProperties().contains(property);
+	}
+
+	public void removeProperties(String... properties) {
+		getProperties().removeAll(Arrays.asList(properties));
 	}
 }

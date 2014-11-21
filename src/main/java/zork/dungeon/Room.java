@@ -7,7 +7,7 @@ public class Room {
 
 	protected String name;
 	protected String description;
-	protected List<Item> items = new LinkedList<Item>();
+	protected List<Item> items;
 
 	public Room(String name, String description) {
 		this.name = name;
@@ -23,11 +23,13 @@ public class Room {
 	}
 
 	public List<Item> getItems() {
+		if (items == null)
+			items = new LinkedList<Item>();
 		return items;
 	}
 
 	public void addItem(Item item) {
-		items.add(item);
+		getItems().add(item);
 	}
 
 }

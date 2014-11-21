@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import zork.dungeon.Map;
+
 public class CommandFactoryTest {
 
 	@Test
@@ -18,7 +20,7 @@ public class CommandFactoryTest {
 	public void registerCommand() {
 		CommandFactory factory = new CommandFactory();
 
-		factory.register(new Inventory());
+		factory.register(new Inventory(new Map()));
 
 		assertTrue(factory.containsKey("inventory"));
 		assertTrue(factory.containsKey("INVENTORY"));
@@ -32,11 +34,11 @@ public class CommandFactoryTest {
 
 		CommandFactory factory = new CommandFactory();
 
-		factory.register(new Inventory());
+		factory.register(new Inventory(new Map()));
 
 		assertTrue(factory.get("look").getClass().equals(Unknown.class));
 	}
-	
+
 	@Test
 	public void emptyCommand() {
 

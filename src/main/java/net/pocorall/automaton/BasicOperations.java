@@ -29,10 +29,19 @@
 
 package net.pocorall.automaton;
 
-import java.util.*;
+import static net.pocorall.automaton.BasicAutomataFactory.makeEmpty;
+import static net.pocorall.automaton.BasicAutomataFactory.makeEmptyString;
+import static net.pocorall.automaton.BasicAutomataFactory.makeString;
+import static net.pocorall.automaton.LinkedAutomaton.getSortedTransitions;
 
-import static net.pocorall.automaton.BasicAutomataFactory.*;
-import static net.pocorall.automaton.LinkedAutomaton.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Basic automata operations.

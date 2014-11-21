@@ -1,14 +1,16 @@
 package zork.interpreter;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import zork.Zork1Map;
 import zork.commands.CommandFactory;
 import zork.commands.Open;
+import zork.dungeon.Item;
 import zork.dungeon.Map;
+import zork.dungeon.Room;
 
 public class DictionaryTest {
 
@@ -28,18 +30,29 @@ public class DictionaryTest {
 	
 	@Test
 	public void dictionaryFromCommand() {
-		commandFactory.register(new Open(new Map()));
+		Open open = new Open();
+		commandFactory.register(open);
 		
 		Dictionary dictionary = new Dictionary(commandFactory, new Map());
 
-		assertTrue(dictionary.contains("OPEN"));
+		assertTrue(dictionary.containsKey("OPEN"));
+		assertEquals(open, dictionary.get("OPEN"));
 	}
 	
 	@Test
 	public void dictionaryFromMap() {
-		Dictionary dictionary = new Dictionary(new CommandFactory(), new Zork1Map());
+		Item item = new Item("small mailbox", "");
 		
-		assertTrue(dictionary.contains("SMALL MAILBOX"));
+		Room room = new Room("Main", "Main room");
+		room.getItems().add(item);
+		
+		Map map = new Map();
+		map.getRooms().add(room);
+		
+		Dictionary dictionary = new Dictionary(commandFactory, map);
+		
+		assertTrue(dictionary.containsKey("SMALL MAILBOX"));
+		assertEquals(item, dictionary.get("SMALL MAILBOX"));
 	}
 
 

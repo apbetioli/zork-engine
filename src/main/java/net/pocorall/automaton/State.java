@@ -30,7 +30,11 @@
 package net.pocorall.automaton;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <tt>DefaultAutomaton</tt> state.

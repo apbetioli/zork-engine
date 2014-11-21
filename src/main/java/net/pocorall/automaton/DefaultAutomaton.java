@@ -29,7 +29,8 @@
 
 package net.pocorall.automaton;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Finite-state automaton with regular expression operations.

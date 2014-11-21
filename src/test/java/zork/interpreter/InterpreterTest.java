@@ -1,11 +1,6 @@
 package zork.interpreter;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,21 +21,7 @@ public class InterpreterTest {
 	@Before()
 	public void init() {
 		commandFactory = new CommandFactory();
-		commandFactory.register(new Open(new Map()));
-	}
-
-	@Test
-	public void parseInput() {
-		
-		String input = "OPEN THE CAR";
-		Dictionary dictionary = new Dictionary(commandFactory, new Map());
-		Interpreter interpreter = new Interpreter(commandFactory, dictionary);
-
-		Parser lex = interpreter.createParser(input);
-
-		assertTrue(lex.hasMoreTokens());
-		assertEquals("OPEN", lex.nextToken());
-		assertFalse(lex.hasMoreTokens());
+		commandFactory.register(new Open());
 	}
 
 	@Test
@@ -48,7 +29,7 @@ public class InterpreterTest {
 
 		commandFactory.register(new Empty());
 		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
-		Interpreter interpreter = new Interpreter(commandFactory, dictionary);
+		Interpreter interpreter = new Interpreter(dictionary);
 
 		Command command = interpreter.analize(" ");
 
@@ -59,7 +40,7 @@ public class InterpreterTest {
 	public void analizeUnknownCommand() {
 
 		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
-		Interpreter interpreter = new Interpreter(commandFactory, dictionary);
+		Interpreter interpreter = new Interpreter(dictionary);
 
 		Command command = interpreter.analize("ITADAKIMASU");
 
@@ -68,10 +49,10 @@ public class InterpreterTest {
 
 	@Test
 	public void analizeSingleCommand() {
-		
-		commandFactory.register(new Inventory());
+
+		commandFactory.register(new Inventory(new Map()));
 		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
-		Interpreter interpreter = new Interpreter(commandFactory, dictionary);
+		Interpreter interpreter = new Interpreter(dictionary);
 
 		Command command = interpreter.analize("INVENTORY");
 
@@ -80,9 +61,9 @@ public class InterpreterTest {
 
 	@Test
 	public void analizeCompositeCommand() {
-		
+
 		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
-		Interpreter interpreter = new Interpreter(commandFactory, dictionary);
+		Interpreter interpreter = new Interpreter(dictionary);
 
 		Open command = (Open) interpreter.analize("OPEN MAILBOX");
 

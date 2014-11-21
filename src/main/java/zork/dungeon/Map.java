@@ -5,9 +5,10 @@ import java.util.List;
 
 public class Map {
 
-	protected String version;
-	protected Room currentRoom;
-	protected List<Room> rooms = new LinkedList<Room>();
+	private String version;
+	private Room currentRoom;
+	private List<Room> rooms;
+	private List<Item> inventory;
 
 	public String getVersion() {
 		return version;
@@ -26,7 +27,14 @@ public class Map {
 	}
 
 	public List<Room> getRooms() {
+		if (rooms == null)
+			rooms = new LinkedList<Room>();
 		return rooms;
 	}
 
+	public List<Item> getInventory() {
+		if (inventory == null)
+			inventory = new LinkedList<Item>();
+		return inventory;
+	}
 }

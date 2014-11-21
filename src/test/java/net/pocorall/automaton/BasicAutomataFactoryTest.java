@@ -1,18 +1,33 @@
 package net.pocorall.automaton;
 
+import static net.pocorall.automaton.BasicAutomataFactory.makeAnyChar;
+import static net.pocorall.automaton.BasicAutomataFactory.makeAnyString;
+import static net.pocorall.automaton.BasicAutomataFactory.makeChar;
+import static net.pocorall.automaton.BasicAutomataFactory.makeCharRange;
+import static net.pocorall.automaton.BasicAutomataFactory.makeCharSet;
+import static net.pocorall.automaton.BasicAutomataFactory.makeDecimalValue;
+import static net.pocorall.automaton.BasicAutomataFactory.makeEmpty;
+import static net.pocorall.automaton.BasicAutomataFactory.makeEmptyString;
+import static net.pocorall.automaton.BasicAutomataFactory.makeFractionDigits;
+import static net.pocorall.automaton.BasicAutomataFactory.makeIntegerValue;
+import static net.pocorall.automaton.BasicAutomataFactory.makeInterval;
+import static net.pocorall.automaton.BasicAutomataFactory.makeMaxInteger;
+import static net.pocorall.automaton.BasicAutomataFactory.makeMinInteger;
+import static net.pocorall.automaton.BasicAutomataFactory.makeString;
+import static net.pocorall.automaton.BasicAutomataFactory.makeStringMatcher;
+import static net.pocorall.automaton.BasicAutomataFactory.makeStringUnion;
+import static net.pocorall.automaton.BasicAutomataFactory.makeTotalDigits;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static net.pocorall.automaton.BasicAutomataFactory.*;
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-
 /**
- * Created with IntelliJ IDEA.
- * User: onsquare
- * Date: 12. 8. 19
- * Time: 오전 12:58
- * To change this template use File | Settings | File Templates.
+ * Created with IntelliJ IDEA. User: onsquare Date: 12. 8. 19 Time: 오전 12:58 To
+ * change this template use File | Settings | File Templates.
  */
 public class BasicAutomataFactoryTest {
 	@Test

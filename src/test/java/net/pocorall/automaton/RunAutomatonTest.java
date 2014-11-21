@@ -1,6 +1,6 @@
 package net.pocorall.automaton;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -14,7 +14,6 @@ public class RunAutomatonTest {
 
 		private Map<String, Object> mapOrdenado = new TreeMap<String, Object>();
 
-		private final StringUnionOperations builder = new StringUnionOperations();
 
 		public PatternMatcher add(String key, Object value) {
 			mapOrdenado.put(key, value);
@@ -23,6 +22,8 @@ public class RunAutomatonTest {
 
 		public RunAutomaton build() {
 
+			StringUnionOperations builder = new StringUnionOperations();
+			
 			for (Entry<String, Object> entry : mapOrdenado.entrySet())
 				builder.add(entry.getValue(), entry.getKey());
 
@@ -38,18 +39,23 @@ public class RunAutomatonTest {
 	@Test
 	public void testSplit() {
 
-		RunAutomaton patterns = new PatternMatcher().add("box", "<item>").add("mailbox", "<item>")
-				.add("open", "<command>").add("small", "<item>").add("small mailbox", "<item>").build();
+		RunAutomaton patterns = new PatternMatcher()
+				.add("box", "<item>")
+				.add("mailbox", "<item>")
+				.add("open", "<command>")
+				.add("small", "<item>")
+				.add("small mailbox", "<item>")
+				.build();
 
 		String result = "";
 
-		RunAutomatonMatcher matcher = patterns.newMatcher("open small mailbox");
-		Object aObj = matcher.find();
-		while (aObj != null) {
-			result += matcher.token() + matcher.group() + "(" + aObj + ")";
-			aObj = matcher.find();
+		RunAutomatonMatcher matcher = patterns.newMatcher("open the small mailbox");
+		Object value = matcher.find();
+		while (value != null) {
+			result += " " + matcher.group() + "(" + value + ")";
+			value = matcher.find();
 		}
 
-		assertEquals("open(<command>) small mailbox(<item>)", result);
+		assertEquals("open(<command>) small mailbox(<item>)", result.trim());
 	}
 }

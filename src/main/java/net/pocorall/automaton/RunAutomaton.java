@@ -29,8 +29,7 @@
 
 package net.pocorall.automaton;
 
-import java.io.*;
-import java.net.URL;
+import java.io.Serializable;
 import java.util.Set;
 
 /**

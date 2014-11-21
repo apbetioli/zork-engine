@@ -1,21 +1,15 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
+import static zork.commands.Property.CLOSED;
+import static zork.commands.Property.OPEN;
+import static zork.commands.Property.OPENABLE;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import zork.dungeon.Item;
-import zork.dungeon.Map;
-
 public class Open extends Command {
-
-	private Map map;
-
-	public Open(Map map) {
-		this.map = map;
-	}
 
 	@Override
 	public List<String> getSynonyms() {
@@ -25,17 +19,18 @@ public class Open extends Command {
 	@Override
 	public String execute() {
 
-		if (!getParser().hasMoreTokens())
+		if (item == null)
 			return "What do you want to open?";
 
-		String object = getParser().nextToken();
+		if (item.is(OPEN))
+			return "It is already open.";
 
-		for (Item item : map.getCurrentRoom().getItems()) 
-			for (String synonym : item.getSynonyms()) 
-				if (synonym.trim().equalsIgnoreCase(object))
-					return String.format("Opening the %s reveals a %s", item.getName(), StringUtils.join(item.getItems(), ", ") + ".");
+		if (!item.is(OPENABLE))
+			return String.format("You must tell me how to do that to a %s.", item.getName());
 
-		return "You must tell me how to do that to a " + object.toLowerCase() + ".";
+		item.addProperties(OPEN);
+		item.removeProperties(CLOSED);
+
+		return String.format("Opening the %s reveals a %s", item.getName(), StringUtils.join(item.getItems(), ", ") + ".");
 	}
-
 }

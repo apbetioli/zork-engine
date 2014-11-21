@@ -1,14 +1,16 @@
 package zork.interpreter;
 
-import java.util.HashSet;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
+import zork.commands.Command;
 import zork.commands.CommandFactory;
 import zork.dungeon.Item;
 import zork.dungeon.Map;
 import zork.dungeon.Room;
 
-public class Dictionary extends HashSet<String> {
+public class Dictionary extends TreeMap<String, Object> {
 
 	private static final long serialVersionUID = 4964927938848125605L;
 
@@ -28,8 +30,8 @@ public class Dictionary extends HashSet<String> {
 	}
 
 	private void addCommands() {
-		for (String command : commandFactory.keySet())
-			add(command);
+		for (Entry<String, Command> entry : commandFactory.entrySet())
+			put(entry.getKey(), entry.getValue());
 	}
 
 	private void addItems() {
@@ -40,12 +42,17 @@ public class Dictionary extends HashSet<String> {
 	private void addItems(List<Item> items) {
 		for (Item item : items) {
 
-			add(item.getName().trim().toUpperCase());
+			put(item.getName(), item);
 
 			for (String synonym : item.getSynonyms())
-				add(synonym.trim().toUpperCase());
+				put(synonym, item);
 
 			addItems(item.getItems());
 		}
+	}
+
+	@Override
+	public Object put(String key, Object value) {
+		return super.put(key.trim().toUpperCase(), value);
 	}
 }
