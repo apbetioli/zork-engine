@@ -1,6 +1,7 @@
 package zork.util;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -11,6 +12,11 @@ import org.junit.Test;
 public class StringUtilsTest {
 
 	@Test
+	public void coverage() {
+		new StringUtils();
+	}
+
+	@Test
 	public void containsIgnoreCase() {
 		List<String> list = new ArrayList<String>();
 		list.add("open");
@@ -18,6 +24,7 @@ public class StringUtilsTest {
 
 		assertTrue(StringUtils.containsIgnoreCase(list, "OPEN"));
 		assertTrue(StringUtils.containsIgnoreCase(list, "close"));
+		assertFalse(StringUtils.containsIgnoreCase(list, "closen"));
 	}
 
 	@Test
