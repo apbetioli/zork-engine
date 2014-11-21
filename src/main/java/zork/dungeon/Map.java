@@ -7,8 +7,8 @@ public class Map {
 
 	private String version;
 	private String currentRoom;
-	private List<Room> rooms;
-	private List<Item> inventory;
+	private List<Room> rooms = new LinkedList<Room>();
+	private List<Item> inventory = new LinkedList<Item>();
 
 	public String getVersion() {
 		return version;
@@ -31,14 +31,10 @@ public class Map {
 	}
 
 	public List<Room> getRooms() {
-		if (rooms == null)
-			rooms = new LinkedList<Room>();
 		return rooms;
 	}
 
 	public List<Item> getInventory() {
-		if (inventory == null)
-			inventory = new LinkedList<Item>();
 		return inventory;
 	}
 }
