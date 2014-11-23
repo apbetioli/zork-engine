@@ -3,19 +3,19 @@ package zork.commands;
 import java.util.Collections;
 import java.util.List;
 
-import zork.Game;
+import zork.Engine;
 import zork.dungeon.Item;
 
 public abstract class Command {
 
-	protected Game game;
+	protected Engine engine;
 	protected Item item;
 
 	public Command() {
 	}
 
-	public Command(Game game) {
-		this.game = game;
+	public Command(Engine engine) {
+		this.engine = engine;
 	}
 
 	public abstract String execute();

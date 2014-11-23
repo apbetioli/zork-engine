@@ -7,7 +7,7 @@ import java.util.TreeMap;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
 import zork.dungeon.Item;
-import zork.dungeon.Map;
+import zork.dungeon.Game;
 import zork.dungeon.Room;
 
 public class Dictionary extends TreeMap<String, Object> {
@@ -15,11 +15,11 @@ public class Dictionary extends TreeMap<String, Object> {
 	private static final long serialVersionUID = 4964927938848125605L;
 
 	private CommandFactory commandFactory;
-	private Map map;
+	private Game game;
 
-	public Dictionary(CommandFactory commandFactory, Map map) {
+	public Dictionary(CommandFactory commandFactory, Game game) {
 		this.commandFactory = commandFactory;
-		this.map = map;
+		this.game = game;
 
 		build();
 	}
@@ -35,7 +35,7 @@ public class Dictionary extends TreeMap<String, Object> {
 	}
 
 	private void addItems() {
-		for (Room room : map.getRooms())
+		for (Room room : game.getRooms())
 			addItems(room.getItems());
 	}
 

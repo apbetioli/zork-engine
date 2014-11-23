@@ -15,13 +15,13 @@ public class GsonTest {
 		gsonBuilder.setPrettyPrinting();
 		Gson gson = gsonBuilder.create();
 
-		String json = gson.toJson(new Zork1Map());
+		String json = gson.toJson(new ZorkOne());
 
 		System.out.println(json);
 
-		zork.dungeon.Map map = gson.fromJson(json, zork.dungeon.Map.class);
+		zork.dungeon.Game game = gson.fromJson(json, zork.dungeon.Game.class);
 
-		assertNotNull(map);
+		assertNotNull(game);
 	}
 
 }

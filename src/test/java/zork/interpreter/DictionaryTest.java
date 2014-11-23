@@ -9,7 +9,7 @@ import org.junit.Test;
 import zork.commands.CommandFactory;
 import zork.commands.Open;
 import zork.dungeon.Item;
-import zork.dungeon.Map;
+import zork.dungeon.Game;
 import zork.dungeon.Room;
 
 public class DictionaryTest {
@@ -23,7 +23,7 @@ public class DictionaryTest {
 
 	@Test
 	public void emptyDictionary() {
-		Dictionary dictionary = new Dictionary(commandFactory, new Map());
+		Dictionary dictionary = new Dictionary(commandFactory, new Game());
 
 		assertTrue(dictionary.isEmpty());
 	}
@@ -33,7 +33,7 @@ public class DictionaryTest {
 		Open open = new Open();
 		commandFactory.register(open);
 
-		Dictionary dictionary = new Dictionary(commandFactory, new Map());
+		Dictionary dictionary = new Dictionary(commandFactory, new Game());
 
 		assertTrue(dictionary.containsKey("OPEN"));
 		assertEquals(open, dictionary.get("OPEN"));
@@ -46,10 +46,10 @@ public class DictionaryTest {
 		Room room = new Room("Main", "Main room");
 		room.getItems().add(item);
 
-		Map map = new Map();
-		map.getRooms().add(room);
+		Game game = new Game();
+		game.getRooms().add(room);
 
-		Dictionary dictionary = new Dictionary(commandFactory, map);
+		Dictionary dictionary = new Dictionary(commandFactory, game);
 
 		assertTrue(dictionary.containsKey("SMALL MAILBOX"));
 		assertEquals(item, dictionary.get("SMALL MAILBOX"));

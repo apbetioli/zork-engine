@@ -5,12 +5,12 @@ import static zork.commands.Property.READABLE;
 
 import java.util.List;
 
-import zork.Game;
+import zork.Engine;
 
 public class Read extends Command {
 
-	public Read(Game game) {
-		super(game);
+	public Read(Engine engine) {
+		super(engine);
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class Read extends Command {
 
 		String result = "";
 
-		if (!game.getMap().getInventory().contains(item)) {
-			String taken = game.interact("TAKE " + item.getName());
+		if (!engine.getGame().getInventory().contains(item)) {
+			String taken = engine.interact("TAKE " + item.getName());
 			if (!taken.equals("Taken."))
 				return taken;
 

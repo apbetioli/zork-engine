@@ -4,12 +4,12 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Game;
+import zork.Engine;
 
 public class Version extends Command {
 
-	public Version(Game game) {
-		super(game);
+	public Version(Engine engine) {
+		super(engine);
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class Version extends Command {
 
 	@Override
 	public String execute() {
-		return game.getMap().getVersion();
+		return engine.getGame().getVersion();
 	}
 
 }

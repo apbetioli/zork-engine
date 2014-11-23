@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class ConsoleRunner {
 
 	public static void main(String[] args) {
-		Game game = new Zork(new Zork1Map());
-		start(game);
+		Engine engine = new ZorkEngine(new ZorkOne());
+		start(engine);
 
 		System.out.print(">");
 		Scanner scanner = new Scanner(System.in);
@@ -14,15 +14,15 @@ public class ConsoleRunner {
 			String input = scanner.nextLine();
 			if(input.equals("exit"))
 				break;
-			System.out.println(game.interact(input));
+			System.out.println(engine.interact(input));
 			System.out.println();
 			System.out.print(">");
 		}
 		scanner.close();
 	}
 
-	private static void start(Game game) {
-		System.out.println(game.interact("version"));
-		System.out.println(game.interact("look"));
+	private static void start(Engine engine) {
+		System.out.println(engine.interact("version"));
+		System.out.println(engine.interact("look"));
 	}
 }

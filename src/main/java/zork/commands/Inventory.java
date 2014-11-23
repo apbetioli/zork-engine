@@ -4,13 +4,13 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Game;
+import zork.Engine;
 import zork.dungeon.Item;
 
 public class Inventory extends Command {
 
-	public Inventory(Game game) {
-		super(game);
+	public Inventory(Engine engine) {
+		super(engine);
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class Inventory extends Command {
 	@Override
 	public String execute() {
 
-		List<Item> items = game.getMap().getInventory();
+		List<Item> items = engine.getGame().getInventory();
 		if (items.isEmpty())
 			return "You are empty-handed.";
 

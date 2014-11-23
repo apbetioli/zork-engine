@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import zork.Game;
-import zork.Zork1Map;
+import zork.Engine;
+import zork.ZorkOne;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
 import zork.commands.Empty;
 import zork.commands.Inventory;
 import zork.commands.Open;
 import zork.commands.Unknown;
-import zork.dungeon.Map;
+import zork.dungeon.Game;
 
 public class InterpreterTest {
 
@@ -29,7 +29,7 @@ public class InterpreterTest {
 	public void analizeEmptyCommand() {
 
 		commandFactory.register(new Empty());
-		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
+		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
 		Interpreter interpreter = new Interpreter(dictionary);
 
 		Command command = interpreter.analize(" ");
@@ -40,7 +40,7 @@ public class InterpreterTest {
 	@Test
 	public void analizeUnknownCommand() {
 
-		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
+		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
 		Interpreter interpreter = new Interpreter(dictionary);
 
 		Command command = interpreter.analize("ITADAKIMASU");
@@ -51,8 +51,8 @@ public class InterpreterTest {
 	@Test
 	public void analizeSingleCommand() {
 
-		commandFactory.register(new Inventory(new Game(new Map())));
-		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
+		commandFactory.register(new Inventory(new Engine(new Game())));
+		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
 		Interpreter interpreter = new Interpreter(dictionary);
 
 		Command command = interpreter.analize("INVENTORY");
@@ -63,7 +63,7 @@ public class InterpreterTest {
 	@Test
 	public void analizeCompositeCommand() {
 
-		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
+		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
 		Interpreter interpreter = new Interpreter(dictionary);
 
 		Open command = (Open) interpreter.analize("OPEN MAILBOX");

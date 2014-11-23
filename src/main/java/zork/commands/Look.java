@@ -6,14 +6,14 @@ import static zork.commands.Property.SCENERY;
 
 import java.util.List;
 
-import zork.Game;
+import zork.Engine;
 import zork.dungeon.Item;
 import zork.dungeon.Room;
 
 public class Look extends Command {
 
-	public Look(Game game) {
-		super(game);
+	public Look(Engine engine) {
+		super(engine);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class Look extends Command {
 
 	@Override
 	public String execute() {
-		Room room = game.getMap().getCurrentRoom();
+		Room room = engine.getGame().getCurrentRoom();
 
 		String look = lookRoom(room);
 

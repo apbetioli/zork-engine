@@ -6,13 +6,13 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class ZorkTest {
+public class ZorkOneTest {
 
-	private Game zork;
+	private Engine zork;
 
 	@Before
 	public void init() {
-		zork = new Zork(new Zork1Map());
+		zork = new ZorkEngine(new ZorkOne());
 	}
 
 	@Test
@@ -275,7 +275,7 @@ public class ZorkTest {
 
 	@Test
 	public void erroComParserLetraPorLetra() {
-		Game zork = new Zork(new Zork1Map());
+		Engine zork = new ZorkEngine(new ZorkOne());
 		assertEquals("Opening the small mailbox reveals a leaflet.", zork.interact("open box"));
 		assertEquals("That is not a verb I recognize.", zork.interact("giloio"));
 	}

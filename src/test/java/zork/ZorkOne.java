@@ -8,12 +8,12 @@ import static zork.commands.Property.READABLE;
 import static zork.commands.Property.SCENERY;
 import static zork.commands.Property.TAKEABLE;
 import zork.dungeon.Item;
-import zork.dungeon.Map;
+import zork.dungeon.Game;
 import zork.dungeon.Room;
 
-public class Zork1Map extends Map {
+public class ZorkOne extends Game {
 
-	public Zork1Map() {
+	public ZorkOne() {
 		setVersion("ZORK I: The Great Underground Empire\n"
 				+ "Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n"
 				+ "ZORK is a registered trademark of Infocom, Inc.\n"

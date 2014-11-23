@@ -3,7 +3,7 @@ package zork.dungeon;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Map {
+public class Game {
 
 	private String version;
 	private String currentRoom;

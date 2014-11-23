@@ -9,19 +9,19 @@ import zork.commands.Open;
 import zork.commands.Read;
 import zork.commands.Take;
 import zork.commands.Version;
-import zork.dungeon.Map;
+import zork.dungeon.Game;
 import zork.interpreter.Dictionary;
 import zork.interpreter.Interpreter;
 
-public class Game {
+public class Engine {
 
-	private final Map map;
+	private final Game game;
 	private Interpreter interpreter;
 	private CommandFactory commandFactory;
 	private Dictionary dictionary;
 
-	public Game(Map map) {
-		this.map = map;
+	public Engine(Game game) {
+		this.game = game;
 
 		init();
 	}
@@ -44,7 +44,7 @@ public class Game {
 	}
 
 	private Dictionary createDictionary() {
-		return new Dictionary(commandFactory, map);
+		return new Dictionary(commandFactory, game);
 	}
 
 	protected CommandFactory createCommandFactory() {
@@ -69,8 +69,8 @@ public class Game {
 		return new Interpreter(dictionary);
 	}
 
-	public Map getMap() {
-		return map;
+	public Game getGame() {
+		return game;
 	}
 
 }

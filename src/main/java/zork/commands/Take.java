@@ -7,14 +7,14 @@ import static zork.commands.Property.TAKEABLE;
 
 import java.util.List;
 
-import zork.Game;
+import zork.Engine;
 import zork.dungeon.Item;
 import zork.dungeon.Room;
 
 public class Take extends Command {
 
-	public Take(Game game) {
-		super(game);
+	public Take(Engine engine) {
+		super(engine);
 	}
 
 	@Override
@@ -31,10 +31,10 @@ public class Take extends Command {
 		if (!item.is(TAKEABLE))
 			return "An interesting idea...";
 
-		if (!itemIsVisibleFrom(item, game.getMap().getCurrentRoom()))
+		if (!itemIsVisibleFrom(item, engine.getGame().getCurrentRoom()))
 			return "You can't see any such thing.";
 
-		game.getMap().getInventory().add(item);
+		engine.getGame().getInventory().add(item);
 
 		return "Taken.";
 	}
