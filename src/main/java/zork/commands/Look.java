@@ -6,16 +6,14 @@ import static zork.commands.Property.SCENERY;
 
 import java.util.List;
 
+import zork.Game;
 import zork.dungeon.Item;
-import zork.dungeon.Map;
 import zork.dungeon.Room;
 
 public class Look extends Command {
 
-	private Map map;
-
-	public Look(Map map) {
-		this.map = map;
+	public Look(Game game) {
+		super(game);
 	}
 
 	@Override
@@ -25,7 +23,7 @@ public class Look extends Command {
 
 	@Override
 	public String execute() {
-		Room room = map.getCurrentRoom();
+		Room room = game.getMap().getCurrentRoom();
 
 		String look = lookRoom(room);
 
@@ -35,7 +33,7 @@ public class Look extends Command {
 	}
 
 	private String lookRoom(Room room) {
-		return room.getName() + "\n" + room.getDescription() + "\n";
+		return String.format("%s\n%s\n", room.getName(), room.getDescription());
 	}
 
 	private String lookItems(List<Item> items) {
@@ -46,14 +44,11 @@ public class Look extends Command {
 			if (item.is(SCENERY))
 				continue;
 
-			look += item.getDescription() + "\n";
-
 			if (item.is(OPEN)) {
-				look += "The " + item.getName() + " contains:\n";
+				look += String.format("The %s contains:\n", item.getName());
 
 				for (Item sub : item.getItems())
-					look += "  " + sub.getDescription() + "\n";
-
+					look += String.format("  A %s\n", sub.getName());
 			}
 
 		}

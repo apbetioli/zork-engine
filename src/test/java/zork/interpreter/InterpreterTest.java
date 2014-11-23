@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import zork.Game;
 import zork.Zork1Map;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
@@ -50,7 +51,7 @@ public class InterpreterTest {
 	@Test
 	public void analizeSingleCommand() {
 
-		commandFactory.register(new Inventory(new Map()));
+		commandFactory.register(new Inventory(new Game(new Map())));
 		Dictionary dictionary = new Dictionary(commandFactory, new Zork1Map());
 		Interpreter interpreter = new Interpreter(dictionary);
 
@@ -69,5 +70,5 @@ public class InterpreterTest {
 
 		assertEquals(Open.class, command.getClass());
 	}
-	
+
 }

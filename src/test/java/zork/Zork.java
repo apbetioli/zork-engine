@@ -11,7 +11,7 @@ public class Zork extends Game {
 	@Override
 	protected void registerCommands() {
 		super.registerCommands();
-		
-		registerCommand(new ZorkCommand());
+
+		registerCommand(new ZorkCommand(this));
 	}
 }

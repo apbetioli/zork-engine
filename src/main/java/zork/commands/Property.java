@@ -9,4 +9,6 @@ public interface Property {
 	public static final String FIXED = "FIXED";
 	public static final String TAKEABLE = "TAKEABLE";
 	public static final String SCENERY = "SCENERY";
+	public static final String READABLE = "READABLE";
+
 }

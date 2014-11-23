@@ -52,13 +52,13 @@ public class Game {
 	}
 
 	protected void registerCommands() {
-		registerCommand(new Inventory(map));
-		registerCommand(new Version(map));
+		registerCommand(new Inventory(this));
+		registerCommand(new Version(this));
 		registerCommand(new Open());
 		registerCommand(new Close());
-		registerCommand(new Look(map));
-		registerCommand(new Take(map));
-		registerCommand(new Read());
+		registerCommand(new Look(this));
+		registerCommand(new Take(this));
+		registerCommand(new Read(this));
 	}
 
 	protected void registerCommand(Command command) {
@@ -67,6 +67,10 @@ public class Game {
 
 	protected Interpreter createInterpreter() {
 		return new Interpreter(dictionary);
+	}
+
+	public Map getMap() {
+		return map;
 	}
 
 }

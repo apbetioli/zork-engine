@@ -241,6 +241,14 @@ public class ZorkTest {
 	}
 
 	@Test
+	public void takeLeafletWithoutOpeningTheMailbox() {
+
+		String result = zork.interact("take leaflet");
+
+		assertEquals("You can't see any such thing.", result);
+	}
+
+	@Test
 	public void inventoryWithLeaflet() {
 		zork.interact("open mailbox");
 		zork.interact("take leaflet");
@@ -279,7 +287,13 @@ public class ZorkTest {
 		assertEquals("You can't see any such thing.", result);
 	}
 
-	@Ignore
+	@Test
+	public void readMailbox() {
+		String result = zork.interact("read mailbox");
+
+		assertEquals("How does one read a small mailbox?", result);
+	}
+
 	@Test
 	public void readLeafletWithoutTaking() {
 		zork.interact("open small mailbox");
@@ -294,7 +308,6 @@ public class ZorkTest {
 						+ "    No devices should be without one!\n", result);
 	}
 
-	@Ignore
 	@Test
 	public void readLeaflet() {
 		zork.interact("open small mailbox");
@@ -317,4 +330,45 @@ public class ZorkTest {
 		assertEquals("small mailbox: It is securely anchored.", result);
 	}
 
+	@Ignore
+	@Test
+	public void examineMe() {
+		String result = zork.interact("examine me");
+
+		assertEquals("That's difficult unless your eyes are prehensile.", result);
+	}
+
+	@Ignore
+	@Test
+	public void lookAtMe() {
+		String result = zork.interact("look at me");
+
+		assertEquals("That's difficult unless your eyes are prehensile.", result);
+	}
+
+	@Ignore
+	@Test
+	public void examineDoor() {
+		String result = zork.interact("examine door");
+
+		assertEquals("The door is closed.", result);
+	}
+
+	@Ignore
+	@Test
+	public void examineHouse() {
+		String result = zork.interact("examine house");
+
+		assertEquals(
+				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
+				result);
+	}
+
+	@Ignore
+	@Test
+	public void examineGround() {
+		String result = zork.interact("examine ground");
+
+		assertEquals("There's nothing special about the ground.", result);
+	}
 }

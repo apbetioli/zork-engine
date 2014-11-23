@@ -4,15 +4,13 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
+import zork.Game;
 import zork.dungeon.Item;
-import zork.dungeon.Map;
 
 public class Inventory extends Command {
 
-	private Map map;
-
-	public Inventory(Map map) {
-		this.map = map;
+	public Inventory(Game game) {
+		super(game);
 	}
 
 	@Override
@@ -23,13 +21,15 @@ public class Inventory extends Command {
 	@Override
 	public String execute() {
 
-		List<Item> items = map.getInventory();
+		List<Item> items = game.getMap().getInventory();
 		if (items.isEmpty())
 			return "You are empty-handed.";
 
 		String result = "You are carrying:\n";
+
 		for (Item item : items)
-			result += "  " + item.getDescription() + "\n";
+			result += String.format("  A %s\n", item.getName());
+
 		return result;
 	}
 

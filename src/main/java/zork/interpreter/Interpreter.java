@@ -57,11 +57,8 @@ public class Interpreter {
 		List<Object> tokens = new LinkedList<Object>();
 
 		Object found;
-		while ((found = matcher.find()) != null) {
-			if (matcher.token().trim().isEmpty() || matcher.token().endsWith(" "))
-				System.out.println(matcher.token() + "::" + matcher.group() + "::" + found);
+		while ((found = matcher.find()) != null)
 			tokens.add(found);
-		}
 
 		return tokens;
 	}

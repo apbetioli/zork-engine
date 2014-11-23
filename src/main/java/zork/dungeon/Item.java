@@ -69,4 +69,5 @@ public class Item {
 	public void removeProperties(String... properties) {
 		getProperties().removeAll(Arrays.asList(properties));
 	}
+
 }

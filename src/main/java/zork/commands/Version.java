@@ -4,14 +4,12 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.dungeon.Map;
+import zork.Game;
 
 public class Version extends Command {
 
-	private Map map;
-
-	public Version(Map map) {
-		this.map = map;
+	public Version(Game game) {
+		super(game);
 	}
 
 	@Override
@@ -21,7 +19,7 @@ public class Version extends Command {
 
 	@Override
 	public String execute() {
-		return map.getVersion();
+		return game.getMap().getVersion();
 	}
 
 }
