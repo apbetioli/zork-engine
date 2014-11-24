@@ -1,10 +1,13 @@
 package zork.commands;
 
+import static zork.commands.Property.OPEN;
+
 import java.util.List;
 
 import zork.Engine;
 import zork.FreeMoveException;
 import zork.dungeon.Item;
+import zork.dungeon.Room;
 
 public abstract class Command implements Cloneable {
 
@@ -39,4 +42,22 @@ public abstract class Command implements Cloneable {
 		return null;
 	}
 
+	protected boolean itemIsVisibleFrom(Item item, Room currentRoom) {
+
+		List<Item> items = currentRoom.getItems();
+
+		return itemIsVisibleFrom(item, items);
+	}
+
+	protected boolean itemIsVisibleFrom(Item item, List<Item> items) {
+		for (Item other : items) {
+			if (item.getName().equals(other.getName()))
+				return true;
+
+			if (other.is(OPEN) && itemIsVisibleFrom(item, other.getItems()))
+				return true;
+		}
+
+		return false;
+	}
 }

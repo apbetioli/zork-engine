@@ -24,9 +24,13 @@ public class TakeAll extends Command {
 
 		String result = "";
 
-		List<Item> items = engine.getGame().getCurrentRoom().getItems();
-		for (Item item : items)
-			result += item.getName() + ": " + engine.interact("TAKE " + item.getName()) + "\n";
+		for (Item item : engine.getGame().getCurrentRoom().getItems()) {
+
+			if (item.is(Property.SCENERY))
+				continue;
+
+			result += String.format("%s: %s\n", item.getName(), engine.interact("TAKE " + item.getName()));
+		}
 
 		return result;
 	}

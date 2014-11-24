@@ -22,6 +22,13 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 	}
 
 	@Test
+	public void unknown() {
+		String result = zork.interact("debug door");
+
+		assertEquals("That is not a verb I recognize.", result);
+	}
+
+	@Test
 	public void version() {
 		String version = zork.interact("version");
 
@@ -176,6 +183,20 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 	}
 
 	@Test
+	public void openDoor() {
+		String result = zork.interact("open door");
+
+		assertEquals("The door cannot be opened.", result);
+	}
+
+	@Test
+	public void closeDoor() {
+		String result = zork.interact("close door");
+
+		assertEquals("That's already closed.", result);
+	}
+
+	@Test
 	public void closeLeaflet() {
 		String result = zork.interact("close leaflet");
 
@@ -226,6 +247,16 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 	}
 
 	@Test
+	public void takeLeafletTwice() {
+		zork.interact("open mailbox");
+
+		zork.interact("take leaflet");
+		String result = zork.interact("take leaflet");
+
+		assertEquals("You already have that!", result);
+	}
+
+	@Test
 	public void takeLeafletWithoutOpeningTheMailbox() {
 
 		String result = zork.interact("take leaflet");
@@ -254,7 +285,62 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 	public void takeDoor() {
 		String result = zork.interact("take door");
 
-		assertEquals("An interesting idea...", result); // RANDOMIZE
+		assertEquals("An interesting idea...", result); // FIXME RANDOMIZE
+	}
+
+	@Test
+	public void drop() {
+		zork.interact("open mailbox");
+		zork.interact("take leaflet");
+
+		String result = zork.interact("drop leaflet");
+
+		assertEquals("Dropped.", result);
+	}
+
+	@Test
+	public void dropTwice() {
+		zork.interact("open mailbox");
+		zork.interact("take leaflet");
+		zork.interact("drop leaflet");
+
+		String result = zork.interact("drop leaflet");
+
+		assertEquals("You don't have the leaflet!", result);
+	}
+
+	@Test
+	public void dropAll() {
+		zork.interact("open mailbox");
+		zork.interact("take leaflet");
+
+		String result = zork.interact("drop all");
+
+		assertEquals("leaflet: Dropped.\n", result);
+	}
+
+	@Test
+	public void dropLeafletWithoutHavingIt() {
+		String result = zork.interact("drop leaflet");
+
+		assertEquals("You don't have the leaflet!", result);
+	}
+
+	@Test
+	public void dropAllWithoutHavingNothing() {
+		String result = zork.interact("drop all");
+
+		assertEquals("You are empty-handed.", result);
+	}
+
+	@Test
+	public void leave() {
+		zork.interact("open mailbox");
+		zork.interact("take leaflet");
+
+		String result = zork.interact("leave leaflet");
+
+		assertEquals("Dropped.", result);
 	}
 
 	@Test
@@ -310,16 +396,37 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 	public void getAll() {
 		String result = zork.interact("get all");
 
-		assertEquals("small mailbox: It is securely anchored.\n"
-				+ "door: An interesting idea...\n", result);
+		assertEquals("small mailbox: It is securely anchored.\n", result);
 	}
 
-	@Ignore
 	@Test
-	public void examineMe() {
-		String result = zork.interact("examine me");
+	public void examineLeaflet() {
+		String result = zork.interact("examine leaflet");
 
-		assertEquals("That's difficult unless your eyes are prehensile.", result);
+		assertEquals("You can't see any such thing.", result);
+	}
+
+	@Test
+	public void examineDoor() {
+		String result = zork.interact("examine door");
+
+		assertEquals("The door is closed.", result);
+	}
+
+	@Test
+	public void examineHouse() {
+		String result = zork.interact("examine house");
+
+		assertEquals(
+				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
+				result);
+	}
+
+	@Test
+	public void examineGround() {
+		String result = zork.interact("examine ground");
+
+		assertEquals("There's nothing special about the ground.", result);
 	}
 
 	@Ignore
@@ -332,27 +439,10 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 
 	@Ignore
 	@Test
-	public void examineDoor() {
-		String result = zork.interact("examine door");
+	public void examineMe() {
+		String result = zork.interact("examine me");
 
-		assertEquals("The door is closed.", result);
+		assertEquals("That's difficult unless your eyes are prehensile.", result);
 	}
 
-	@Ignore
-	@Test
-	public void examineHouse() {
-		String result = zork.interact("examine house");
-
-		assertEquals(
-				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.",
-				result);
-	}
-
-	@Ignore
-	@Test
-	public void examineGround() {
-		String result = zork.interact("examine ground");
-
-		assertEquals("There's nothing special about the ground.", result);
-	}
 }

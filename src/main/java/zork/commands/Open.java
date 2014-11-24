@@ -4,6 +4,7 @@ import static java.util.Arrays.asList;
 import static zork.commands.Property.CLOSED;
 import static zork.commands.Property.OPEN;
 import static zork.commands.Property.OPENABLE;
+import static zork.commands.Property.SCENERY;
 
 import java.util.List;
 
@@ -26,6 +27,9 @@ public class Open extends Command {
 
 		if (getItem().is(OPEN))
 			return "It is already open.";
+
+		if (getItem().is(SCENERY))
+			return String.format("The %s cannot be opened.", getItem().getName());
 
 		if (!getItem().is(OPENABLE))
 			return String.format("You must tell me how to do that to a %s.", getItem().getName());

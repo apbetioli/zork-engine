@@ -3,6 +3,9 @@ package zork;
 import zork.commands.Close;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
+import zork.commands.Drop;
+import zork.commands.DropAll;
+import zork.commands.Examine;
 import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
@@ -77,6 +80,9 @@ public class Engine {
 		registerCommand(new TakeAll(this));
 		registerCommand(new Read(this));
 		registerCommand(new Score(this));
+		registerCommand(new Drop(this));
+		registerCommand(new DropAll(this));
+		registerCommand(new Examine(this));
 	}
 
 	protected void registerCommand(Command command) {

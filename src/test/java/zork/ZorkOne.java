@@ -44,10 +44,22 @@ public class ZorkOne extends Game {
 
 		room.addItem(mailbox);
 
-		Item door = new Item("door", "");
-		door.addProperties(SCENERY);
+		Item door = new Item("door", "The door is closed.");
+		door.addProperties(SCENERY, CLOSED);
 
 		room.addItem(door);
+
+		Item house = new Item(
+				"white house",
+				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.");
+		house.addSynonyms("house", "white");
+		house.addProperties(SCENERY);
+		room.addItem(house);
+
+		// FIXME GLOBAL
+		Item ground = new Item("ground", "There's nothing special about the ground.");
+		ground.addProperties(SCENERY);
+		room.addItem(ground);
 
 		setCurrentRoom(room.getName());
 

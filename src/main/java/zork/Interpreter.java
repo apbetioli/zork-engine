@@ -37,6 +37,9 @@ public class Interpreter {
 		if (tokens.get(0) instanceof Command)
 			lastCommand = (Command) tokens.remove(0);
 
+		if (lastCommand == null)
+			return new Unknown();
+
 		lastCommand.setTokens(tokens);
 
 		return lastCommand;
