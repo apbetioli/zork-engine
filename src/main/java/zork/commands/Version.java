@@ -5,6 +5,7 @@ import static java.util.Arrays.asList;
 import java.util.List;
 
 import zork.Engine;
+import zork.FreeMoveException;
 
 public class Version extends Command {
 
@@ -18,8 +19,7 @@ public class Version extends Command {
 	}
 
 	@Override
-	public String execute() {
-		return engine.getGame().getVersion();
+	public String execute() throws FreeMoveException {
+		throw new FreeMoveException(engine.getGame().getVersion());
 	}
-
 }

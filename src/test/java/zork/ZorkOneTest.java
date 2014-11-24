@@ -2,25 +2,10 @@ package zork;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class ZorkOneTest {
-
-	private Engine zork;
-
-	@Before
-	public void init() {
-		zork = new ZorkEngine(new ZorkOne());
-	}
-
-	@Test
-	public void zork() {
-		String result = zork.interact("zork");
-
-		assertEquals("At your service!", result);
-	}
+public class ZorkOneTest extends ZorkOneBaseTest {
 
 	@Test
 	public void pardon() {

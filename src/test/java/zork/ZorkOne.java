@@ -7,8 +7,8 @@ import static zork.commands.Property.OPENABLE;
 import static zork.commands.Property.READABLE;
 import static zork.commands.Property.SCENERY;
 import static zork.commands.Property.TAKEABLE;
-import zork.dungeon.Item;
 import zork.dungeon.Game;
+import zork.dungeon.Item;
 import zork.dungeon.Room;
 
 public class ZorkOne extends Game {

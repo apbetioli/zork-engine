@@ -9,6 +9,7 @@ public class Game {
 	private String currentRoom;
 	private List<Room> rooms = new LinkedList<Room>();
 	private List<Item> inventory = new LinkedList<Item>();
+	private Rank rank = new Rank();
 
 	public String getVersion() {
 		return version;
@@ -20,7 +21,7 @@ public class Game {
 
 	public Room getCurrentRoom() {
 		for (Room room : rooms) {
-			if(room.getName().equals(currentRoom))
+			if (room.getName().equals(currentRoom))
 				return room;
 		}
 		return null;
@@ -36,5 +37,9 @@ public class Game {
 
 	public List<Item> getInventory() {
 		return inventory;
+	}
+
+	public Rank getRank() {
+		return rank;
 	}
 }

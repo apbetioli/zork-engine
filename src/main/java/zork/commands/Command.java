@@ -1,9 +1,9 @@
 package zork.commands;
 
-import java.util.Collections;
 import java.util.List;
 
 import zork.Engine;
+import zork.FreeMoveException;
 import zork.dungeon.Item;
 
 public abstract class Command {
@@ -18,11 +18,9 @@ public abstract class Command {
 		this.engine = engine;
 	}
 
-	public abstract String execute();
+	public abstract String execute() throws FreeMoveException;
 
-	public List<String> getSynonyms() {
-		return Collections.emptyList();
-	}
+	public abstract List<String> getSynonyms();
 
 	public void setItem(Item item) {
 		this.item = item;

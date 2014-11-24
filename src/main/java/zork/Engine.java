@@ -7,11 +7,11 @@ import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
 import zork.commands.Read;
+import zork.commands.Score;
 import zork.commands.Take;
 import zork.commands.Version;
 import zork.dungeon.Game;
-import zork.interpreter.Dictionary;
-import zork.interpreter.Interpreter;
+import zork.dungeon.Rank;
 
 public class Engine {
 
@@ -30,8 +30,23 @@ public class Engine {
 
 		Command command = interpreter.analize(input);
 
-		return command.execute();
+		try {
+			String result = command.execute();
 
+			incrementMove();
+
+			return result;
+
+		} catch (FreeMoveException e) {
+
+			return e.getMessage();
+		}
+
+	}
+
+	private void incrementMove() {
+		Rank rank = game.getRank();
+		rank.setMoves(rank.getMoves() + 1);
 	}
 
 	protected void init() {
@@ -59,6 +74,7 @@ public class Engine {
 		registerCommand(new Look(this));
 		registerCommand(new Take(this));
 		registerCommand(new Read(this));
+		registerCommand(new Score(this));
 	}
 
 	protected void registerCommand(Command command) {

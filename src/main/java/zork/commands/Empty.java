@@ -1,19 +1,19 @@
 package zork.commands;
 
-import static java.util.Arrays.asList;
-
 import java.util.List;
+
+import zork.FreeMoveException;
 
 public class Empty extends Command {
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("");
+		throw new IllegalStateException("This command must not be registered");
 	}
 
 	@Override
-	public String execute() {
-		return "I beg your pardon?";
+	public String execute() throws FreeMoveException {
+		throw new FreeMoveException("I beg your pardon?");
 	}
 
 }

@@ -1,4 +1,4 @@
-package zork.interpreter;
+package zork;
 
 import java.util.Iterator;
 import java.util.LinkedList;

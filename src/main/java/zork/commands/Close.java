@@ -7,6 +7,8 @@ import static zork.commands.Property.OPEN;
 
 import java.util.List;
 
+import zork.FreeMoveException;
+
 public class Close extends Command {
 
 	@Override
@@ -15,10 +17,10 @@ public class Close extends Command {
 	}
 
 	@Override
-	public String execute() {
+	public String execute() throws FreeMoveException {
 
 		if (item == null)
-			return "What do you want to close?";
+			throw new FreeMoveException("What do you want to close?");
 
 		if (item.is(CLOSED))
 			return "That's already closed.";

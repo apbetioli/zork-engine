@@ -52,6 +52,7 @@ public class Look extends Command {
 			}
 
 		}
+		
 		return look;
 	}
 

@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import zork.FreeMoveException;
+
 public class Open extends Command {
 
 	@Override
@@ -17,10 +19,10 @@ public class Open extends Command {
 	}
 
 	@Override
-	public String execute() {
+	public String execute() throws FreeMoveException {
 
 		if (item == null)
-			return "What do you want to open?";
+			throw new FreeMoveException("What do you want to open?");
 
 		if (item.is(OPEN))
 			return "It is already open.";

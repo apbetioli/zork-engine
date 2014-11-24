@@ -1,4 +1,4 @@
-package zork.interpreter;
+package zork;
 
 import java.util.List;
 import java.util.Map.Entry;
@@ -6,8 +6,8 @@ import java.util.TreeMap;
 
 import zork.commands.Command;
 import zork.commands.CommandFactory;
-import zork.dungeon.Item;
 import zork.dungeon.Game;
+import zork.dungeon.Item;
 import zork.dungeon.Room;
 
 public class Dictionary extends TreeMap<String, Object> {

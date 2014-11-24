@@ -2,11 +2,11 @@ package zork.commands;
 
 import org.junit.Test;
 
-public class UnknownTest {
+public class EmptyTest {
 
 	@Test(expected = IllegalStateException.class)
-	public void unknownHasNoSynonyms() {
-		Command u = new Unknown();
+	public void emptyHasNoSynonyms() {
+		Command u = new Empty();
 
 		u.getSynonyms();
 	}

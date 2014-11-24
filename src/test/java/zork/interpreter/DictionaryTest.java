@@ -6,10 +6,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import zork.Dictionary;
 import zork.commands.CommandFactory;
 import zork.commands.Open;
-import zork.dungeon.Item;
 import zork.dungeon.Game;
+import zork.dungeon.Item;
 import zork.dungeon.Room;
 
 public class DictionaryTest {

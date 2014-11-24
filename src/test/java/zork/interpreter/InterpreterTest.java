@@ -5,11 +5,12 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import zork.Dictionary;
 import zork.Engine;
+import zork.Interpreter;
 import zork.ZorkOne;
 import zork.commands.Command;
 import zork.commands.CommandFactory;
-import zork.commands.Empty;
 import zork.commands.Inventory;
 import zork.commands.Open;
 import zork.commands.Unknown;
@@ -23,18 +24,6 @@ public class InterpreterTest {
 	public void init() {
 		commandFactory = new CommandFactory();
 		commandFactory.register(new Open());
-	}
-
-	@Test
-	public void analizeEmptyCommand() {
-
-		commandFactory.register(new Empty());
-		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
-		Interpreter interpreter = new Interpreter(dictionary);
-
-		Command command = interpreter.analize(" ");
-
-		assertEquals(Empty.class, command.getClass());
 	}
 
 	@Test

@@ -40,15 +40,4 @@ public class CommandFactoryTest {
 		assertTrue(factory.get("look").getClass().equals(Unknown.class));
 	}
 
-	@Test
-	public void emptyCommand() {
-
-		CommandFactory factory = new CommandFactory();
-
-		factory.register(new Empty());
-
-		assertTrue(factory.containsKey("   "));
-		assertTrue(factory.get("   ").getClass().equals(Empty.class));
-	}
-
 }
