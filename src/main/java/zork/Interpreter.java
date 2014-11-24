@@ -1,6 +1,5 @@
 package zork;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -12,7 +11,6 @@ import net.pocorall.automaton.StringUnionOperations;
 import zork.commands.Command;
 import zork.commands.Empty;
 import zork.commands.Unknown;
-import zork.dungeon.Item;
 
 public class Interpreter {
 
@@ -33,46 +31,48 @@ public class Interpreter {
 		RunAutomatonMatcher matcher = newMatcher(sentence);
 		List<Object> tokens = findAllTokens(matcher);
 
-		Iterator<Object> iterator = tokens.iterator();
-
-		if (!iterator.hasNext())
-			return new Unknown();
-
-		Object first = iterator.next();
-
-		if (first instanceof Command) {
-			lastCommand = (Command) first;
-			if (iterator.hasNext())
-				lastCommand.setItem((Item) iterator.next());
-
+		if (tokens.get(0) instanceof Command) {
+			Command prototype = (Command) tokens.remove(0);
+			lastCommand = prototype.clone();
 		} else {
-
-			lastCommand.setItem((Item) first);
+			if (lastCommand == null || lastCommand.isExecuted()) {
+				return new Unknown();
+			}
 		}
+
+		lastCommand.setTokens(tokens);
 
 		return lastCommand;
 	}
 
-	private List<Object> findAllTokens(RunAutomatonMatcher matcher) {
+	protected List<Object> findAllTokens(RunAutomatonMatcher matcher) {
 		List<Object> tokens = new LinkedList<Object>();
 
 		Object found;
-		while ((found = matcher.find()) != null)
+		while ((found = matcher.find()) != null) {
+			String token = matcher.token().trim();
+			if (!token.isEmpty())
+				tokens.add(token);
+
 			tokens.add(found);
+		}
+		String token = matcher.token().trim();
+		if (!token.isEmpty())
+			tokens.add(token);
 
 		return tokens;
 	}
 
-	private RunAutomatonMatcher newMatcher(String sentence) {
+	protected RunAutomatonMatcher newMatcher(String sentence) {
 		RunAutomaton automaton = buildAutomaton();
-		return automaton.newMatcher(sentence + " ");
+		return automaton.newMatcher(wholeWord(sentence));
 	}
 
 	private RunAutomaton buildAutomaton() {
 		StringUnionOperations builder = new StringUnionOperations();
 
 		for (Entry<String, Object> entry : dictionary.entrySet())
-			builder.add(entry.getValue(), entry.getKey() + " ");
+			builder.add(entry.getValue(), wholeWord(entry.getKey()));
 
 		DefaultAutomaton a = new DefaultAutomaton();
 		a.setInitialState(builder.complete());
@@ -81,6 +81,10 @@ public class Interpreter {
 		a.recomputeHashCode();
 
 		return new RunAutomaton(a);
+	}
+
+	private String wholeWord(String sentence) {
+		return " " + sentence.replaceAll(" ", "  ") + " ";
 	}
 
 }

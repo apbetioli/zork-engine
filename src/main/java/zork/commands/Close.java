@@ -19,17 +19,17 @@ public class Close extends Command {
 	@Override
 	public String execute() throws FreeMoveException {
 
-		if (item == null)
+		if (getItem() == null)
 			throw new FreeMoveException("What do you want to close?");
 
-		if (item.is(CLOSED))
+		if (getItem().is(CLOSED))
 			return "That's already closed.";
 
-		if (!item.is(CLOSABLE))
-			return String.format("You must tell me how to do that to a %s.", item.getName());
+		if (!getItem().is(CLOSABLE))
+			return String.format("You must tell me how to do that to a %s.", getItem().getName());
 
-		item.addProperties(CLOSED);
-		item.removeProperties(OPEN);
+		getItem().addProperties(CLOSED);
+		getItem().removeProperties(OPEN);
 
 		return "Closed.";
 	}

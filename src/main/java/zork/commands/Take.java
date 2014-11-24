@@ -25,16 +25,19 @@ public class Take extends Command {
 	@Override
 	public String execute() {
 
-		if (item.is(FIXED))
+		if (getItem() == null)
+			return "What do you want to take?";
+
+		if (getItem().is(FIXED))
 			return "It is securely anchored.";
 
-		if (!item.is(TAKEABLE))
+		if (!getItem().is(TAKEABLE))
 			return "An interesting idea...";
 
-		if (!itemIsVisibleFrom(item, engine.getGame().getCurrentRoom()))
+		if (!itemIsVisibleFrom(getItem(), engine.getGame().getCurrentRoom()))
 			return "You can't see any such thing.";
 
-		engine.getGame().getInventory().add(item);
+		engine.getGame().getInventory().add(getItem());
 
 		return "Taken.";
 	}

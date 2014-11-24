@@ -1,8 +1,10 @@
-package zork;
+package zork.util;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
+
+import zork.ZorkOne;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

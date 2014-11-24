@@ -27,8 +27,7 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 
 		assertEquals("ZORK I: The Great Underground Empire\n"
 				+ "Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n"
-				+ "ZORK is a registered trademark of Infocom, Inc.\n"
-				+ "Revision 88 / Serial number 840726\n", version);
+				+ "ZORK is a registered trademark of Infocom, Inc.\n" + "Revision 88 / Serial number 840726\n", version);
 	}
 
 	@Test
@@ -37,23 +36,20 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 
 		assertEquals("ZORK I: The Great Underground Empire\n"
 				+ "Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n"
-				+ "ZORK is a registered trademark of Infocom, Inc.\n"
-				+ "Revision 88 / Serial number 840726\n", version);
+				+ "ZORK is a registered trademark of Infocom, Inc.\n" + "Revision 88 / Serial number 840726\n", version);
 	}
 
 	@Test
 	public void look() {
 		String result = zork.interact("look");
-		assertEquals("West of House\n"
-				+ "This is an open field west of a white house, with a boarded front door.\n"
+		assertEquals("West of House\n" + "This is an open field west of a white house, with a boarded front door.\n"
 				+ "There is a small mailbox here.\n", result);
 	}
 
 	@Test
 	public void l() {
 		String result = zork.interact("l");
-		assertEquals("West of House\n"
-				+ "This is an open field west of a white house, with a boarded front door.\n"
+		assertEquals("West of House\n" + "This is an open field west of a white house, with a boarded front door.\n"
 				+ "There is a small mailbox here.\n", result);
 	}
 
@@ -128,11 +124,8 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 
 		String result = zork.interact("look");
 
-		assertEquals("West of House\n"
-				+ "This is an open field west of a white house, with a boarded front door.\n"
-				+ "There is a small mailbox here.\n"
-				+ "The small mailbox contains:\n"
-				+ "  A leaflet\n", result);
+		assertEquals("West of House\n" + "This is an open field west of a white house, with a boarded front door.\n"
+				+ "There is a small mailbox here.\n" + "The small mailbox contains:\n" + "  A leaflet\n", result);
 
 	}
 
@@ -190,6 +183,13 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 	}
 
 	@Test
+	public void take() {
+		String result = zork.interact("take");
+
+		assertEquals("What do you want to take?", result);
+	}
+
+	@Test
 	public void takeLeaflet() {
 		zork.interact("open mailbox");
 
@@ -240,8 +240,7 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 
 		String result = zork.interact("inventory");
 
-		assertEquals("You are carrying:\n"
-				+ "  A leaflet\n", result);
+		assertEquals("You are carrying:\n" + "  A leaflet\n", result);
 	}
 
 	@Test
@@ -307,12 +306,12 @@ public class ZorkOneTest extends ZorkOneBaseTest {
 						+ "    No devices should be without one!\n", result);
 	}
 
-	@Ignore
 	@Test
 	public void getAll() {
 		String result = zork.interact("get all");
 
-		assertEquals("small mailbox: It is securely anchored.", result);
+		assertEquals("small mailbox: It is securely anchored.\n"
+				+ "door: An interesting idea...\n", result);
 	}
 
 	@Ignore

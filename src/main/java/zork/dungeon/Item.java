@@ -47,11 +47,6 @@ public class Item {
 		getSynonyms().addAll(StringUtils.trimAll(Arrays.asList(synonym)));
 	}
 
-	@Override
-	public String toString() {
-		return name;
-	}
-
 	public void addProperties(String... properties) {
 		getProperties().addAll(StringUtils.trimAndUpperCaseAll(Arrays.asList(properties)));
 	}
@@ -70,4 +65,8 @@ public class Item {
 		getProperties().removeAll(Arrays.asList(properties));
 	}
 
+	@Override
+	public String toString() {
+		return name;
+	}
 }

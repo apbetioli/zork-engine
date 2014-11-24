@@ -9,6 +9,7 @@ import zork.commands.Open;
 import zork.commands.Read;
 import zork.commands.Score;
 import zork.commands.Take;
+import zork.commands.TakeAll;
 import zork.commands.Version;
 import zork.dungeon.Game;
 import zork.dungeon.Rank;
@@ -31,7 +32,7 @@ public class Engine {
 		Command command = interpreter.analize(input);
 
 		try {
-			String result = command.execute();
+			String result = command.doExecute();
 
 			incrementMove();
 
@@ -73,6 +74,7 @@ public class Engine {
 		registerCommand(new Close());
 		registerCommand(new Look(this));
 		registerCommand(new Take(this));
+		registerCommand(new TakeAll(this));
 		registerCommand(new Read(this));
 		registerCommand(new Score(this));
 	}

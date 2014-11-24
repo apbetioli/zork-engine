@@ -1,6 +1,10 @@
-package zork;
+package zork.util;
 
 import java.util.Scanner;
+
+import zork.Engine;
+import zork.ZorkEngine;
+import zork.ZorkOne;
 
 public class ConsoleRunner {
 

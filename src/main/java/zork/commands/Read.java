@@ -21,21 +21,21 @@ public class Read extends Command {
 	@Override
 	public String execute() {
 
-		if (!item.is(READABLE))
-			return String.format("How does one read a %s?", item.getName());
+		if (!getItem().is(READABLE))
+			return String.format("How does one read a %s?", getItem().getName());
 
 		String result = "";
 
-		if (!engine.getGame().getInventory().contains(item)) {
-			String taken = engine.interact("TAKE " + item.getName());
+		if (!engine.getGame().getInventory().contains(getItem())) {
+			String taken = engine.interact("TAKE " + getItem().getName());
 
-			if (!engine.getGame().getInventory().contains(item))
+			if (!engine.getGame().getInventory().contains(getItem()))
 				return taken;
 
 			result += String.format("(%s)\n", taken.replace(".", ""));
 		}
 
-		return result + item.getDescription();
+		return result + getItem().getDescription();
 	}
 
 }

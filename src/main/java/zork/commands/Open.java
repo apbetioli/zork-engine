@@ -21,18 +21,19 @@ public class Open extends Command {
 	@Override
 	public String execute() throws FreeMoveException {
 
-		if (item == null)
+		if (getItem() == null)
 			throw new FreeMoveException("What do you want to open?");
 
-		if (item.is(OPEN))
+		if (getItem().is(OPEN))
 			return "It is already open.";
 
-		if (!item.is(OPENABLE))
-			return String.format("You must tell me how to do that to a %s.", item.getName());
+		if (!getItem().is(OPENABLE))
+			return String.format("You must tell me how to do that to a %s.", getItem().getName());
 
-		item.addProperties(OPEN);
-		item.removeProperties(CLOSED);
+		getItem().addProperties(OPEN);
+		getItem().removeProperties(CLOSED);
 
-		return String.format("Opening the %s reveals a %s", item.getName(), StringUtils.join(item.getItems(), ", ") + ".");
+		return String.format("Opening the %s reveals a %s", getItem().getName(),
+				StringUtils.join(getItem().getItems(), ", ") + ".");
 	}
 }

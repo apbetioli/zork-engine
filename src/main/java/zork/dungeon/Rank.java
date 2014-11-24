@@ -23,20 +23,8 @@ public class Rank {
 		return rank;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
 	public void setMoves(int moves) {
 		this.moves = moves;
-	}
-
-	public void setRank(String rank) {
-		this.rank = rank;
 	}
 
 }
