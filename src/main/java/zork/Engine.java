@@ -32,7 +32,7 @@ public class Engine {
 		Command command = interpreter.analize(input);
 
 		try {
-			String result = command.doExecute();
+			String result = command.execute();
 
 			incrementMove();
 

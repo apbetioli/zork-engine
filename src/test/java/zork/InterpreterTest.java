@@ -63,7 +63,7 @@ public class InterpreterTest {
 	}
 
 	@Test
-	public void all() {
+	public void dontFindTheLOfAllAsToken() {
 		commandFactory.register(new Look(null));
 		commandFactory.register(new Take(null));
 
@@ -73,7 +73,7 @@ public class InterpreterTest {
 		RunAutomatonMatcher matcher = interpreter.newMatcher("GET ALL");
 		List<Object> tokens = interpreter.findAllTokens(matcher);
 
-		assertEquals("[<Take:Command>, ALL]", tokens.toString());
+		assertEquals("[<Take:Command>]", tokens.toString());
 	}
 
 }

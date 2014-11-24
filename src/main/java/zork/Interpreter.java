@@ -31,14 +31,11 @@ public class Interpreter {
 		RunAutomatonMatcher matcher = newMatcher(sentence);
 		List<Object> tokens = findAllTokens(matcher);
 
-		if (tokens.get(0) instanceof Command) {
-			Command prototype = (Command) tokens.remove(0);
-			lastCommand = prototype.clone();
-		} else {
-			if (lastCommand == null || lastCommand.isExecuted()) {
-				return new Unknown();
-			}
-		}
+		if (tokens.isEmpty())
+			return new Unknown();
+
+		if (tokens.get(0) instanceof Command)
+			lastCommand = (Command) tokens.remove(0);
 
 		lastCommand.setTokens(tokens);
 
@@ -49,16 +46,8 @@ public class Interpreter {
 		List<Object> tokens = new LinkedList<Object>();
 
 		Object found;
-		while ((found = matcher.find()) != null) {
-			String token = matcher.token().trim();
-			if (!token.isEmpty())
-				tokens.add(token);
-
+		while ((found = matcher.find()) != null)
 			tokens.add(found);
-		}
-		String token = matcher.token().trim();
-		if (!token.isEmpty())
-			tokens.add(token);
 
 		return tokens;
 	}
