@@ -17,6 +17,7 @@ import zork.commands.Version;
 import zork.dungeon.Game;
 import zork.dungeon.Score;
 import zork.exceptions.FreeMoveException;
+import zork.language.prepositions.The;
 
 public class Engine {
 
@@ -72,7 +73,7 @@ public class Engine {
 	}
 
 	private void registerPrepositions() {
-		dictionary.put("THE", "THE");
+		dictionary.register(new The());
 	}
 
 	private Dictionary createDictionary() {

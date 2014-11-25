@@ -11,6 +11,7 @@ public class Inventory extends Command {
 
 	public Inventory(Engine engine) {
 		super(engine);
+		setDepth(0);
 	}
 
 	@Override

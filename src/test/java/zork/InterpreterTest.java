@@ -86,4 +86,18 @@ public class InterpreterTest {
 
 	}
 
+	@Test
+	public void newEmptyCommandEveryTime() {
+
+		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
+		Interpreter interpreter = new Interpreter(dictionary);
+
+		Open command = (Open) interpreter.analize("OPEN MAILBOX");
+
+		assertEquals(1, command.getTokens().size());
+
+		Open command2 = (Open) interpreter.analize("OPEN MAILBOX");
+
+		assertEquals(1, command2.getTokens().size());
+	}
 }

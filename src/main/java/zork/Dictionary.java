@@ -9,8 +9,10 @@ import zork.commands.CommandFactory;
 import zork.dungeon.Game;
 import zork.dungeon.Item;
 import zork.dungeon.Room;
+import zork.language.Preposition;
+import zork.language.Token;
 
-public class Dictionary extends TreeMap<String, Object> {
+public class Dictionary extends TreeMap<String, Token> {
 
 	private static final long serialVersionUID = 4964927938848125605L;
 
@@ -54,7 +56,12 @@ public class Dictionary extends TreeMap<String, Object> {
 	}
 
 	@Override
-	public Object put(String key, Object value) {
+	public Token put(String key, Token value) {
 		return super.put(key.trim().toUpperCase(), value);
+	}
+
+	public void register(Preposition preposition) {
+		for (String synonym : preposition.getSynonyms())
+			put(synonym, preposition);
 	}
 }

@@ -14,6 +14,7 @@ public class Look extends Command {
 
 	public Look(Engine engine) {
 		super(engine);
+		setDepth(0);
 	}
 
 	@Override
@@ -52,7 +53,7 @@ public class Look extends Command {
 			}
 
 		}
-		
+
 		return look;
 	}
 

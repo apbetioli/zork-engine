@@ -12,6 +12,7 @@ public class ScoreCommand extends Command {
 
 	public ScoreCommand(Engine engine) {
 		super(engine);
+		setDepth(0);
 	}
 
 	@Override

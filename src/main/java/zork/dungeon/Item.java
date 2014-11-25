@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import zork.language.Word;
 import zork.util.StringUtils;
 
-public class Item {
+public class Item extends Word {
 
 	private String name;
 	private String description;

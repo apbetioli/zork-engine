@@ -8,6 +8,10 @@ import zork.commands.Command;
 
 public class ZorkCommand extends Command {
 
+	public ZorkCommand() {
+		setDepth(0);
+	}
+
 	@Override
 	public List<String> getSynonyms() {
 		return asList("ZORK");
