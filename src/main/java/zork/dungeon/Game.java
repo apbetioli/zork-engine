@@ -9,7 +9,8 @@ public class Game {
 	private String currentRoom;
 	private List<Room> rooms = new LinkedList<Room>();
 	private List<Item> inventory = new LinkedList<Item>();
-	private Rank rank = new Rank();
+	private List<Item> globalItems = new LinkedList<Item>();
+	private Score score = new Score();
 
 	public String getVersion() {
 		return version;
@@ -39,7 +40,11 @@ public class Game {
 		return inventory;
 	}
 
-	public Rank getRank() {
-		return rank;
+	public Score getScore() {
+		return score;
+	}
+
+	public List<Item> getGlobalItems() {
+		return globalItems;
 	}
 }

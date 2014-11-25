@@ -1,13 +1,12 @@
 package zork;
 
 import static org.junit.Assert.assertEquals;
-
-import java.util.List;
-
 import net.pocorall.automaton.RunAutomatonMatcher;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import zork.commands.Command;
 import zork.commands.CommandFactory;
@@ -15,12 +14,16 @@ import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
 import zork.commands.Take;
-import zork.commands.Unknown;
 import zork.dungeon.Game;
+import zork.exceptions.UnknownCommandException;
+import zork.exceptions.UnknownWordException;
 
 public class InterpreterTest {
 
 	private CommandFactory commandFactory;
+
+	@Rule
+	public ExpectedException expectedException = ExpectedException.none();
 
 	@Before()
 	public void init() {
@@ -28,15 +31,13 @@ public class InterpreterTest {
 		commandFactory.register(new Open());
 	}
 
-	@Test
+	@Test(expected = UnknownCommandException.class)
 	public void analizeUnknownCommand() {
 
 		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
 		Interpreter interpreter = new Interpreter(dictionary);
 
-		Command command = interpreter.analize("ITADAKIMASU");
-
-		assertEquals(Unknown.class, command.getClass());
+		interpreter.analize("ITADAKIMASU");
 	}
 
 	@Test
@@ -71,9 +72,18 @@ public class InterpreterTest {
 		Interpreter interpreter = new Interpreter(dictionary);
 
 		RunAutomatonMatcher matcher = interpreter.newMatcher("GET ALL");
-		List<Object> tokens = interpreter.findAllTokens(matcher);
 
-		assertEquals("[<Take:Command>]", tokens.toString());
+		expectedException.expect(UnknownWordException.class);
+		expectedException.expectMessage("I don't know the word \"ALL\".");
+
+		interpreter.findAllTokens(matcher);
+	}
+
+	@Test
+	public void knownCommandUnknownWord() {
+
+		commandFactory.register(new Take(null));
+
 	}
 
 }

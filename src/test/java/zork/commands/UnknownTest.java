@@ -1,14 +1,24 @@
 package zork.commands;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-public class UnknownTest {
+import zork.EngineTest;
 
-	@Test(expected = IllegalStateException.class)
-	public void unknownHasNoSynonyms() {
-		Command u = new Unknown();
+public class UnknownTest extends EngineTest {
 
-		u.getSynonyms();
+	@Test
+	public void notAVerb() {
+		String result = engine.interact("notaverb");
+
+		assertEquals("That is not a verb I recognize.", result);
 	}
 
+	@Test
+	public void unknown() {
+		String result = engine.interact("debug door");
+
+		assertEquals("That is not a verb I recognize.", result);
+	}
 }

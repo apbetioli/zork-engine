@@ -5,12 +5,12 @@ import static java.util.Arrays.asList;
 import java.util.List;
 
 import zork.Engine;
-import zork.FreeMoveException;
-import zork.dungeon.Rank;
+import zork.dungeon.Score;
+import zork.exceptions.FreeMoveException;
 
-public class Score extends Command {
+public class ScoreCommand extends Command {
 
-	public Score(Engine engine) {
+	public ScoreCommand(Engine engine) {
 		super(engine);
 	}
 
@@ -22,7 +22,7 @@ public class Score extends Command {
 	@Override
 	public String execute() throws FreeMoveException {
 
-		Rank ranking = engine.getGame().getRank();
+		Score ranking = engine.getGame().getScore();
 
 		int score = ranking.getScore();
 		int total = ranking.getTotal();

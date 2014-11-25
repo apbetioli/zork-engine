@@ -7,7 +7,7 @@ import static zork.commands.Property.OPEN;
 
 import java.util.List;
 
-import zork.FreeMoveException;
+import zork.exceptions.FreeMoveException;
 
 public class Close extends Command {
 

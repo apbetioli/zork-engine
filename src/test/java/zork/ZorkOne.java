@@ -18,7 +18,18 @@ public class ZorkOne extends Game {
 				+ "Copyright (c) 1981, 1982, 1983 Infocom, Inc. All rights reserved.\n"
 				+ "ZORK is a registered trademark of Infocom, Inc.\n"
 				+ "Revision 88 / Serial number 840726\n");
+		addGlobalItems();
 		addRooms();
+	}
+
+	private void addGlobalItems() {
+		Item player = new Item("me", "That's difficult unless your eyes are prehensile.");
+		player.addSynonyms("cretin", "myself");
+		getGlobalItems().add(player);
+
+		Item ground = new Item("ground", "There's nothing special about the ground.");
+		ground.addSynonyms("sand", "earth", "here", "hole");
+		getGlobalItems().add(ground);
 	}
 
 	private void addRooms() {
@@ -34,7 +45,9 @@ public class ZorkOne extends Game {
 				"    WELCOME TO ZORK\n\n"
 						+ "    ZORK is a game of adventure, danger, and low cunning. In it you will explore some of the most amazing territory ever seen by mortal man.  Hardened adventurers have run screaming from the terrors contained within!\n\n"
 						+ "    In ZORK the intrepid explorer delves into the forgotten secrets of a lost labyrinth deep in the bowels of the earth, searching for vast treasures long hidden from prying eyes, treasures guarded by fearsome monsters and diabolical traps!\n\n"
-						+ "    No devices should be without one!\n");
+						+ "    No devices should be without one!\n"
+						+ "    Zork was created at the MIT Laboratory for Computer Science by Tim Anderson, Marc Blank, Bruce Daniels, and Dave Lebling.  It was inspired by the Adventure game of Crowther and Woods, and the long tradition of fantasy and science fiction games.\n"
+						+ "    On-line information may be obtained with the command HELP (synonyms are ABOUT, INFO, HINT, etc.).");
 		leaflet.addProperties(TAKEABLE, READABLE);
 
 		Item mailbox = new Item("small mailbox", "There is a small mailbox here.");
@@ -55,11 +68,6 @@ public class ZorkOne extends Game {
 		house.addSynonyms("house", "white");
 		house.addProperties(SCENERY);
 		room.addItem(house);
-
-		// FIXME GLOBAL
-		Item ground = new Item("ground", "There's nothing special about the ground.");
-		ground.addProperties(SCENERY);
-		room.addItem(ground);
 
 		setCurrentRoom(room.getName());
 

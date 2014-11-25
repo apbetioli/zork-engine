@@ -10,12 +10,13 @@ import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
 import zork.commands.Read;
-import zork.commands.Score;
+import zork.commands.ScoreCommand;
 import zork.commands.Take;
 import zork.commands.TakeAll;
 import zork.commands.Version;
 import zork.dungeon.Game;
-import zork.dungeon.Rank;
+import zork.dungeon.Score;
+import zork.exceptions.FreeMoveException;
 
 public class Engine {
 
@@ -32,10 +33,14 @@ public class Engine {
 
 	public String interact(String input) {
 
-		Command command = interpreter.analize(input);
+		Command command = null;
 
 		try {
+			command = interpreter.analize(input);
+
 			String result = command.execute();
+
+			interpreter.clearPendingCommand();
 
 			incrementMove();
 
@@ -43,13 +48,15 @@ public class Engine {
 
 		} catch (FreeMoveException e) {
 
+			interpreter.setPendingCommand(command);
+
 			return e.getMessage();
 		}
 
 	}
 
 	private void incrementMove() {
-		Rank rank = game.getRank();
+		Score rank = game.getScore();
 		rank.setMoves(rank.getMoves() + 1);
 	}
 
@@ -59,7 +66,13 @@ public class Engine {
 
 		dictionary = createDictionary();
 
+		registerPrepositions();
+
 		interpreter = createInterpreter();
+	}
+
+	private void registerPrepositions() {
+		dictionary.put("THE", "THE");
 	}
 
 	private Dictionary createDictionary() {
@@ -79,7 +92,7 @@ public class Engine {
 		registerCommand(new Take(this));
 		registerCommand(new TakeAll(this));
 		registerCommand(new Read(this));
-		registerCommand(new Score(this));
+		registerCommand(new ScoreCommand(this));
 		registerCommand(new Drop(this));
 		registerCommand(new DropAll(this));
 		registerCommand(new Examine(this));

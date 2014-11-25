@@ -1,14 +1,18 @@
 package zork.commands;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-public class EmptyTest {
+import zork.EngineTest;
 
-	@Test(expected = IllegalStateException.class)
-	public void emptyHasNoSynonyms() {
-		Command u = new Empty();
+public class EmptyTest extends EngineTest {
 
-		u.getSynonyms();
+	@Test
+	public void pardon() {
+		String result = engine.interact(" ");
+
+		assertEquals("I beg your pardon?", result);
 	}
 
 }

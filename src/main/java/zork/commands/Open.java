@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import zork.FreeMoveException;
+import zork.exceptions.FreeMoveException;
 
 public class Open extends Command {
 

@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class ZorkCommandTest extends ZorkOneBaseTest {
+public class ZorkCommandTest extends EngineTest {
 
 	@Test
 	public void zork() {
-		String result = zork.interact("zork");
+		String result = engine.interact("zork");
 
 		assertEquals("At your service!", result);
 	}

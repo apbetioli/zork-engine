@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import zork.Engine;
 import zork.dungeon.Game;
+import zork.exceptions.UnknownCommandException;
 
 public class CommandFactoryTest {
 
@@ -30,14 +31,14 @@ public class CommandFactoryTest {
 		assertNotNull(factory.get("INVENTORY"));
 	}
 
-	@Test
+	@Test(expected = UnknownCommandException.class)
 	public void unknownCommand() {
 
 		CommandFactory factory = new CommandFactory();
 
 		factory.register(new Inventory(new Engine(new Game())));
 
-		assertTrue(factory.get("look").getClass().equals(Unknown.class));
+		factory.get("look");
 	}
 
 }

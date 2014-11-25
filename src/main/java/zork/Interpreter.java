@@ -8,14 +8,18 @@ import net.pocorall.automaton.DefaultAutomaton;
 import net.pocorall.automaton.RunAutomaton;
 import net.pocorall.automaton.RunAutomatonMatcher;
 import net.pocorall.automaton.StringUnionOperations;
+
+import org.apache.commons.lang3.StringUtils;
+
 import zork.commands.Command;
-import zork.commands.Empty;
-import zork.commands.Unknown;
+import zork.exceptions.EmptyInputException;
+import zork.exceptions.UnknownCommandException;
+import zork.exceptions.UnknownWordException;
 
 public class Interpreter {
 
 	private Dictionary dictionary;
-	private Command lastCommand;
+	private Command pendingCommand;
 
 	public Interpreter(Dictionary dictionary) {
 		this.dictionary = dictionary;
@@ -26,33 +30,45 @@ public class Interpreter {
 		String sentence = input.trim().toUpperCase();
 
 		if (sentence.isEmpty())
-			return new Empty();
+			throw new EmptyInputException();
 
 		RunAutomatonMatcher matcher = newMatcher(sentence);
 		List<Object> tokens = findAllTokens(matcher);
 
-		if (tokens.isEmpty())
-			return new Unknown();
+		Command command = pendingCommand;
 
 		if (tokens.get(0) instanceof Command)
-			lastCommand = (Command) tokens.remove(0);
+			command = (Command) tokens.remove(0);
 
-		if (lastCommand == null)
-			return new Unknown();
+		command.setTokens(tokens);
 
-		lastCommand.setTokens(tokens);
-
-		return lastCommand;
+		return command;
 	}
 
 	protected List<Object> findAllTokens(RunAutomatonMatcher matcher) {
 		List<Object> tokens = new LinkedList<Object>();
 
 		Object found;
-		while ((found = matcher.find()) != null)
+		while ((found = matcher.find()) != null) {
+
+			verifyToken(matcher, tokens);
+
 			tokens.add(found);
+		}
+
+		verifyToken(matcher, tokens);
 
 		return tokens;
+	}
+
+	private void verifyToken(RunAutomatonMatcher matcher, List<Object> tokens) {
+		String token = StringUtils.trimToEmpty(matcher.token());
+		if (!token.isEmpty()) {
+			if (tokens.isEmpty())
+				throw new UnknownCommandException();
+			else
+				throw new UnknownWordException(token);
+		}
 	}
 
 	protected RunAutomatonMatcher newMatcher(String sentence) {
@@ -77,6 +93,14 @@ public class Interpreter {
 
 	private String wholeWord(String sentence) {
 		return " " + sentence.replaceAll(" ", "  ") + " ";
+	}
+
+	public void setPendingCommand(Command lastCommand) {
+		this.pendingCommand = lastCommand;
+	}
+
+	public void clearPendingCommand() {
+		setPendingCommand(null);
 	}
 
 }

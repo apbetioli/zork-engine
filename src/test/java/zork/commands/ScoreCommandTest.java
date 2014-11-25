@@ -4,13 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import zork.ZorkOneBaseTest;
+import zork.EngineTest;
 
-public class ScoreTest extends ZorkOneBaseTest {
+public class ScoreCommandTest extends EngineTest {
 
 	@Test
 	public void startScore() {
-		String result = zork.interact("score");
+		String result = engine.interact("score");
 
 		assertEquals("Your score is 0 (total of 350 points), in 0 moves.\n"
 				+ "This gives you the rank of Beginner.", result);
@@ -18,9 +18,9 @@ public class ScoreTest extends ZorkOneBaseTest {
 
 	@Test
 	public void oneMoveScore() {
-		zork.interact("look");
+		engine.interact("look");
 
-		String result = zork.interact("score");
+		String result = engine.interact("score");
 
 		assertEquals("Your score is 0 (total of 350 points), in 1 moves.\n"
 				+ "This gives you the rank of Beginner.", result);
@@ -28,10 +28,10 @@ public class ScoreTest extends ZorkOneBaseTest {
 
 	@Test
 	public void oneMoveTwiceScore() {
-		zork.interact("look");
-		zork.interact("look");
+		engine.interact("look");
+		engine.interact("look");
 
-		String result = zork.interact("score");
+		String result = engine.interact("score");
 
 		assertEquals("Your score is 0 (total of 350 points), in 2 moves.\n"
 				+ "This gives you the rank of Beginner.", result);

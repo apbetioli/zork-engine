@@ -2,6 +2,8 @@ package zork.commands;
 
 import java.util.HashMap;
 
+import zork.exceptions.UnknownCommandException;
+
 public class CommandFactory extends HashMap<String, Command> {
 
 	private static final long serialVersionUID = -4812254220176470750L;
@@ -17,7 +19,7 @@ public class CommandFactory extends HashMap<String, Command> {
 		if (command != null)
 			return command;
 
-		return new Unknown();
+		throw new UnknownCommandException();
 	}
 
 	public void register(Command command) {

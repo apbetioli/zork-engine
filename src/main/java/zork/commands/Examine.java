@@ -5,7 +5,7 @@ import static java.util.Arrays.asList;
 import java.util.List;
 
 import zork.Engine;
-import zork.FreeMoveException;
+import zork.exceptions.FreeMoveException;
 
 public class Examine extends Command {
 
@@ -15,13 +15,13 @@ public class Examine extends Command {
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("EXAMINE");
+		return asList("EXAMINE", "LOOK AT");
 	}
 
 	@Override
 	public String execute() throws FreeMoveException {
 
-		if (!itemIsVisibleFrom(getItem(), engine.getGame().getCurrentRoom()))
+		if (!isItemVisible(getItem()))
 			return "You can't see any such thing.";
 
 		return getItem().getDescription();

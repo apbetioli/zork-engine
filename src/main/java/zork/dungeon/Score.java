@@ -1,6 +1,6 @@
 package zork.dungeon;
 
-public class Rank {
+public class Score {
 
 	private int score = 0;
 	private int total = 350;

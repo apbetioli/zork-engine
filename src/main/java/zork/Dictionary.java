@@ -35,6 +35,8 @@ public class Dictionary extends TreeMap<String, Object> {
 	}
 
 	private void addItems() {
+		addItems(game.getGlobalItems());
+
 		for (Room room : game.getRooms())
 			addItems(room.getItems());
 	}

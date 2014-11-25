@@ -31,7 +31,7 @@ public class Take extends Command {
 		if (!getItem().is(TAKEABLE))
 			return "An interesting idea...";
 
-		if (!itemIsVisibleFrom(getItem(), engine.getGame().getCurrentRoom()))
+		if (!isItemVisible(getItem()))
 			return "You can't see any such thing.";
 
 		if (engine.getGame().getInventory().contains(getItem()))

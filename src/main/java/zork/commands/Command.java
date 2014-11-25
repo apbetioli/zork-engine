@@ -2,12 +2,11 @@ package zork.commands;
 
 import static zork.commands.Property.OPEN;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import zork.Engine;
-import zork.FreeMoveException;
 import zork.dungeon.Item;
-import zork.dungeon.Room;
 
 public abstract class Command implements Cloneable {
 
@@ -21,14 +20,9 @@ public abstract class Command implements Cloneable {
 		this.engine = engine;
 	}
 
-	public abstract String execute() throws FreeMoveException;
+	public abstract String execute();
 
 	public abstract List<String> getSynonyms();
-
-	@Override
-	public String toString() {
-		return "<" + getClass().getSimpleName() + ":Command>";
-	}
 
 	public void setTokens(List<Object> tokens) {
 		this.tokens = tokens;
@@ -42,19 +36,21 @@ public abstract class Command implements Cloneable {
 		return null;
 	}
 
-	protected boolean itemIsVisibleFrom(Item item, Room currentRoom) {
+	protected boolean isItemVisible(Item item) {
 
-		List<Item> items = currentRoom.getItems();
+		List<Item> items = new LinkedList<Item>();
+		items.addAll(engine.getGame().getGlobalItems());
+		items.addAll(engine.getGame().getCurrentRoom().getItems());
 
-		return itemIsVisibleFrom(item, items);
+		return isItemVisibleFrom(item, items);
 	}
 
-	protected boolean itemIsVisibleFrom(Item item, List<Item> items) {
+	private boolean isItemVisibleFrom(Item item, List<Item> items) {
 		for (Item other : items) {
 			if (item.getName().equals(other.getName()))
 				return true;
 
-			if (other.is(OPEN) && itemIsVisibleFrom(item, other.getItems()))
+			if (other.is(OPEN) && isItemVisibleFrom(item, other.getItems()))
 				return true;
 		}
 
