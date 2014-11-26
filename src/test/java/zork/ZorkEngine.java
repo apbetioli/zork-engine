@@ -1,7 +1,9 @@
 package zork;
 
-import zork.dungeon.Game;
+import java.util.Set;
 
+import zork.commands.Command;
+import zork.dungeon.Game;
 
 public class ZorkEngine extends Engine {
 
@@ -10,9 +12,12 @@ public class ZorkEngine extends Engine {
 	}
 
 	@Override
-	protected void registerCommands() {
-		super.registerCommands();
+	protected Set<Command> defineCommands() {
+		Set<Command> commands = super.defineCommands();
 
-		registerCommand(new ZorkCommand());
+		commands.add(new ZorkCommand());
+
+		return commands;
 	}
+
 }

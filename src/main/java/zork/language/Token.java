@@ -9,6 +9,8 @@ public abstract class Token {
 
 	public abstract int getNumberOfArgs();
 
+	public abstract List<String> getSynonyms();
+
 	public void addArg(Token token) {
 		getArgs().add(token);
 	}
@@ -32,4 +34,5 @@ public abstract class Token {
 			throw new IllegalStateException(e);
 		}
 	}
+
 }

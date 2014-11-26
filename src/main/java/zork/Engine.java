@@ -1,8 +1,10 @@
 package zork;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import zork.commands.Close;
 import zork.commands.Command;
-import zork.commands.CommandFactory;
 import zork.commands.Drop;
 import zork.commands.DropAll;
 import zork.commands.Examine;
@@ -22,9 +24,7 @@ import zork.language.Article;
 public class Engine {
 
 	private final Game game;
-	private Dictionary dictionary;
 	private Interpreter interpreter;
-	private CommandFactory commandFactory;
 
 	public Engine(Game game) {
 		this.game = game;
@@ -56,55 +56,42 @@ public class Engine {
 
 	}
 
-	private void incrementMove() {
-		Score rank = game.getScore();
-		rank.setMoves(rank.getMoves() + 1);
+	protected void incrementMove() {
+		Score score = game.getScore();
+		score.setMoves(score.getMoves() + 1);
 	}
 
 	protected void init() {
-		commandFactory = createCommandFactory();
-		registerCommands();
-
-		dictionary = createDictionary();
-
-		registerPrepositions();
-
-		interpreter = createInterpreter();
+		DictionaryBuilder dictionaryBuilder = createDictionaryBuilder();
+		interpreter = createInterpreter(dictionaryBuilder);
 	}
 
-	private void registerPrepositions() {
-		dictionary.register(new Article());
+	protected DictionaryBuilder createDictionaryBuilder() {
+		return new DictionaryBuilder()
+				.addItems(game)
+				.addToken(new Article())
+				.addCommands(defineCommands());
 	}
 
-	private Dictionary createDictionary() {
-		return new Dictionary(commandFactory, game);
+	protected Set<Command> defineCommands() {
+		Set<Command> commands = new HashSet<Command>();
+		commands.add(new Inventory(this));
+		commands.add(new Version(this));
+		commands.add(new Open());
+		commands.add(new Close());
+		commands.add(new Look(this));
+		commands.add(new Take(this));
+		commands.add(new TakeAll(this));
+		commands.add(new Read(this));
+		commands.add(new ScoreCommand(this));
+		commands.add(new Drop(this));
+		commands.add(new DropAll(this));
+		commands.add(new Examine(this));
+		return commands;
 	}
 
-	protected CommandFactory createCommandFactory() {
-		return new CommandFactory();
-	}
-
-	protected void registerCommands() {
-		registerCommand(new Inventory(this));
-		registerCommand(new Version(this));
-		registerCommand(new Open());
-		registerCommand(new Close());
-		registerCommand(new Look(this));
-		registerCommand(new Take(this));
-		registerCommand(new TakeAll(this));
-		registerCommand(new Read(this));
-		registerCommand(new ScoreCommand(this));
-		registerCommand(new Drop(this));
-		registerCommand(new DropAll(this));
-		registerCommand(new Examine(this));
-	}
-
-	protected void registerCommand(Command command) {
-		commandFactory.register(command);
-	}
-
-	protected Interpreter createInterpreter() {
-		return new Interpreter(dictionary);
+	protected Interpreter createInterpreter(DictionaryBuilder dictionaryBuilder) {
+		return new Interpreter(dictionaryBuilder.build());
 	}
 
 	public Game getGame() {
