@@ -1,11 +1,11 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
-import static zork.commands.Property.READABLE;
+import static zork.game.Property.READABLE;
 
 import java.util.List;
 
-import zork.Engine;
+import zork.engine.Engine;
 
 public class Read extends Command {
 

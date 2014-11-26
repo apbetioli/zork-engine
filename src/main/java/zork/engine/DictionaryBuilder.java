@@ -1,12 +1,12 @@
-package zork;
+package zork.engine;
 
 import java.util.List;
 import java.util.Set;
 
 import zork.commands.Command;
-import zork.dungeon.Game;
-import zork.dungeon.Item;
-import zork.dungeon.Room;
+import zork.game.Game;
+import zork.game.Item;
+import zork.game.Room;
 import zork.language.Token;
 
 public class DictionaryBuilder {

@@ -1,4 +1,4 @@
-package zork;
+package zork.engine;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,13 +12,13 @@ import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
 import zork.commands.Read;
-import zork.commands.ScoreCommand;
+import zork.commands.Score;
 import zork.commands.Take;
 import zork.commands.TakeAll;
 import zork.commands.Version;
-import zork.dungeon.Game;
-import zork.dungeon.Score;
 import zork.exceptions.FreeMoveException;
+import zork.game.Game;
+import zork.game.Stats;
 import zork.language.Article;
 
 public class Engine {
@@ -57,8 +57,8 @@ public class Engine {
 	}
 
 	protected void incrementMove() {
-		Score score = game.getScore();
-		score.setMoves(score.getMoves() + 1);
+		Stats stats = game.getStats();
+		stats.setMoves(stats.getMoves() + 1);
 	}
 
 	protected void init() {
@@ -83,7 +83,7 @@ public class Engine {
 		commands.add(new Take(this));
 		commands.add(new TakeAll(this));
 		commands.add(new Read(this));
-		commands.add(new ScoreCommand(this));
+		commands.add(new Score(this));
 		commands.add(new Drop(this));
 		commands.add(new DropAll(this));
 		commands.add(new Examine(this));

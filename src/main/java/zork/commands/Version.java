@@ -4,18 +4,13 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Engine;
+import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
 
 public class Version extends Command {
 
 	public Version(Engine engine) {
 		super(engine);
-	}
-
-	@Override
-	public int getNumberOfArgs() {
-		return 0;
 	}
 
 	@Override

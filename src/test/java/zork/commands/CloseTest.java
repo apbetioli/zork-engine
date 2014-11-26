@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import zork.EngineTest;
+import zork.engine.EngineTest;
 
 public class CloseTest extends EngineTest {
 
@@ -59,4 +59,12 @@ public class CloseTest extends EngineTest {
 		assertEquals("You must tell me how to do that to a leaflet.", result);
 	}
 
+	@Test
+	public void ignorePendingCommand() {
+		engine.interact("open");
+
+		String result = engine.interact("close door");
+
+		assertEquals("That's already closed.", result);
+	}
 }

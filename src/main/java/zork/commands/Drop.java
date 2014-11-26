@@ -4,7 +4,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Engine;
+import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
 
 public class Drop extends Command {

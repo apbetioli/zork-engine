@@ -4,18 +4,13 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Engine;
-import zork.dungeon.Item;
+import zork.engine.Engine;
+import zork.game.Item;
 
 public class Inventory extends Command {
 
 	public Inventory(Engine engine) {
 		super(engine);
-	}
-
-	@Override
-	public int getNumberOfArgs() {
-		return 0;
 	}
 
 	@Override

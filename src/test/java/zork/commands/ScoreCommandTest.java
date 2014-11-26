@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import zork.EngineTest;
+import zork.engine.EngineTest;
 
 public class ScoreCommandTest extends EngineTest {
 

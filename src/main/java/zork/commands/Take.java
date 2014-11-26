@@ -1,12 +1,12 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
-import static zork.commands.Property.FIXED;
-import static zork.commands.Property.TAKEABLE;
+import static zork.game.Property.FIXED;
+import static zork.game.Property.TAKEABLE;
 
 import java.util.List;
 
-import zork.Engine;
+import zork.engine.Engine;
 
 public class Take extends Command {
 

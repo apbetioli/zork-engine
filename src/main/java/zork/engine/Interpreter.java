@@ -1,8 +1,9 @@
-package zork;
+package zork.engine;
 
 import java.util.List;
 
 import zork.commands.Command;
+import zork.exceptions.UnknownCommandException;
 import zork.language.Token;
 
 public class Interpreter {
@@ -20,18 +21,18 @@ public class Interpreter {
 
 		appendPendingCommand(tokens);
 
-		Command command = (Command) buildTree(tokens);
+		Token command = buildTree(tokens);
+
+		if (!(command instanceof Command))
+			throw new UnknownCommandException();
 
 		System.out.println(command);
 
-		return command;
+		return (Command) command;
 	}
 
 	private void appendPendingCommand(List<Token> tokens) {
-		if (pendingCommand == null)
-			return;
-
-		if (!(tokens.get(0) instanceof Command))
+		if (pendingCommand != null && !(tokens.get(0) instanceof Command))
 			tokens.add(0, pendingCommand);
 	}
 

@@ -1,9 +1,9 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
-import static zork.commands.Property.CLOSABLE;
-import static zork.commands.Property.CLOSED;
-import static zork.commands.Property.OPEN;
+import static zork.game.Property.CLOSABLE;
+import static zork.game.Property.CLOSED;
+import static zork.game.Property.OPEN;
 
 import java.util.List;
 

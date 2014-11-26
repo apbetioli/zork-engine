@@ -1,13 +1,13 @@
-package zork.dungeon;
+package zork.game;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import zork.language.Token;
+import zork.language.Noun;
 import zork.util.StringUtils;
 
-public class Item extends Token {
+public class Item extends Noun {
 
 	private String name;
 	private String description;
@@ -18,11 +18,6 @@ public class Item extends Token {
 	public Item(String name, String description) {
 		this.name = name;
 		this.description = description;
-	}
-
-	@Override
-	public int getNumberOfArgs() {
-		return 0;
 	}
 
 	public String getName() {
@@ -93,8 +88,4 @@ public class Item extends Token {
 		return true;
 	}
 
-	@Override
-	public Token clone() {
-		return this;
-	}
 }

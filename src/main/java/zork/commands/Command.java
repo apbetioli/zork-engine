@@ -1,15 +1,16 @@
 package zork.commands;
 
-import static zork.commands.Property.OPEN;
+import static zork.game.Property.OPEN;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import zork.Engine;
-import zork.dungeon.Item;
+import zork.engine.Engine;
+import zork.game.Item;
 import zork.language.Token;
+import zork.language.Verb;
 
-public abstract class Command extends Token implements Cloneable {
+public abstract class Command extends Verb implements Cloneable {
 
 	protected Engine engine;
 
@@ -21,13 +22,6 @@ public abstract class Command extends Token implements Cloneable {
 	}
 
 	public abstract String execute();
-
-	public abstract List<String> getSynonyms();
-
-	@Override
-	public int getNumberOfArgs() {
-		return 1;
-	}
 
 	protected Item getItem() {
 		return getItem(getArgs());

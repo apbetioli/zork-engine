@@ -1,15 +1,15 @@
 package zork;
 
-import static zork.commands.Property.CLOSABLE;
-import static zork.commands.Property.CLOSED;
-import static zork.commands.Property.FIXED;
-import static zork.commands.Property.OPENABLE;
-import static zork.commands.Property.READABLE;
-import static zork.commands.Property.SCENERY;
-import static zork.commands.Property.TAKEABLE;
-import zork.dungeon.Game;
-import zork.dungeon.Item;
-import zork.dungeon.Room;
+import static zork.game.Property.CLOSABLE;
+import static zork.game.Property.CLOSED;
+import static zork.game.Property.FIXED;
+import static zork.game.Property.OPENABLE;
+import static zork.game.Property.READABLE;
+import static zork.game.Property.SCENERY;
+import static zork.game.Property.TAKEABLE;
+import zork.game.Game;
+import zork.game.Item;
+import zork.game.Room;
 
 public class ZorkOne extends Game {
 

@@ -11,8 +11,8 @@ public abstract class Token {
 
 	public abstract List<String> getSynonyms();
 
-	public void addArg(Token token) {
-		getArgs().add(token);
+	public void addArg(Token arg) {
+		getArgs().add(arg);
 	}
 
 	public List<Token> getArgs() {

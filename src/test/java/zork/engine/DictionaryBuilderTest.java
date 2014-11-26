@@ -1,4 +1,4 @@
-package zork;
+package zork.engine;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -7,9 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import zork.commands.Open;
-import zork.dungeon.Game;
-import zork.dungeon.Item;
-import zork.dungeon.Room;
+import zork.engine.Dictionary;
+import zork.engine.DictionaryBuilder;
+import zork.game.Game;
+import zork.game.Item;
+import zork.game.Room;
 
 public class DictionaryBuilderTest {
 

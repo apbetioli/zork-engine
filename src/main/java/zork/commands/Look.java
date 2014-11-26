@@ -1,24 +1,19 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
-import static zork.commands.Property.OPEN;
-import static zork.commands.Property.SCENERY;
+import static zork.game.Property.OPEN;
+import static zork.game.Property.SCENERY;
 
 import java.util.List;
 
-import zork.Engine;
-import zork.dungeon.Item;
-import zork.dungeon.Room;
+import zork.engine.Engine;
+import zork.game.Item;
+import zork.game.Room;
 
 public class Look extends Command {
 
 	public Look(Engine engine) {
 		super(engine);
-	}
-
-	@Override
-	public int getNumberOfArgs() {
-		return 0;
 	}
 
 	@Override

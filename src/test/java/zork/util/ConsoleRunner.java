@@ -2,9 +2,9 @@ package zork.util;
 
 import java.util.Scanner;
 
-import zork.Engine;
 import zork.ZorkEngine;
 import zork.ZorkOne;
+import zork.engine.Engine;
 
 public class ConsoleRunner {
 

@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import zork.engine.Engine;
+import zork.engine.EngineTest;
+
 public class ZorkOneTest extends EngineTest {
 
 	@Test

@@ -1,15 +1,20 @@
-package zork;
+package zork.engine;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import zork.ZorkOne;
+import zork.commands.Close;
 import zork.commands.Command;
 import zork.commands.Inventory;
 import zork.commands.Open;
-import zork.dungeon.Game;
+import zork.engine.DictionaryBuilder;
+import zork.engine.Engine;
+import zork.engine.Interpreter;
 import zork.exceptions.UnknownCommandException;
+import zork.game.Game;
 
 public class InterpreterTest {
 
@@ -21,6 +26,7 @@ public class InterpreterTest {
 
 		DictionaryBuilder builder = new DictionaryBuilder()
 				.addCommand(new Open())
+				.addCommand(new Close())
 				.addCommand(new Inventory(engine))
 				.addItems(new ZorkOne());
 
@@ -44,7 +50,7 @@ public class InterpreterTest {
 	@Test
 	public void analizeCompositeCommand() {
 
-		Open command = (Open) interpreter.analize("OPEN MAILBOX");
+		Command command = interpreter.analize("OPEN MAILBOX");
 
 		assertEquals(Open.class, command.getClass());
 	}
@@ -52,12 +58,22 @@ public class InterpreterTest {
 	@Test
 	public void newEmptyCommandEveryTime() {
 
-		Open command = (Open) interpreter.analize("OPEN MAILBOX");
+		Command command = interpreter.analize("OPEN MAILBOX");
 
 		assertEquals(1, command.getArgs().size());
 
-		Open command2 = (Open) interpreter.analize("OPEN MAILBOX");
+		Command command2 = interpreter.analize("OPEN MAILBOX");
 
 		assertEquals(1, command2.getArgs().size());
+	}
+
+	@Test(expected = UnknownCommandException.class)
+	public void notACommand() {
+		interpreter.analize("OPEN BOX");
+
+		Command command = interpreter.analize("DOOR");
+
+		String result = command.execute();
+		System.out.println(result);
 	}
 }

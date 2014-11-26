@@ -3,7 +3,8 @@ package zork;
 import java.util.Set;
 
 import zork.commands.Command;
-import zork.dungeon.Game;
+import zork.engine.Engine;
+import zork.game.Game;
 
 public class ZorkEngine extends Engine {
 

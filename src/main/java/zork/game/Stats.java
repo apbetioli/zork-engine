@@ -1,6 +1,6 @@
-package zork.dungeon;
+package zork.game;
 
-public class Score {
+public class Stats {
 
 	private int score = 0;
 	private int total = 350;

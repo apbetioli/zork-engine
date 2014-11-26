@@ -1,4 +1,4 @@
-package zork.dungeon;
+package zork.game;
 
 import java.util.LinkedList;
 import java.util.List;

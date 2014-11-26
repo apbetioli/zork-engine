@@ -1,14 +1,18 @@
-package zork;
+package zork.engine;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import zork.ZorkOne;
 import zork.commands.Look;
 import zork.commands.Take;
-import zork.dungeon.Game;
+import zork.engine.DictionaryBuilder;
+import zork.engine.Engine;
+import zork.engine.Parser;
 import zork.exceptions.UnknownWordException;
+import zork.game.Game;
 
 public class ParserTest {
 

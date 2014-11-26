@@ -21,7 +21,7 @@ public class GsonTest {
 
 		System.out.println(json);
 
-		zork.dungeon.Game game = gson.fromJson(json, zork.dungeon.Game.class);
+		zork.game.Game game = gson.fromJson(json, zork.game.Game.class);
 
 		assertNotNull(game);
 	}

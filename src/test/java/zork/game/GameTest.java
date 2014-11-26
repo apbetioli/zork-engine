@@ -1,4 +1,4 @@
-package zork.dungeon;
+package zork.game;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import zork.ZorkOne;
+import zork.game.Game;
 
 public class GameTest {
 

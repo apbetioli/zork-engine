@@ -1,4 +1,4 @@
-package zork;
+package zork.engine;
 
 import java.util.TreeMap;
 

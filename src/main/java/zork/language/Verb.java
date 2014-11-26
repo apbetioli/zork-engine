@@ -1,7 +1,7 @@
 package zork.language;
 
 
-public abstract class Preposition extends Token implements Cloneable {
+public abstract class Verb extends Token {
 
 	@Override
 	public int getNumberOfArgs() {

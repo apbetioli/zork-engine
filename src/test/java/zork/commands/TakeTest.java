@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import zork.EngineTest;
+import zork.engine.EngineTest;
 
 public class TakeTest extends EngineTest {
 

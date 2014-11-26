@@ -1,4 +1,4 @@
-package zork.dungeon;
+package zork.game;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Game {
 	private List<Room> rooms = new LinkedList<Room>();
 	private List<Item> inventory = new LinkedList<Item>();
 	private List<Item> globalItems = new LinkedList<Item>();
-	private Score score = new Score();
+	private Stats stats = new Stats();
 
 	public String getVersion() {
 		return version;
@@ -40,8 +40,8 @@ public class Game {
 		return inventory;
 	}
 
-	public Score getScore() {
-		return score;
+	public Stats getStats() {
+		return stats;
 	}
 
 	public List<Item> getGlobalItems() {

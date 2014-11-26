@@ -1,10 +1,10 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
-import static zork.commands.Property.CLOSED;
-import static zork.commands.Property.OPEN;
-import static zork.commands.Property.OPENABLE;
-import static zork.commands.Property.SCENERY;
+import static zork.game.Property.CLOSED;
+import static zork.game.Property.OPEN;
+import static zork.game.Property.OPENABLE;
+import static zork.game.Property.SCENERY;
 
 import java.util.List;
 

@@ -4,19 +4,14 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Engine;
-import zork.dungeon.Score;
+import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
+import zork.game.Stats;
 
-public class ScoreCommand extends Command {
+public class Score extends Command {
 
-	public ScoreCommand(Engine engine) {
+	public Score(Engine engine) {
 		super(engine);
-	}
-
-	@Override
-	public int getNumberOfArgs() {
-		return 0;
 	}
 
 	@Override
@@ -27,12 +22,12 @@ public class ScoreCommand extends Command {
 	@Override
 	public String execute() throws FreeMoveException {
 
-		Score ranking = engine.getGame().getScore();
+		Stats stats = engine.getGame().getStats();
 
-		int score = ranking.getScore();
-		int total = ranking.getTotal();
-		int moves = ranking.getMoves();
-		String rank = ranking.getRank();
+		int score = stats.getScore();
+		int total = stats.getTotal();
+		int moves = stats.getMoves();
+		String rank = stats.getRank();
 
 		throw new FreeMoveException(String.format("Your score is %d (total of %d points), in %d moves.\n"
 				+ "This gives you the rank of %s.", score, total, moves, rank));

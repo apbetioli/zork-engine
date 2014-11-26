@@ -4,9 +4,9 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.Engine;
-import zork.dungeon.Item;
+import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
+import zork.game.Item;
 
 public class DropAll extends Command {
 
