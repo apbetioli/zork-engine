@@ -1,7 +1,6 @@
 package zork;
 
 import static org.junit.Assert.assertEquals;
-import net.pocorall.automaton.RunAutomatonMatcher;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -71,12 +70,10 @@ public class InterpreterTest {
 		Dictionary dictionary = new Dictionary(commandFactory, new ZorkOne());
 		Interpreter interpreter = new Interpreter(dictionary);
 
-		RunAutomatonMatcher matcher = interpreter.newMatcher("GET ALL");
-
 		expectedException.expect(UnknownWordException.class);
 		expectedException.expectMessage("I don't know the word \"ALL\".");
 
-		interpreter.findAllTokens(matcher);
+		interpreter.tokenize("GET ALL");
 	}
 
 	@Test
@@ -94,10 +91,10 @@ public class InterpreterTest {
 
 		Open command = (Open) interpreter.analize("OPEN MAILBOX");
 
-		assertEquals(1, command.getTokens().size());
+		assertEquals(1, command.getArgs().size());
 
 		Open command2 = (Open) interpreter.analize("OPEN MAILBOX");
 
-		assertEquals(1, command2.getTokens().size());
+		assertEquals(1, command2.getArgs().size());
 	}
 }

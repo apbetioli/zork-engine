@@ -8,18 +8,15 @@ import java.util.List;
 import zork.Engine;
 import zork.dungeon.Item;
 import zork.language.Token;
-import zork.language.Word;
 
-public abstract class Command extends Word implements Cloneable {
+public abstract class Command extends Token implements Cloneable {
 
 	protected Engine engine;
 
 	public Command() {
-		setDepth(1);
 	}
 
 	public Command(Engine engine) {
-		this();
 		this.engine = engine;
 	}
 
@@ -27,8 +24,13 @@ public abstract class Command extends Word implements Cloneable {
 
 	public abstract List<String> getSynonyms();
 
+	@Override
+	public int getNumberOfArgs() {
+		return 1;
+	}
+
 	protected Item getItem() {
-		return getItem(getTokens());
+		return getItem(getArgs());
 	}
 
 	private Item getItem(List<Token> tokens) {
@@ -40,7 +42,7 @@ public abstract class Command extends Word implements Cloneable {
 		if (next instanceof Item)
 			return (Item) next;
 		else
-			return getItem(next.getTokens());
+			return getItem(next.getArgs());
 	}
 
 	protected boolean isItemVisible(Item item) {
@@ -64,12 +66,4 @@ public abstract class Command extends Word implements Cloneable {
 		return false;
 	}
 
-	@Override
-	public Command clone() {
-		try {
-			return (Command) super.clone();
-		} catch (CloneNotSupportedException e) {
-			throw new IllegalStateException(e);
-		}
-	}
 }

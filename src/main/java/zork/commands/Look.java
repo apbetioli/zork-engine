@@ -14,7 +14,11 @@ public class Look extends Command {
 
 	public Look(Engine engine) {
 		super(engine);
-		setDepth(0);
+	}
+
+	@Override
+	public int getNumberOfArgs() {
+		return 0;
 	}
 
 	@Override

@@ -17,14 +17,14 @@ import zork.commands.Version;
 import zork.dungeon.Game;
 import zork.dungeon.Score;
 import zork.exceptions.FreeMoveException;
-import zork.language.prepositions.The;
+import zork.language.Article;
 
 public class Engine {
 
 	private final Game game;
+	private Dictionary dictionary;
 	private Interpreter interpreter;
 	private CommandFactory commandFactory;
-	private Dictionary dictionary;
 
 	public Engine(Game game) {
 		this.game = game;
@@ -73,7 +73,7 @@ public class Engine {
 	}
 
 	private void registerPrepositions() {
-		dictionary.register(new The());
+		dictionary.register(new Article());
 	}
 
 	private Dictionary createDictionary() {

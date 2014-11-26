@@ -1,6 +1,5 @@
 package zork;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -29,28 +28,38 @@ public class Interpreter {
 
 	public Command analize(String input) {
 
-		RunAutomatonMatcher matcher = newMatcher(input);
-		List<Token> tokens = findAllTokens(matcher);
+		List<Token> tokens = tokenize(input);
 
-		Command command = pendingCommand;
+		appendPendingCommand(tokens);
 
-		if (tokens.get(0) instanceof Command)
-			command = ((Command) tokens.remove(0)).clone();
-
-		command = (Command) buildTree(tokens.iterator(), command);
+		Command command = (Command) buildCommandTree(tokens);
 
 		System.out.println(command);
 
 		return command;
 	}
 
-	private Token buildTree(Iterator<Token> iterator, Token node) {
-		for (int i = 0; i < node.getDepth() && iterator.hasNext(); i++)
-			node.addToken(buildTree(iterator, iterator.next()));
+	private void appendPendingCommand(List<Token> tokens) {
+		if (pendingCommand == null)
+			return;
+
+		if (!(tokens.get(0) instanceof Command))
+			tokens.add(0, pendingCommand);
+	}
+
+	private Token buildCommandTree(List<Token> tokens) {
+		Token node = (Token) tokens.remove(0).clone();
+		for (int i = 0; i < node.getNumberOfArgs() && !tokens.isEmpty(); i++)
+			node.addArg(buildCommandTree(tokens));
 		return node;
 	}
 
-	protected List<Token> findAllTokens(RunAutomatonMatcher matcher) {
+	protected List<Token> tokenize(String input) {
+		RunAutomatonMatcher matcher = newMatcher(input);
+		return findAllTokens(matcher);
+	}
+
+	private List<Token> findAllTokens(RunAutomatonMatcher matcher) {
 		List<Token> tokens = new LinkedList<Token>();
 
 		Token found;
@@ -73,7 +82,7 @@ public class Interpreter {
 		}
 	}
 
-	protected RunAutomatonMatcher newMatcher(String input) {
+	private RunAutomatonMatcher newMatcher(String input) {
 
 		String sentence = input.trim().toUpperCase();
 

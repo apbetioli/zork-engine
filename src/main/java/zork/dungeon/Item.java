@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-import zork.language.Word;
+import zork.language.Token;
 import zork.util.StringUtils;
 
-public class Item extends Word {
+public class Item extends Token {
 
 	private String name;
 	private String description;
@@ -18,6 +18,11 @@ public class Item extends Word {
 	public Item(String name, String description) {
 		this.name = name;
 		this.description = description;
+	}
+
+	@Override
+	public int getNumberOfArgs() {
+		return 0;
 	}
 
 	public String getName() {
@@ -88,4 +93,8 @@ public class Item extends Word {
 		return true;
 	}
 
+	@Override
+	public Token clone() {
+		return this;
+	}
 }

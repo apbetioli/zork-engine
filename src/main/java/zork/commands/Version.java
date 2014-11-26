@@ -11,7 +11,11 @@ public class Version extends Command {
 
 	public Version(Engine engine) {
 		super(engine);
-		setDepth(0);
+	}
+
+	@Override
+	public int getNumberOfArgs() {
+		return 0;
 	}
 
 	@Override
