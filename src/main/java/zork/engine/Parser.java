@@ -12,7 +12,6 @@ import net.pocorall.automaton.StringUnionOperations;
 import org.apache.commons.lang3.StringUtils;
 
 import zork.exceptions.EmptyInputException;
-import zork.exceptions.UnknownCommandException;
 import zork.exceptions.UnknownWordException;
 import zork.language.Token;
 
@@ -44,12 +43,8 @@ public class Parser {
 	}
 
 	private void verifyUnknownToken(String token, List<Token> tokens) {
-		if (!StringUtils.isEmpty(token)) {
-			if (tokens.isEmpty())
-				throw new UnknownCommandException();
-			else
-				throw new UnknownWordException(token.trim());
-		}
+		if (!StringUtils.isEmpty(token))
+			throw new UnknownWordException(token.trim());
 	}
 
 	private RunAutomatonMatcher newMatcher(String input) {

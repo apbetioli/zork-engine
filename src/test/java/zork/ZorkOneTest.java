@@ -13,7 +13,7 @@ public class ZorkOneTest extends EngineTest {
 	public void erroComParserLetraPorLetra() {
 		Engine zork = new ZorkEngine(new ZorkOne());
 		assertEquals("Opening the small mailbox reveals a leaflet.", zork.interact("open box"));
-		assertEquals("That is not a verb I recognize.", zork.interact("giloio"));
+		assertEquals("I don't know the word \"GILOIO\".", zork.interact("giloio"));
 	}
 
 	@Test

@@ -10,10 +10,8 @@ import zork.commands.Close;
 import zork.commands.Command;
 import zork.commands.Inventory;
 import zork.commands.Open;
-import zork.engine.DictionaryBuilder;
-import zork.engine.Engine;
-import zork.engine.Interpreter;
 import zork.exceptions.UnknownCommandException;
+import zork.exceptions.UnknownWordException;
 import zork.game.Game;
 
 public class InterpreterTest {
@@ -33,10 +31,16 @@ public class InterpreterTest {
 		interpreter = new Interpreter(builder.build());
 	}
 
+	@Test(expected = UnknownWordException.class)
+	public void analizeUnknownWord() {
+
+		interpreter.analize("ITADAKIMASU");
+	}
+
 	@Test(expected = UnknownCommandException.class)
 	public void analizeUnknownCommand() {
 
-		interpreter.analize("ITADAKIMASU");
+		interpreter.analize("DOOR");
 	}
 
 	@Test

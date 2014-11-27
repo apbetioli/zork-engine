@@ -9,15 +9,15 @@ import zork.engine.EngineTest;
 public class UnknownTest extends EngineTest {
 
 	@Test
-	public void notAVerb() {
-		String result = engine.interact("notaverb");
+	public void unknownWord() {
+		String result = engine.interact("debug dadada");
 
-		assertEquals("That is not a verb I recognize.", result);
+		assertEquals("I don't know the word \"DEBUG  DADADA\".", result);
 	}
 
 	@Test
-	public void unknown() {
-		String result = engine.interact("debug door");
+	public void unknownCommand() {
+		String result = engine.interact("door");
 
 		assertEquals("That is not a verb I recognize.", result);
 	}
