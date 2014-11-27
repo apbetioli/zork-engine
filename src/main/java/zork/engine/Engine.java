@@ -8,6 +8,7 @@ import zork.commands.Command;
 import zork.commands.Drop;
 import zork.commands.DropAll;
 import zork.commands.Examine;
+import zork.commands.Go;
 import zork.commands.Help;
 import zork.commands.Inventory;
 import zork.commands.Look;
@@ -17,6 +18,7 @@ import zork.commands.Score;
 import zork.commands.Take;
 import zork.commands.TakeAll;
 import zork.commands.Version;
+import zork.commands.directions.East;
 import zork.exceptions.FreeMoveException;
 import zork.game.Game;
 import zork.game.Stats;
@@ -89,6 +91,8 @@ public class Engine {
 		commands.add(new DropAll(this));
 		commands.add(new Examine(this));
 		commands.add(new Help());
+		commands.add(new Go(this));
+		commands.add(new East(this));
 		return commands;
 	}
 

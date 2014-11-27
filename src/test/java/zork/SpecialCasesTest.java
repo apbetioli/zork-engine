@@ -7,7 +7,7 @@ import org.junit.Test;
 import zork.engine.Engine;
 import zork.engine.EngineTest;
 
-public class ZorkOneTest extends EngineTest {
+public class SpecialCasesTest extends EngineTest {
 
 	@Test
 	public void erroComParserLetraPorLetra() {
@@ -22,4 +22,5 @@ public class ZorkOneTest extends EngineTest {
 
 		assertEquals("Opening the small mailbox reveals a leaflet.", result);
 	}
+
 }
