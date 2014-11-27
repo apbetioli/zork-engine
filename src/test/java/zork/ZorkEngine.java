@@ -1,6 +1,6 @@
 package zork;
 
-import java.util.Set;
+import java.util.List;
 
 import zork.commands.Command;
 import zork.engine.Engine;
@@ -13,8 +13,8 @@ public class ZorkEngine extends Engine {
 	}
 
 	@Override
-	protected Set<Command> defineCommands() {
-		Set<Command> commands = super.defineCommands();
+	protected List<Command> defineCommands() {
+		List<Command> commands = super.defineCommands();
 
 		commands.add(new ZorkCommand());
 

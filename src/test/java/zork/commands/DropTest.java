@@ -41,4 +41,13 @@ public class DropTest extends EngineTest {
 		assertEquals("Dropped.", result);
 	}
 
+	@Test
+	public void dropThenLeaflet() {
+
+		engine.interact("drop");
+
+		String result = engine.interact("leaflet");
+
+		assertEquals("Dropped.", result);
+	}
 }

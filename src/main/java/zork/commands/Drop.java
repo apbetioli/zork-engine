@@ -21,6 +21,9 @@ public class Drop extends Command {
 	@Override
 	public String execute() throws FreeMoveException {
 
+		if (getItem() == null)
+			throw new FreeMoveException("What do you want to drop?");
+
 		if (!engine.getGame().getInventory().contains(getItem()))
 			return String.format("You don't have the %s!", getItem().getName());
 

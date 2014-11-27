@@ -21,6 +21,9 @@ public class Examine extends Command {
 	@Override
 	public String execute() throws FreeMoveException {
 
+		if (getItem() == null)
+			throw new FreeMoveException("What do you want to examine?");
+
 		if (!isItemVisible(getItem()))
 			return "You can't see any such thing.";
 

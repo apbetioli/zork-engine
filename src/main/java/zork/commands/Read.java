@@ -6,6 +6,7 @@ import static zork.game.Property.READABLE;
 import java.util.List;
 
 import zork.engine.Engine;
+import zork.exceptions.FreeMoveException;
 
 public class Read extends Command {
 
@@ -20,6 +21,9 @@ public class Read extends Command {
 
 	@Override
 	public String execute() {
+
+		if (getItem() == null)
+			throw new FreeMoveException("What do you want to read?");
 
 		if (!getItem().is(READABLE))
 			return String.format("How does one read a %s?", getItem().getName());

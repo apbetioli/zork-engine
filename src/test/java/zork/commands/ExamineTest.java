@@ -58,4 +58,20 @@ public class ExamineTest extends EngineTest {
 
 		assertEquals("I don't know the word \"SKY\".", result);
 	}
+
+	@Test
+	public void examine() {
+		String result = engine.interact("examine");
+
+		assertEquals("What do you want to examine?", result);
+	}
+
+	@Test
+	public void examineThenMe() {
+		engine.interact("examine");
+
+		String result = engine.interact("me");
+
+		assertEquals("That's difficult unless your eyes are prehensile.", result);
+	}
 }

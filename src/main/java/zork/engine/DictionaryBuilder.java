@@ -1,7 +1,6 @@
 package zork.engine;
 
 import java.util.List;
-import java.util.Set;
 
 import zork.commands.Command;
 import zork.game.Game;
@@ -54,7 +53,7 @@ public class DictionaryBuilder {
 		return addToken(command);
 	}
 
-	public DictionaryBuilder addCommands(Set<Command> commands) {
+	public DictionaryBuilder addCommands(List<Command> commands) {
 		for (Command command : commands)
 			addToken(command);
 

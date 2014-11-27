@@ -1,13 +1,14 @@
 package zork.engine;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 import zork.commands.Close;
 import zork.commands.Command;
 import zork.commands.Drop;
 import zork.commands.DropAll;
 import zork.commands.Examine;
+import zork.commands.Help;
 import zork.commands.Inventory;
 import zork.commands.Look;
 import zork.commands.Open;
@@ -73,8 +74,8 @@ public class Engine {
 				.addCommands(defineCommands());
 	}
 
-	protected Set<Command> defineCommands() {
-		Set<Command> commands = new HashSet<Command>();
+	protected List<Command> defineCommands() {
+		List<Command> commands = new LinkedList<Command>();
 		commands.add(new Inventory(this));
 		commands.add(new Version(this));
 		commands.add(new Open());
@@ -87,6 +88,7 @@ public class Engine {
 		commands.add(new Drop(this));
 		commands.add(new DropAll(this));
 		commands.add(new Examine(this));
+		commands.add(new Help());
 		return commands;
 	}
 

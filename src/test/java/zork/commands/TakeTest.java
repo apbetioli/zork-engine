@@ -97,4 +97,13 @@ public class TakeTest extends EngineTest {
 
 		assertEquals("An interesting idea...", result); // FIXME RANDOMIZE
 	}
+
+	@Test
+	public void takeThenLeaflet() {
+
+		engine.interact("take");
+		String result = engine.interact("leaflet");
+
+		assertEquals("Taken.", result);
+	}
 }

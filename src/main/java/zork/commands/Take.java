@@ -7,6 +7,7 @@ import static zork.game.Property.TAKEABLE;
 import java.util.List;
 
 import zork.engine.Engine;
+import zork.exceptions.FreeMoveException;
 
 public class Take extends Command {
 
@@ -23,7 +24,7 @@ public class Take extends Command {
 	public String execute() {
 
 		if (getItem() == null)
-			return "What do you want to take?";
+			throw new FreeMoveException("What do you want to take?");
 
 		if (getItem().is(FIXED))
 			return "It is securely anchored.";
