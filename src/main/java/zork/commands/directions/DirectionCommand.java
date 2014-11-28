@@ -1,5 +1,5 @@
 package zork.commands.directions;
 
-public interface Direction {
+public interface DirectionCommand {
 
 }

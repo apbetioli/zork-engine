@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import zork.commands.directions.EastTest;
+import zork.commands.directions.SouthTest;
 import zork.engine.EngineTest;
 
 public class GoTest extends EngineTest {
@@ -16,24 +18,17 @@ public class GoTest extends EngineTest {
 	}
 
 	@Test
+	public void goSouth() {
+		String result = engine.interact("go south");
+
+		assertEquals(SouthTest.SOUTH_ROOM, result);
+	}
+
+	@Test
 	public void goEast() {
+		engine.interact("go south");
 		String result = engine.interact("go east");
 
-		assertEquals("East", result);
+		assertEquals(EastTest.BEHIND_HOUSE, result);
 	}
-
-	@Test
-	public void east() {
-		String result = engine.interact("east");
-
-		assertEquals("East", result);
-	}
-
-	@Test
-	public void e() {
-		String result = engine.interact("e");
-
-		assertEquals("East", result);
-	}
-
 }

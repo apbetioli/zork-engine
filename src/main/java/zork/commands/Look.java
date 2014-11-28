@@ -33,7 +33,7 @@ public class Look extends Command {
 	}
 
 	private String lookRoom(Room room) {
-		return String.format("%s\n%s\n", room.getName(), room.getDescription());
+		return String.format("%s\n%s", room.getName(), room.getDescription());
 	}
 
 	private String lookItems(List<Item> items) {
@@ -45,10 +45,10 @@ public class Look extends Command {
 				continue;
 
 			if (item.is(OPEN)) {
-				look += String.format("The %s contains:\n", item.getName());
+				look += String.format("\nThe %s contains:", item.getName());
 
 				for (Item sub : item.getItems())
-					look += String.format("  A %s\n", sub.getName());
+					look += String.format("\n  A %s", sub.getName());
 			}
 
 		}

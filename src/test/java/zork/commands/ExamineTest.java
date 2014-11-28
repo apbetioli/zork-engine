@@ -23,6 +23,22 @@ public class ExamineTest extends EngineTest {
 	}
 
 	@Test
+	public void examineMailbox() {
+		String result = engine.interact("examine mailbox");
+
+		assertEquals("The small mailbox is closed.", result);
+	}
+
+	@Test
+	public void examineMailboxAfterOpen() {
+		engine.interact("open mailbox");
+		String result = engine.interact("examine mailbox");
+
+		assertEquals("The small mailbox contains:\n"
+				+ "  A leaflet", result);
+	}
+
+	@Test
 	public void examineHouse() {
 		String result = engine.interact("examine house");
 

@@ -20,6 +20,7 @@ public class ZorkOne extends Game {
 				+ "Revision 88 / Serial number 840726\n");
 		addGlobalItems();
 		addRooms();
+		setCurrentRoom("West of House");
 	}
 
 	private void addGlobalItems() {
@@ -34,6 +35,27 @@ public class ZorkOne extends Game {
 
 	private void addRooms() {
 		getRooms().add(westHouse());
+		getRooms().add(southHouse());
+		getRooms().add(behindHouse());
+	}
+
+	private Room behindHouse() {
+		Room room = new Room("Behind House",
+				"You are behind the white house. A path leads into the forest to the east. In one corner of the house there is a small window which is slightly ajar.");
+
+		Item item = new Item("window", "With great effort, you open the window far enough to allow entry.");
+		item.addProperties(CLOSED, OPENABLE, CLOSABLE);
+		room.addItem(item);
+
+		return room;
+	}
+
+	private Room southHouse() {
+		Room room = new Room("South of House", "You are facing the south side of a white house. There is no door here, and all the windows are boarded.");
+
+		room.setDirection("E", "Behind House");
+
+		return room;
 	}
 
 	private Room westHouse() {
@@ -50,7 +72,7 @@ public class ZorkOne extends Game {
 						+ "    On-line information may be obtained with the command HELP (synonyms are ABOUT, INFO, HINT, etc.).");
 		leaflet.addProperties(TAKEABLE, READABLE);
 
-		Item mailbox = new Item("small mailbox", "There is a small mailbox here.");
+		Item mailbox = new Item("small mailbox", "The small mailbox is closed.");
 		mailbox.addSynonyms("small", "mailbox", "mail-box", "box");
 		mailbox.addProperties(OPENABLE, CLOSABLE, CLOSED, FIXED);
 		mailbox.addItem(leaflet);
@@ -69,7 +91,8 @@ public class ZorkOne extends Game {
 		house.addProperties(SCENERY);
 		room.addItem(house);
 
-		setCurrentRoom(room.getName());
+		room.setDirection("S", "South of House");
+		room.setDirection("E", "The door is boarded and you can't remove the boards.");
 
 		return room;
 	}

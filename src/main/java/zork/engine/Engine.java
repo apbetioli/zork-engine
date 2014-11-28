@@ -19,7 +19,9 @@ import zork.commands.Take;
 import zork.commands.TakeAll;
 import zork.commands.Version;
 import zork.commands.directions.East;
+import zork.commands.directions.South;
 import zork.exceptions.FreeMoveException;
+import zork.exceptions.InexistentRoomException;
 import zork.game.Game;
 import zork.game.Stats;
 import zork.language.Article;
@@ -53,6 +55,10 @@ public class Engine {
 		} catch (FreeMoveException e) {
 
 			interpreter.setPendingCommand(command);
+
+			return e.getMessage();
+
+		} catch (InexistentRoomException e) {
 
 			return e.getMessage();
 		}
@@ -93,6 +99,7 @@ public class Engine {
 		commands.add(new Help());
 		commands.add(new Go(this));
 		commands.add(new East(this));
+		commands.add(new South(this));
 		return commands;
 	}
 
