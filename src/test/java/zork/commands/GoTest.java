@@ -31,4 +31,18 @@ public class GoTest extends EngineTest {
 
 		assertEquals(EastTest.BEHIND_HOUSE, result);
 	}
+
+	@Test
+	public void goUp() {
+		String result = engine.interact("go up");
+
+		assertEquals("You can't go that way.", result);
+	}
+
+	@Test
+	public void goDoor() {
+		String result = engine.interact("go door");
+
+		assertEquals("Where do you want to go?", result);
+	}
 }

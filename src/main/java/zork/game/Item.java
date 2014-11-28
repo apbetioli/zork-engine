@@ -3,6 +3,8 @@ package zork.game;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import zork.language.Noun;
 import zork.util.StringUtils;
@@ -14,6 +16,7 @@ public class Item extends Noun {
 	private List<Item> items;
 	private List<String> synonyms;
 	private List<String> properties;
+	private Map<String, String> actions;
 
 	public Item(String name, String description) {
 		this.name = name;
@@ -86,6 +89,16 @@ public class Item extends Noun {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	public Map<String, String> getActions() {
+		if (actions == null)
+			actions = new TreeMap<String, String>();
+		return actions;
+	}
+
+	public void onAction(String action, String result) {
+		getActions().put(action, result);
 	}
 
 }

@@ -7,6 +7,7 @@ import zork.commands.Close;
 import zork.commands.Command;
 import zork.commands.Drop;
 import zork.commands.DropAll;
+import zork.commands.Enter;
 import zork.commands.Examine;
 import zork.commands.Go;
 import zork.commands.Help;
@@ -20,6 +21,7 @@ import zork.commands.TakeAll;
 import zork.commands.Version;
 import zork.commands.directions.East;
 import zork.commands.directions.South;
+import zork.commands.directions.Up;
 import zork.exceptions.FreeMoveException;
 import zork.exceptions.InexistentRoomException;
 import zork.game.Game;
@@ -100,6 +102,8 @@ public class Engine {
 		commands.add(new Go(this));
 		commands.add(new East(this));
 		commands.add(new South(this));
+		commands.add(new Up(this));
+		commands.add(new Enter(this));
 		return commands;
 	}
 

@@ -22,14 +22,6 @@ public class EnterTest extends EngineTest {
 
 		String result = engine.interact("enter door");
 
-		assertThat(result, is("You can't go that way."));
-	}
-
-	@Test
-	public void enterEast() {
-
-		String result = engine.interact("enter door");
-
 		assertThat(result, is("The door is locked, and there is evidently no key."));
 	}
 

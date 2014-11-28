@@ -31,6 +31,10 @@ public class Game {
 	}
 
 	public void setCurrentRoom(String currentRoom) {
+
+		if (currentRoom == null)
+			throw new InexistentRoomException("You can't go that way.");
+
 		for (Room room : rooms) {
 			if (room.getName().equals(currentRoom)) {
 				this.currentRoom = currentRoom;
