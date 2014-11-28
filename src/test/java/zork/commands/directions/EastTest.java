@@ -14,7 +14,7 @@ public class EastTest extends EngineTest {
 	public void e() {
 		String result = engine.interact("e");
 
-		assertEquals("The door is boarded and you can't remove the boards.", result);
+		assertEquals("The door is locked, and there is evidently no key.", result);
 
 		assertEquals("West of House", engine.getGame().getCurrentRoom().getName());
 	}

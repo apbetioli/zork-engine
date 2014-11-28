@@ -72,14 +72,14 @@ public class ZorkOne extends Game {
 						+ "    On-line information may be obtained with the command HELP (synonyms are ABOUT, INFO, HINT, etc.).");
 		leaflet.addProperties(TAKEABLE, READABLE);
 
-		Item mailbox = new Item("small mailbox", "The small mailbox is closed.");
+		Item mailbox = new Item("small mailbox", "Opening the small mailbox reveals a leaflet.");
 		mailbox.addSynonyms("small", "mailbox", "mail-box", "box");
 		mailbox.addProperties(OPENABLE, CLOSABLE, CLOSED, FIXED);
 		mailbox.addItem(leaflet);
 
 		room.addItem(mailbox);
 
-		Item door = new Item("door", "The door is closed.");
+		Item door = new Item("door", "");
 		door.addProperties(SCENERY, CLOSED);
 
 		room.addItem(door);
@@ -92,7 +92,7 @@ public class ZorkOne extends Game {
 		room.addItem(house);
 
 		room.setDirection("S", "South of House");
-		room.setDirection("E", "The door is boarded and you can't remove the boards.");
+		room.setDirection("E", "The door is locked, and there is evidently no key.");
 
 		return room;
 	}

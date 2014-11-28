@@ -1,13 +1,14 @@
 package zork.commands;
 
 import static java.util.Arrays.asList;
+import static zork.game.Property.CLOSED;
 
 import java.util.List;
 
 import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
 
-public class Examine extends Command {
+public class Examine extends Look {
 
 	public Examine(Engine engine) {
 		super(engine);
@@ -27,7 +28,12 @@ public class Examine extends Command {
 		if (!isItemVisible(getItem()))
 			return "You can't see any such thing.";
 
+		if (getItem().is(CLOSED))
+			return String.format("The %s is closed.", getItem().getName());
+
+		if (!getItem().getItems().isEmpty())
+			return super.lookItems(asList(getItem())).trim();
+
 		return getItem().getDescription();
 	}
-
 }

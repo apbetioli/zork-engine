@@ -32,11 +32,11 @@ public class Look extends Command {
 		return look;
 	}
 
-	private String lookRoom(Room room) {
+	protected String lookRoom(Room room) {
 		return String.format("%s\n%s", room.getName(), room.getDescription());
 	}
 
-	private String lookItems(List<Item> items) {
+	protected String lookItems(List<Item> items) {
 		String look = "";
 
 		for (Item item : items) {

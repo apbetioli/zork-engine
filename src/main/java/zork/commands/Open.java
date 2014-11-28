@@ -8,8 +8,6 @@ import static zork.game.Property.SCENERY;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import zork.exceptions.FreeMoveException;
 
 public class Open extends Command {
@@ -37,7 +35,6 @@ public class Open extends Command {
 		getItem().addProperties(OPEN);
 		getItem().removeProperties(CLOSED);
 
-		return String.format("Opening the %s reveals a %s", getItem().getName(),
-				StringUtils.join(getItem().getItems(), ", ") + ".");
+		return getItem().getDescription();
 	}
 }

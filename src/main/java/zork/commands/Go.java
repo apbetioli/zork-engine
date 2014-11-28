@@ -16,7 +16,7 @@ public class Go extends Command {
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("GO");
+		return asList("GO", "ENTER");
 	}
 
 	@Override
@@ -26,6 +26,8 @@ public class Go extends Command {
 			Token next = getArgs().iterator().next();
 			if (next instanceof DirectionCommand)
 				return ((Command) next).execute();
+
+			return "You can't go that way.";
 		}
 
 		return "Where do you want to go?";
