@@ -10,10 +10,14 @@ import java.nio.channels.WritableByteChannel;
 
 public class IOUtils {
 
-	public static void fastCopy(final InputStream src, final OutputStream dest) throws IOException {
+	public static void fastCopy(final InputStream src, final OutputStream dest) {
 		final ReadableByteChannel inputChannel = Channels.newChannel(src);
 		final WritableByteChannel outputChannel = Channels.newChannel(dest);
-		fastCopy(inputChannel, outputChannel);
+		try {
+			fastCopy(inputChannel, outputChannel);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void fastCopy(final ReadableByteChannel src, final WritableByteChannel dest) throws IOException {
