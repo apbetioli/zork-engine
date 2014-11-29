@@ -4,7 +4,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import zork.commands.directions.DirectionCommand;
+import zork.commands.directions.Direction;
 import zork.engine.Engine;
 import zork.language.Token;
 
@@ -24,7 +24,7 @@ public class Go extends Command {
 
 		if (!getArgs().isEmpty()) {
 			Token next = getArgs().iterator().next();
-			if (next instanceof DirectionCommand)
+			if (next instanceof Direction)
 				return ((Command) next).execute();
 		}
 

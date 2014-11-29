@@ -8,7 +8,7 @@ import zork.commands.Command;
 import zork.engine.Engine;
 import zork.game.Room;
 
-public class East extends Command implements DirectionCommand {
+public class East extends Command implements Direction {
 
 	public East(Engine engine) {
 		super(engine);
@@ -21,9 +21,9 @@ public class East extends Command implements DirectionCommand {
 
 	@Override
 	public String execute() {
-		Room currentRoom = engine.getGame().getCurrentRoom();
+		Room currentRoom = engine.getCurrentRoom();
 		String direction = currentRoom.getDirection("E");
-		engine.getGame().setCurrentRoom(direction);
+		engine.setCurrentRoom(direction);
 
 		return engine.interact("LOOK");
 	}

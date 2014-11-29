@@ -7,6 +7,7 @@ import static zork.game.Property.OPENABLE;
 import static zork.game.Property.READABLE;
 import static zork.game.Property.SCENERY;
 import static zork.game.Property.TAKEABLE;
+import static zork.game.Property.TRANSPARENT;
 import zork.game.Game;
 import zork.game.Item;
 import zork.game.Room;
@@ -35,8 +36,63 @@ public class ZorkOne extends Game {
 
 	private void addRooms() {
 		getRooms().add(westHouse());
+		getRooms().add(forest());
 		getRooms().add(southHouse());
 		getRooms().add(behindHouse());
+		getRooms().add(kitchen());
+		getRooms().add(livingRoom());
+	}
+
+	private Room forest() {
+		Room room = new Room("Forest", "This is a forest, with trees in all directions. To the east, there appears to be sunlight.");
+		return room;
+	}
+
+	private Room livingRoom() {
+		Room room = new Room(
+				"Living Room",
+				"You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.\n"
+						+ "Above the trophy case hangs an elvish sword of great antiquity.\n"
+						+ "A battery-powered brass lantern is on the trophy case.");
+
+		Item lantern = new Item("brass lantern", "");
+		lantern.addSynonyms("lamp");
+		lantern.addProperties(TAKEABLE);
+		room.addItem(lantern);
+
+		Item trophyCase = new Item("trophy case", "");
+		room.addItem(trophyCase);
+
+		Item sword = new Item("sword", "");
+		room.addItem(sword);
+
+		Item carpet = new Item("carpet", "");
+		carpet.addSynonyms("rug");
+		room.addItem(carpet);
+
+		return room;
+	}
+
+	private Room kitchen() {
+		Room room = new Room(
+				"Kitchen",
+				"You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.\n"
+						+ "On the table is an elongated brown sack, smelling of hot peppers.\n"
+						+ "A bottle is sitting on the table.");
+
+		Item water = new Item("quantity of water", "");
+		water.addSynonyms("water");
+
+		Item bottle = new Item("glass bottle", "Sitting on the table is a small bottle.");
+		bottle.addSynonyms("bottle", "glass");
+		bottle.addItem(water);
+		bottle.addProperties(CLOSED, OPENABLE, TRANSPARENT);
+
+		room.addItem(bottle);
+
+		room.putDirection("W", "Living Room");
+
+		return room;
 	}
 
 	private Room behindHouse() {
@@ -45,8 +101,15 @@ public class ZorkOne extends Game {
 
 		Item window = new Item("window", "With great effort, you open the window far enough to allow entry.");
 		window.addProperties(CLOSED, OPENABLE, CLOSABLE);
-		window.onAction("enter", "Kitchen");
+		window.putAction("enter", "Kitchen");
 		room.addItem(window);
+
+		Item house = new Item(
+				"white house",
+				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.");
+		house.addSynonyms("house", "white");
+		house.putAction("enter", "Kitchen");
+		room.addItem(house);
 
 		return room;
 	}
@@ -54,7 +117,7 @@ public class ZorkOne extends Game {
 	private Room southHouse() {
 		Room room = new Room("South of House", "You are facing the south side of a white house. There is no door here, and all the windows are boarded.");
 
-		room.setDirection("E", "Behind House");
+		room.putDirection("E", "Behind House");
 
 		return room;
 	}
@@ -77,13 +140,13 @@ public class ZorkOne extends Game {
 		mailbox.addSynonyms("small", "mailbox", "mail-box", "box");
 		mailbox.addProperties(OPENABLE, CLOSABLE, CLOSED, FIXED);
 		mailbox.addItem(leaflet);
-		mailbox.onAction("enter", "You hit your head against the small mailbox as you attempt this feat.");
+		mailbox.putAction("enter", "You hit your head against the small mailbox as you attempt this feat.");
 
 		room.addItem(mailbox);
 
 		Item door = new Item("door", "");
 		door.addProperties(SCENERY, CLOSED);
-		door.onAction("enter", "The door is locked, and there is evidently no key.");
+		door.putAction("enter", "The door is locked, and there is evidently no key.");
 
 		room.addItem(door);
 
@@ -92,11 +155,12 @@ public class ZorkOne extends Game {
 				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.");
 		house.addSynonyms("house", "white");
 		house.addProperties(SCENERY);
-		house.onAction("enter", "I can't see how to get in from here.");
+		house.putAction("enter", "I can't see how to get in from here.");
 		room.addItem(house);
 
-		room.setDirection("S", "South of House");
-		room.setDirection("E", "The door is locked, and there is evidently no key.");
+		room.putDirection("S", "South of House");
+		room.putDirection("E", "The door is locked, and there is evidently no key.");
+		room.putDirection("W", "Forest");
 
 		return room;
 	}

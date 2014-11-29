@@ -8,24 +8,24 @@ import zork.commands.Command;
 import zork.engine.Engine;
 import zork.game.Room;
 
-public class South extends Command implements Direction {
+public class West extends Command implements Direction {
 
-	public South(Engine engine) {
+	public West(Engine engine) {
 		super(engine);
 	}
 
 	@Override
 	public List<String> getSynonyms() {
-		return asList("SOUTH", "S");
+		return asList("W", "WEST");
 	}
 
 	@Override
 	public String execute() {
-
 		Room currentRoom = engine.getCurrentRoom();
-		String direction = currentRoom.getDirection("S");
+		String direction = currentRoom.getDirection("W");
 		engine.setCurrentRoom(direction);
 
 		return engine.interact("LOOK");
 	}
+
 }

@@ -3,6 +3,7 @@ package zork.commands;
 import static java.util.Arrays.asList;
 import static zork.game.Property.OPEN;
 import static zork.game.Property.SCENERY;
+import static zork.game.Property.TRANSPARENT;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Look extends Command {
 
 	@Override
 	public String execute() {
-		Room room = engine.getGame().getCurrentRoom();
+		Room room = engine.getCurrentRoom();
 
 		String look = lookRoom(room);
 
@@ -44,7 +45,7 @@ public class Look extends Command {
 			if (item.is(SCENERY))
 				continue;
 
-			if (item.is(OPEN)) {
+			if (item.is(OPEN) || item.is(TRANSPARENT)) {
 				look += String.format("\nThe %s contains:", item.getName());
 
 				for (Item sub : item.getItems())

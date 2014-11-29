@@ -43,7 +43,7 @@ public abstract class Command extends Verb implements Cloneable {
 
 		List<Item> items = new LinkedList<Item>();
 		items.addAll(engine.getGame().getGlobalItems());
-		items.addAll(engine.getGame().getCurrentRoom().getItems());
+		items.addAll(engine.getCurrentRoom().getItems());
 
 		return isItemVisibleFrom(item, items);
 	}

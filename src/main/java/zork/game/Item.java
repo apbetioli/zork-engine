@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import zork.language.Noun;
 import zork.util.StringUtils;
+import zork.util.UpperCaseKeyTreeMap;
 
 public class Item extends Noun {
 
@@ -16,7 +16,7 @@ public class Item extends Noun {
 	private List<Item> items;
 	private List<String> synonyms;
 	private List<String> properties;
-	private Map<String, String> actions;
+	private UpperCaseKeyTreeMap<String> actions;
 
 	public Item(String name, String description) {
 		this.name = name;
@@ -93,11 +93,11 @@ public class Item extends Noun {
 
 	public Map<String, String> getActions() {
 		if (actions == null)
-			actions = new TreeMap<String, String>();
+			actions = new UpperCaseKeyTreeMap<String>();
 		return actions;
 	}
 
-	public void onAction(String action, String result) {
+	public void putAction(String action, String result) {
 		getActions().put(action, result);
 	}
 

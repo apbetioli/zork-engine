@@ -19,7 +19,14 @@ public class Enter extends Command {
 
 	@Override
 	public String execute() {
-		return null;
+
+		String result = getItem().getActions().get("enter");
+
+		if (!engine.getRoomMap().containsKey(result))
+			return result;
+
+		engine.setCurrentRoom(result);
+		return engine.interact("LOOK");
 	}
 
 }

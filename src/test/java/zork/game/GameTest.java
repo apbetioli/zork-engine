@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import zork.ZorkOne;
-import zork.game.Game;
 
 public class GameTest {
 
@@ -19,6 +18,6 @@ public class GameTest {
 	@Test
 	public void currentRoom() {
 		Game game = new ZorkOne();
-		assertEquals("West of House", game.getCurrentRoom().getName());
+		assertEquals("West of House", game.getCurrentRoom());
 	}
 }

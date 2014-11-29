@@ -16,7 +16,7 @@ public class EastTest extends EngineTest {
 
 		assertEquals("The door is locked, and there is evidently no key.", result);
 
-		assertEquals("West of House", engine.getGame().getCurrentRoom().getName());
+		assertEquals("West of House", engine.getGame().getCurrentRoom());
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class EastTest extends EngineTest {
 
 		assertEquals(BEHIND_HOUSE, result);
 
-		assertEquals("Behind House", engine.getGame().getCurrentRoom().getName());
+		assertEquals("Behind House", engine.getGame().getCurrentRoom());
 
 	}
 

@@ -31,13 +31,17 @@ public class ZorkOneTranscriptTest extends EngineTest {
 
 		verify("enter house",
 				"Kitchen\n"
-						+ "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open. On the table is an elongated brown sack, smelling of hot peppers. A bottle is sitting on the table.\n"
+						+ "You are in the kitchen of the white house. A table seems to have been used recently for the preparation of food. A passage leads to the west and a dark staircase can be seen leading upward. A dark chimney leads down and to the east is a small window which is open.\n"
+						+ "On the table is an elongated brown sack, smelling of hot peppers.\n"
+						+ "A bottle is sitting on the table.\n"
 						+ "The glass bottle contains:\n"
 						+ "  A quantity of water");
 
 		verify("go west",
 				"Living Room\n"
-						+ "You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room. Above the trophy case hangs an elvish sword of great antiquity. A battery-powered brass lantern is on the trophy case.");
+						+ "You are in the living room. There is a doorway to the east, a wooden door with strange gothic lettering to the west, which appears to be nailed shut, a trophy case, and a large oriental rug in the center of the room.\n"
+						+ "Above the trophy case hangs an elvish sword of great antiquity.\n"
+						+ "A battery-powered brass lantern is on the trophy case.");
 
 		verify("take lamp", "Taken.");
 
@@ -80,8 +84,59 @@ public class ZorkOneTranscriptTest extends EngineTest {
 
 		verify("take rope", "Taken.");
 
-		verify("", "");
-		verify("", "");
+		verify("go down", "Kitchen\n"
+				+ "On the table is an elongated brown sack, smelling of hot peppers.\n"
+				+ "A bottle is sitting on the table.\n"
+				+ "The glass bottle contains:\n"
+				+ "  A quantity of water");
+
+		verify("go west", "Living Room\n"
+				+ "Above the trophy case hangs an elvish sword of great antiquity.");
+
+		verify("open case", "Opened.");
+
+		verify("put painting inside case", "Done.");
+
+		verify("drop knife", "Dropped.");
+
+		verify("take sword", "Taken.");
+
+		verify("open trap door", "The door reluctantly opens to reveal a rickety staircase descending into darkness.");
+
+		verify("go down", "The trap door crashes shut, and you hear someone barring it.\n\n"
+				+ "Cellar\n"
+				+ "Your sword is glowing with a faint blue glow.");
+
+		verify("go north",
+				"The Troll Room\n"
+						+ "This is a small room with passages to the east and south and a forbidding hole leading west. Bloodstains and deep scratches (perhaps made by an axe) mar the walls.\n"
+						+ "A nasty-looking troll, brandishing a bloody axe, blocks all passages out of the room.\n"
+						+ "Your sword has begun to glow very brightly.\n"
+						+ "The troll's mighty blow drops you to your knees.");
+
+		verify("kill troll with sword", "You are still recovering from that last blow, so your attack is ineffective.\n"
+				+ "The troll's axe barely misses your ear.");
+
+		verify("kill troll with sword", "Clang! Crash! The troll parries.\n"
+				+ "The troll's axe barely misses your ear.");
+
+		verify("kill troll with sword", "The troll is confused and can't fight back.\n"
+				+ "The troll slowly regains his feet.");
+
+		verify("kill troll with sword", "The troll is knocked out!");
+
+		verify("kill troll with sword", "The unarmed troll cannot defend himself: He dies.\n"
+				+ "Almost as soon as the troll breathes his last breath, a cloud of sinister black fog envelops him, and when the fog lifts, the carcass has disappeared.\n"
+				+ "Your sword is no longer glowing.");
+
+		verify("drop sword", "Dropped.");
+
+		verify("go east", "East-West Passage\n"
+				+ "This is a narrow east-west passageway. There is a narrow stairway leading down at the north end of the room.");
+
+		verify("go east", "Round Room\n"
+				+ "This is a circular stone room with passages in all directions. Several of them have unfortunately been blocked by cave-ins.");
+
 	}
 
 	private void verify(String input, String output) {
@@ -90,83 +145,6 @@ public class ZorkOneTranscriptTest extends EngineTest {
 
 }
 
-// >go down
-// Kitchen
-// On the table is an elongated brown sack, smelling of hot peppers.
-// A bottle is sitting on the table.
-// The glass bottle contains:
-// A quantity of water
-//
-// >go west
-// Living Room
-// Above the trophy case hangs an elvish sword of great antiquity.
-//
-// >open case
-// Opened.
-//
-// >put painting inside case
-// Done.
-//
-// >drop knife
-// Dropped.
-//
-// >take sword
-// Taken.
-//
-// >open trap door
-// The door reluctantly opens to reveal a rickety staircase descending into
-// darkness.
-//
-// >go down
-// The trap door crashes shut, and you hear someone barring it.
-//
-// Cellar
-// Your sword is glowing with a faint blue glow.
-//
-// >go north
-// The Troll Room
-// This is a small room with passages to the east and south and a forbidding
-// hole leading west. Bloodstains and deep scratches (perhaps made by an axe)
-// mar the walls.
-// A nasty-looking troll, brandishing a bloody axe, blocks all passages out of
-// the room.
-// Your sword has begun to glow very brightly.
-// The troll's mighty blow drops you to your knees.
-//
-// >kill troll with sword
-// You are still recovering from that last blow, so your attack is ineffective.
-// The troll's axe barely misses your ear.
-//
-// >kill troll with sword
-// Clang! Crash! The troll parries.
-// The troll's axe barely misses your ear.
-//
-// >kill troll with sword
-// The troll is confused and can't fight back.
-// The troll slowly regains his feet.
-//
-// >kill troll with sword
-// The troll is knocked out!
-//
-// >kill troll with sword
-// The unarmed troll cannot defend himself: He dies.
-// Almost as soon as the troll breathes his last breath, a cloud of sinister
-// black fog envelops him, and when the fog lifts, the carcass has disappeared.
-// Your sword is no longer glowing.
-//
-// >drop sword
-// Dropped.
-//
-// >go east
-// East-West Passage
-// This is a narrow east-west passageway. There is a narrow stairway leading
-// down at the north end of the room.
-//
-// >go east
-// Round Room
-// This is a circular stone room with passages in all directions. Several of
-// them have unfortunately been blocked by cave-ins.
-//
 // >go southeast
 // Engravings Cave
 // You have entered a low cave with passages leading northwest and east.

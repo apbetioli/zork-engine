@@ -2,15 +2,15 @@ package zork.game;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+
+import zork.util.UpperCaseKeyTreeMap;
 
 public class Room {
 
 	protected String name;
 	protected String description;
 	protected List<Item> items;
-	protected Map<String, String> directions;
+	protected UpperCaseKeyTreeMap<String> directions;
 
 	public Room(String name, String description) {
 		this.name = name;
@@ -39,13 +39,14 @@ public class Room {
 		return getDirections().get(name);
 	}
 
-	private Map<String, String> getDirections() {
+	private UpperCaseKeyTreeMap<String> getDirections() {
 		if (directions == null)
-			directions = new TreeMap<String, String>();
+			directions = new UpperCaseKeyTreeMap<String>();
 		return directions;
 	}
 
-	public void setDirection(String name, String roomOrMessage) {
+	public void putDirection(String name, String roomOrMessage) {
 		getDirections().put(name, roomOrMessage);
 	}
+
 }

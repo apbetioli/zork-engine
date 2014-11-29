@@ -3,8 +3,6 @@ package zork.game;
 import java.util.LinkedList;
 import java.util.List;
 
-import zork.exceptions.InexistentRoomException;
-
 public class Game {
 
 	private String version;
@@ -22,27 +20,12 @@ public class Game {
 		this.version = version;
 	}
 
-	public Room getCurrentRoom() {
-		for (Room room : rooms) {
-			if (room.getName().equals(currentRoom))
-				return room;
-		}
-		return null;
+	public String getCurrentRoom() {
+		return currentRoom;
 	}
 
 	public void setCurrentRoom(String currentRoom) {
-
-		if (currentRoom == null)
-			throw new InexistentRoomException("You can't go that way.");
-
-		for (Room room : rooms) {
-			if (room.getName().equals(currentRoom)) {
-				this.currentRoom = currentRoom;
-				return;
-			}
-		}
-
-		throw new InexistentRoomException(currentRoom);
+		this.currentRoom = currentRoom;
 	}
 
 	public List<Room> getRooms() {

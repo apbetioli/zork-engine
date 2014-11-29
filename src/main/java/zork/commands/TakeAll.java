@@ -25,7 +25,7 @@ public class TakeAll extends Command {
 
 		String result = "";
 
-		for (Item item : engine.getGame().getCurrentRoom().getItems()) {
+		for (Item item : engine.getCurrentRoom().getItems()) {
 
 			if (item.is(Property.SCENERY))
 				continue;

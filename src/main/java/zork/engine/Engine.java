@@ -22,15 +22,20 @@ import zork.commands.Version;
 import zork.commands.directions.East;
 import zork.commands.directions.South;
 import zork.commands.directions.Up;
+import zork.commands.directions.West;
 import zork.exceptions.FreeMoveException;
 import zork.exceptions.InexistentRoomException;
 import zork.game.Game;
+import zork.game.Room;
 import zork.game.Stats;
 import zork.language.Article;
+import zork.util.UpperCaseKeyTreeMap;
 
 public class Engine {
 
 	private final Game game;
+	private UpperCaseKeyTreeMap<Room> roomMap;
+
 	private Interpreter interpreter;
 
 	public Engine(Game game) {
@@ -72,7 +77,17 @@ public class Engine {
 		stats.setMoves(stats.getMoves() + 1);
 	}
 
+	private UpperCaseKeyTreeMap<Room> createRoomMap(Game game) {
+		UpperCaseKeyTreeMap<Room> roomMap = new UpperCaseKeyTreeMap<Room>();
+
+		for (Room room : game.getRooms())
+			roomMap.put(room.getName(), room);
+
+		return roomMap;
+	}
+
 	protected void init() {
+		roomMap = createRoomMap(game);
 		DictionaryBuilder dictionaryBuilder = createDictionaryBuilder();
 		interpreter = createInterpreter(dictionaryBuilder);
 	}
@@ -104,6 +119,7 @@ public class Engine {
 		commands.add(new South(this));
 		commands.add(new Up(this));
 		commands.add(new Enter(this));
+		commands.add(new West(this));
 		return commands;
 	}
 
@@ -113,6 +129,25 @@ public class Engine {
 
 	public Game getGame() {
 		return game;
+	}
+
+	public UpperCaseKeyTreeMap<Room> getRoomMap() {
+		return roomMap;
+	}
+
+	public Room getCurrentRoom() {
+		return getRoomMap().get(game.getCurrentRoom());
+	}
+
+	public void setCurrentRoom(String currentRoom) {
+
+		if (currentRoom == null)
+			throw new InexistentRoomException("You can't go that way.");
+
+		if (!getRoomMap().containsKey(currentRoom))
+			throw new InexistentRoomException(currentRoom);
+
+		game.setCurrentRoom(currentRoom);
 	}
 
 }
