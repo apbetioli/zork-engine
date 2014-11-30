@@ -23,8 +23,8 @@ public class InterpreterTest {
 		Engine engine = new Engine(new Game());
 
 		DictionaryBuilder builder = new DictionaryBuilder()
-				.addCommand(new Open())
-				.addCommand(new Close())
+				.addCommand(new Open(engine))
+				.addCommand(new Close(engine))
 				.addCommand(new Inventory(engine))
 				.addItems(new ZorkOne());
 

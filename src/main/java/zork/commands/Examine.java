@@ -25,9 +25,6 @@ public class Examine extends Look {
 		if (getItem() == null)
 			throw new FreeMoveException("What do you want to examine?");
 
-		if (!isItemVisible(getItem()))
-			return "You can't see any such thing.";
-
 		if (getItem().is(CLOSED))
 			return String.format("The %s is closed.", getItem().getName());
 

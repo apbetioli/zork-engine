@@ -19,7 +19,7 @@ public class ReadTest extends EngineTest {
 	public void readLeafletInsideMailboxClosed() {
 		String result = engine.interact("read leaflet");
 
-		assertEquals("You can't see any such thing.", result);
+		assertEquals("You can't see any leaflet here!", result);
 	}
 
 	@Test
@@ -61,6 +61,6 @@ public class ReadTest extends EngineTest {
 
 		String result = engine.interact("leaflet");
 
-		assertEquals("You can't see any such thing.", result);
+		assertEquals("You can't see any leaflet here!", result);
 	}
 }

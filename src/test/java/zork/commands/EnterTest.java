@@ -30,8 +30,24 @@ public class EnterTest extends EngineTest {
 
 		String result = engine.interact("enter mailbox");
 
-		// assertThat(result, is("That's not something you can enter."));
 		assertThat(result, is("You hit your head against the small mailbox as you attempt this feat."));
+	}
+
+	@Test
+	public void enterGround() {
+
+		String result = engine.interact("enter ground");
+
+		assertThat(result, is("You hit your head against the ground as you attempt this feat."));
+	}
+
+	@Test
+	public void enterLeaflet() {
+		engine.interact("open box");
+
+		String result = engine.interact("enter leaflet");
+
+		assertThat(result, is("What a concept!"));
 	}
 
 }

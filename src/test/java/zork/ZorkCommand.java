@@ -5,8 +5,13 @@ import static java.util.Arrays.asList;
 import java.util.List;
 
 import zork.commands.Command;
+import zork.engine.Engine;
 
 public class ZorkCommand extends Command {
+
+	public ZorkCommand(Engine engine) {
+		super(engine);
+	}
 
 	@Override
 	public int getNumberOfArgs() {

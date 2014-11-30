@@ -2,6 +2,7 @@ package zork;
 
 import static zork.game.Property.CLOSABLE;
 import static zork.game.Property.CLOSED;
+import static zork.game.Property.ENTERABLE;
 import static zork.game.Property.FIXED;
 import static zork.game.Property.OPENABLE;
 import static zork.game.Property.READABLE;
@@ -68,6 +69,7 @@ public class ZorkOne extends Game {
 
 		Item carpet = new Item("carpet", "");
 		carpet.addSynonyms("rug");
+		carpet.putAction("move", "With a great effort, the rug is moved to one side of the room, revealing the dusty cover of a closed trap door.");
 		room.addItem(carpet);
 
 		return room;
@@ -108,6 +110,7 @@ public class ZorkOne extends Game {
 				"white house",
 				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.");
 		house.addSynonyms("house", "white");
+		house.addProperties(SCENERY, ENTERABLE);
 		house.putAction("enter", "Kitchen");
 		room.addItem(house);
 
@@ -140,12 +143,11 @@ public class ZorkOne extends Game {
 		mailbox.addSynonyms("small", "mailbox", "mail-box", "box");
 		mailbox.addProperties(OPENABLE, CLOSABLE, CLOSED, FIXED);
 		mailbox.addItem(leaflet);
-		mailbox.putAction("enter", "You hit your head against the small mailbox as you attempt this feat.");
 
 		room.addItem(mailbox);
 
 		Item door = new Item("door", "");
-		door.addProperties(SCENERY, CLOSED);
+		door.addProperties(SCENERY, CLOSED, ENTERABLE);
 		door.putAction("enter", "The door is locked, and there is evidently no key.");
 
 		room.addItem(door);
@@ -154,7 +156,7 @@ public class ZorkOne extends Game {
 				"white house",
 				"The house is a beautiful colonial house which is painted white. It is clear that the owners must have been extremely wealthy.");
 		house.addSynonyms("house", "white");
-		house.addProperties(SCENERY);
+		house.addProperties(SCENERY, ENTERABLE);
 		house.putAction("enter", "I can't see how to get in from here.");
 		room.addItem(house);
 

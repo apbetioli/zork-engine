@@ -69,7 +69,7 @@ public class TakeTest extends EngineTest {
 
 		String result = engine.interact("take leaflet");
 
-		assertEquals("You can't see any such thing.", result);
+		assertEquals("You can't see any leaflet here!", result);
 	}
 
 	@Test

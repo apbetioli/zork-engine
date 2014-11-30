@@ -13,6 +13,7 @@ import zork.commands.Go;
 import zork.commands.Help;
 import zork.commands.Inventory;
 import zork.commands.Look;
+import zork.commands.Move;
 import zork.commands.Open;
 import zork.commands.Read;
 import zork.commands.Score;
@@ -103,8 +104,8 @@ public class Engine {
 		List<Command> commands = new LinkedList<Command>();
 		commands.add(new Inventory(this));
 		commands.add(new Version(this));
-		commands.add(new Open());
-		commands.add(new Close());
+		commands.add(new Open(this));
+		commands.add(new Close(this));
 		commands.add(new Look(this));
 		commands.add(new Take(this));
 		commands.add(new TakeAll(this));
@@ -113,13 +114,14 @@ public class Engine {
 		commands.add(new Drop(this));
 		commands.add(new DropAll(this));
 		commands.add(new Examine(this));
-		commands.add(new Help());
+		commands.add(new Help(this));
 		commands.add(new Go(this));
 		commands.add(new East(this));
 		commands.add(new South(this));
 		commands.add(new Up(this));
 		commands.add(new Enter(this));
 		commands.add(new West(this));
+		commands.add(new Move(this));
 		return commands;
 	}
 

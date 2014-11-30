@@ -53,7 +53,16 @@ public class CloseTest extends EngineTest {
 	}
 
 	@Test
+	public void closeLeafletInvisible() {
+		String result = engine.interact("close leaflet");
+
+		assertEquals("You can't see any leaflet here!", result);
+	}
+
+	@Test
 	public void closeLeaflet() {
+		engine.interact("open box");
+
 		String result = engine.interact("close leaflet");
 
 		assertEquals("You must tell me how to do that to a leaflet.", result);

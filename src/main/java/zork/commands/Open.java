@@ -8,9 +8,14 @@ import static zork.game.Property.SCENERY;
 
 import java.util.List;
 
+import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
 
 public class Open extends Command {
+
+	public Open(Engine engine) {
+		super(engine);
+	}
 
 	@Override
 	public List<String> getSynonyms() {

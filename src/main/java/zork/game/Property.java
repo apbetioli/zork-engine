@@ -11,5 +11,6 @@ public interface Property {
 	public static final String SCENERY = "SCENERY";
 	public static final String READABLE = "READABLE";
 	public static final String TRANSPARENT = "TRANSPARENT";
+	public static final String ENTERABLE = "ENTERABLE";
 
 }

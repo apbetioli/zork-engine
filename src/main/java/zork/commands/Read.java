@@ -33,9 +33,6 @@ public class Read extends Command {
 		if (!engine.getGame().getInventory().contains(getItem())) {
 			String taken = engine.interact("TAKE " + getItem().getName());
 
-			if (!engine.getGame().getInventory().contains(getItem()))
-				return taken;
-
 			result += String.format("(%s)\n", taken.replace(".", ""));
 		}
 

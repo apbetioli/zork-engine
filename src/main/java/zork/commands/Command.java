@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import zork.engine.Engine;
+import zork.exceptions.InexistentRoomException;
 import zork.game.Item;
 import zork.language.Token;
 import zork.language.Verb;
@@ -13,9 +14,6 @@ import zork.language.Verb;
 public abstract class Command extends Verb implements Cloneable {
 
 	protected Engine engine;
-
-	public Command() {
-	}
 
 	public Command(Engine engine) {
 		this.engine = engine;
@@ -34,30 +32,39 @@ public abstract class Command extends Verb implements Cloneable {
 		Token next = tokens.iterator().next();
 
 		if (next instanceof Item)
-			return (Item) next;
+			return getVisibleItem((Item) next);
 		else
 			return getItem(next.getArgs());
 	}
 
-	protected boolean isItemVisible(Item item) {
+	private Item getVisibleItem(Item item) {
 
 		List<Item> items = new LinkedList<Item>();
 		items.addAll(engine.getGame().getGlobalItems());
 		items.addAll(engine.getCurrentRoom().getItems());
 
-		return isItemVisibleFrom(item, items);
+		Item found = getVisibleItemFrom(item, items);
+
+		if (found != null)
+			return found;
+
+		throw new InexistentRoomException(String.format("You can't see any %s here!", item.getName()));
 	}
 
-	private boolean isItemVisibleFrom(Item item, List<Item> items) {
+	private Item getVisibleItemFrom(Item item, List<Item> items) {
 		for (Item other : items) {
 			if (item.getName().equals(other.getName()))
-				return true;
+				return other;
 
-			if (other.is(OPEN) && isItemVisibleFrom(item, other.getItems()))
-				return true;
+			if (other.is(OPEN)) {
+				Item found = getVisibleItemFrom(item, other.getItems());
+
+				if (found != null)
+					return found;
+			}
 		}
 
-		return false;
+		return null;
 	}
 
 }

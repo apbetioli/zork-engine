@@ -7,9 +7,14 @@ import static zork.game.Property.OPEN;
 
 import java.util.List;
 
+import zork.engine.Engine;
 import zork.exceptions.FreeMoveException;
 
 public class Close extends Command {
+
+	public Close(Engine engine) {
+		super(engine);
+	}
 
 	@Override
 	public List<String> getSynonyms() {
