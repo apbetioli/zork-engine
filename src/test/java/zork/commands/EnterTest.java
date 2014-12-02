@@ -2,6 +2,7 @@ package zork.commands;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -50,4 +51,8 @@ public class EnterTest extends EngineTest {
 		assertThat(result, is("What a concept!"));
 	}
 
+	@Test
+	public void enterCondition() {
+		fail("Testar condição window closed");
+	}
 }
